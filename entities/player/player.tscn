@@ -4,13 +4,13 @@
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_pe5m7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_po36n"]
-radius = 38.3275
+radius = 20.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_pe5m7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.0766667, 0.0766667)
+scale = Vector2(0.04, 0.04)
 texture = ExtResource("1_ly0om")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
