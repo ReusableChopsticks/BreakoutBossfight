@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3txh2t24m8j8"]
+
+[ext_resource type="PackedScene" uid="uid://bmrdkjqxvde8w" path="res://entities/player/player.tscn" id="1_37hb1"]
+[ext_resource type="PackedScene" uid="uid://dk4abp6w1e7fu" path="res://scenes/wall.tscn" id="2_loud2"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_37hb1")]
+position = Vector2(481, 547)
+move_speed = 500
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="LeftWall" parent="Walls" instance=ExtResource("2_loud2")]
+
+[node name="RightWall" parent="Walls" instance=ExtResource("2_loud2")]
+position = Vector2(1187, 503)
+
+[node name="TopWall" parent="Walls" instance=ExtResource("2_loud2")]
+position = Vector2(590, 0)
+rotation = 1.5708

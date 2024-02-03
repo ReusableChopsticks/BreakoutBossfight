@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="BreakoutBossfightGame"
-run/main_scene="res://scenes/level 1/level.tscn"
+run/main_scene="res://scenes/ui/game_display.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://entities/projectiles/Bullet.png"
 
 [display]
 
@@ -22,6 +22,7 @@ window/size/viewport_height=1080
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
+window/stretch/aspect="keep_height"
 
 [input]
 
