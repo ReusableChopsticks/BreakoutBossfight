@@ -6,11 +6,42 @@
 [node name="Level" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_37hb1")]
-position = Vector2(360, 69)
+position = Vector2(403, 565)
 move_speed = 500
+max_fall_velocity = 1000
 
 [node name="LeftWall" parent="." instance=ExtResource("2_loud2")]
 
 [node name="LeftWall2" parent="." instance=ExtResource("2_loud2")]
 position = Vector2(543, 752)
 rotation = 1.5708
+
+[node name="LeftWall3" parent="." instance=ExtResource("2_loud2")]
+position = Vector2(643, 648)
+rotation = 1.5708
+scale = Vector2(0.141422, 0.396859)
+
+[node name="LeftWall4" parent="." instance=ExtResource("2_loud2")]
+position = Vector2(841, 576)
+rotation = 1.5708
+scale = Vector2(0.141422, 0.396859)
+
+[node name="LeftWall5" parent="." instance=ExtResource("2_loud2")]
+position = Vector2(711, 446)
+rotation = -1.5565
+scale = Vector2(0.141422, 0.396859)
+
+[node name="LeftWall6" parent="." instance=ExtResource("2_loud2")]
+position = Vector2(576, 354)
+rotation = -1.5565
+scale = Vector2(0.141422, 0.396859)
+
+[node name="LeftWall7" parent="." instance=ExtResource("2_loud2")]
+position = Vector2(401, 232)
+rotation = -1.13359
+scale = Vector2(0.141422, 0.396859)
+
+[node name="LeftWall8" parent="." instance=ExtResource("2_loud2")]
+position = Vector2(628, 116)
+rotation = -2.12892
+scale = Vector2(0.141422, 0.396859)
