@@ -6,16 +6,11 @@
 [node name="Level" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_37hb1")]
-position = Vector2(481, 547)
+position = Vector2(360, 69)
 move_speed = 500
 
-[node name="Walls" type="Node" parent="."]
+[node name="LeftWall" parent="." instance=ExtResource("2_loud2")]
 
-[node name="LeftWall" parent="Walls" instance=ExtResource("2_loud2")]
-
-[node name="RightWall" parent="Walls" instance=ExtResource("2_loud2")]
-position = Vector2(1187, 503)
-
-[node name="TopWall" parent="Walls" instance=ExtResource("2_loud2")]
-position = Vector2(590, 0)
+[node name="LeftWall2" parent="." instance=ExtResource("2_loud2")]
+position = Vector2(543, 752)
 rotation = 1.5708

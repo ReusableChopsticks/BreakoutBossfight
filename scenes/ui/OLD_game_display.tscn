@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d2ibk7hp06n6o"]
 
-[ext_resource type="PackedScene" uid="uid://c3txh2t24m8j8" path="res://scenes/level_1/level.tscn" id="1_r478e"]
-[ext_resource type="Texture2D" uid="uid://2wrj4s618ni1" path="res://graphics/scribbly_circle.png" id="2_3wdes"]
+[ext_resource type="PackedScene" uid="uid://c3txh2t24m8j8" path="res://scenes/level_1/level.tscn" id="1_kdax1"]
+[ext_resource type="Texture2D" uid="uid://2wrj4s618ni1" path="res://graphics/scribbly_circle.png" id="2_oo3dl"]
 
 [node name="GameDisplay" type="CanvasLayer"]
 
@@ -28,7 +28,7 @@ handle_input_locally = false
 size = Vector2i(1187, 1080)
 render_target_update_mode = 4
 
-[node name="Level" parent="HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_r478e")]
+[node name="Level" parent="HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("1_kdax1")]
 
 [node name="ColorRect" type="ColorRect" parent="HBoxContainer"]
 layout_mode = 2
@@ -56,5 +56,5 @@ text = "THIS IS UI"
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("2_3wdes")
+texture = ExtResource("2_oo3dl")
 expand_mode = 5
