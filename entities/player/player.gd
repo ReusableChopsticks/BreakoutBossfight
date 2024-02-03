@@ -4,6 +4,9 @@ var direction
 @export var move_speed = 200
 @export var jump_velocity = -400.0
 @export var max_fall_velocity = 4000
+@export_range(0.0, 1.0) var move_lerp: float = 1
+@export_range(0.0, 1.0) var stop_lerp: float = 1
+@export_range(0.0, 1.0) var air_friction_lerp: float = 1
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var gravity: float = 3000
@@ -29,12 +32,14 @@ func handle_coyote():
 		coyote_timer.start()
 	last_floor = is_on_floor()
 
-func handle_jump():
-	handle_coyote()
+func handle_buffer():
 	if Input.is_action_just_pressed("jump") and not is_on_floor():
 		has_buffer = true
 		buffer_timer.start()
-	
+
+func handle_jump():
+	handle_coyote()
+	handle_buffer()
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or has_coyote):
 		execute_jump()
 	# jump if buffer is active 
@@ -44,9 +49,7 @@ func handle_jump():
 	# Hold jump to go higher
 	elif is_jumping and Input.is_action_pressed("jump") and can_hold_jump and not is_on_ceiling():
 		velocity.y = jump_velocity
-	# upon release, add force downwards
-	#elif Input.is_action_just_released("jump") and velocity.y < 0:
-	
+	# bump head = stop jump
 	if is_on_ceiling():
 		release_jump()
 	
@@ -65,16 +68,27 @@ func release_jump():
 	velocity.y = push_down_velocity
 
 func handle_gravity(delta):
-	# upon release, add force downwards
+	# upon jump release, add force downwards
 	if not Input.is_action_pressed("jump") and velocity.y < 0:
 		release_jump()
 	if not is_on_floor():
 		velocity.y = clampf(velocity.y + (gravity * delta), -999999, max_fall_velocity)
 
+func handle_direction():
+	var direction = Input.get_axis("move_left", "move_right")
+	if direction:
+		#velocity.x = velocity.x + (direction * move_speed)
+		velocity.x = lerpf(velocity.x, direction * move_speed, move_lerp)
+	else:
+		if is_on_floor():
+			velocity.x = lerpf(velocity.x, 0, stop_lerp)
+		else:
+			velocity.x = lerpf(velocity.x, 0, air_friction_lerp)
+
 func _physics_process(delta):
 	handle_jump()
 	handle_gravity(delta)
-
+	handle_direction()
 	
 	## Handle jump.
 	#if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -89,18 +103,11 @@ func _physics_process(delta):
 		#velocity.y = push_down_velocity
 #
 	# Get the input direction and handle the movement/deceleration.
-	var direction = Input.get_axis("move_left", "move_right")
-	if direction:
-		velocity.x = direction * move_speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, move_speed)
-	
-	## bump head, fall down
-	#if is_on_ceiling_only():
-		#velocity.y = push_down_velocity
-		#can_hold_jump = false
-	#
-	#handle_gravity(delta)
+	#var direction = Input.get_axis("move_left", "move_right")
+	#if direction:
+		#velocity.x = direction * move_speed
+	#else:
+		#velocity.x = move_toward(velocity.x, 0, move_speed)
 	
 	move_and_slide()
 

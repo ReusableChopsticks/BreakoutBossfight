@@ -14,6 +14,9 @@ scale = Vector2(0.931818, 0.931818)
 script = ExtResource("1_pe5m7")
 jump_velocity = -500.0
 max_fall_velocity = 2000
+move_lerp = 0.348
+stop_lerp = 0.199
+air_friction_lerp = 0.129
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.04, 0.04)
