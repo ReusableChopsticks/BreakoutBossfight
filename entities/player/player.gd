@@ -7,11 +7,14 @@ var direction
 @export_range(0.0, 1.0) var move_lerp: float = 1
 @export_range(0.0, 1.0) var stop_lerp: float = 1
 @export_range(0.0, 1.0) var air_friction_lerp: float = 1
+@export_range(0, 500) var apex_range: float = 200
+@export_range(0, 1.0) var apex_grav_multiplier: float = 0.7
+@export_range(1.0, 2.0) var apex_x_multiplier: float = 1.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var gravity: float = 3000
 # downwards force for jump releases and ceiling bumps
-var push_down_velocity = 100
+var push_down_velocity = 50
 
 @onready var jump_hold_timer: Timer = $Timers/JumpHoldTimer
 @onready var coyote_timer: Timer = $Timers/CoyoteTimer
@@ -53,7 +56,6 @@ func handle_jump():
 	if is_on_ceiling():
 		release_jump()
 	
-		
 func execute_jump():
 	print("jump")
 	is_jumping = true
@@ -68,11 +70,15 @@ func release_jump():
 	velocity.y = push_down_velocity
 
 func handle_gravity(delta):
+	var y_apex_mod = apex_grav_multiplier if velocity.y < apex_range and velocity.y > -apex_range else 1
+	
 	# upon jump release, add force downwards
 	if not Input.is_action_pressed("jump") and velocity.y < 0:
 		release_jump()
+	# apply gravity if in air
 	if not is_on_floor():
-		velocity.y = clampf(velocity.y + (gravity * delta), -999999, max_fall_velocity)
+		velocity.y = clampf(velocity.y + (gravity * delta * y_apex_mod), -999999, max_fall_velocity)
+
 
 func handle_direction():
 	var direction = Input.get_axis("move_left", "move_right")
@@ -84,31 +90,14 @@ func handle_direction():
 			velocity.x = lerpf(velocity.x, 0, stop_lerp)
 		else:
 			velocity.x = lerpf(velocity.x, 0, air_friction_lerp)
+	if velocity.y < apex_range and velocity.y > -apex_range and velocity.y != 0:
+		velocity.x *= apex_x_multiplier
 
 func _physics_process(delta):
 	handle_jump()
 	handle_gravity(delta)
 	handle_direction()
-	
-	## Handle jump.
-	#if Input.is_action_just_pressed("jump") and is_on_floor():
-		#velocity.y = jump_velocity
-		#can_hold_jump = true
-		#jump_hold_timer.start()
-	#
-		#velocity.y = jump_velocity
-	## jump cancel boosts you down faster
-	## applied only when you release while ascending
-	#if Input.is_action_just_released("jump") and velocity.y < 0:
-		#velocity.y = push_down_velocity
-#
-	# Get the input direction and handle the movement/deceleration.
-	#var direction = Input.get_axis("move_left", "move_right")
-	#if direction:
-		#velocity.x = direction * move_speed
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, move_speed)
-	
+	print(velocity.y)
 	move_and_slide()
 
 
