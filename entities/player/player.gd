@@ -1,30 +1,43 @@
 extends CharacterBody2D
 
 var direction
+@export_group("Movement")
+# base move speed
 @export var move_speed = 200
 @export var jump_velocity = -400.0
 @export var max_fall_velocity = 4000
+# how fast you can change directon
 @export_range(0.0, 1.0) var move_lerp: float = 1
-@export_range(0.0, 1.0) var stop_lerp: float = 1
+# how fast you stop on ground
+@export_range(0.0, 1.0) var friction_lerp: float = 1
+# how fast you stop in air
 @export_range(0.0, 1.0) var air_friction_lerp: float = 1
+@export_subgroup("Apex Bonuses")
+# how much to cut off your y velocity after releasing jump / hit ceiling
+@export_range(0, 1) var release_cancel_mult: float = 0.2
+# what y velocity range covers the apex of your jump
 @export_range(0, 500) var apex_range: float = 200
+# decrease gravity when at apex of jump for greater hangtime
 @export_range(0, 1.0) var apex_grav_multiplier: float = 0.7
+# boost x velocity at jump apex
 @export_range(1.0, 2.0) var apex_x_multiplier: float = 1.5
+@export_group("")
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-#var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var gravity: float = 3000
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+#var gravity: float = 3000
 # downwards force for jump releases and ceiling bumps
-var push_down_velocity = 50
 
 @onready var jump_hold_timer: Timer = $Timers/JumpHoldTimer
 @onready var coyote_timer: Timer = $Timers/CoyoteTimer
 @onready var buffer_timer: Timer = $Timers/BufferTimer
+
 # apply constant force up while holding like hollow knight jump
 var can_hold_jump: bool = true
 # allow player to jump if they press key before hitting ground
 var has_buffer: bool = false
 var has_coyote: bool = false
 var is_jumping = false
+# tracks if floor has just been left
 var last_floor
 
 # handles has_coyote variable
@@ -43,6 +56,7 @@ func handle_buffer():
 func handle_jump():
 	handle_coyote()
 	handle_buffer()
+	# jump if on floor or coyote time active
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or has_coyote):
 		execute_jump()
 	# jump if buffer is active 
@@ -67,15 +81,15 @@ func execute_jump():
 func release_jump():
 	is_jumping = false
 	can_hold_jump = false
-	velocity.y = push_down_velocity
+	velocity.y *= release_cancel_mult
 
 func handle_gravity(delta):
+	# only apply gravity multiplier if within jump apex
 	var y_apex_mod = apex_grav_multiplier if velocity.y < apex_range and velocity.y > -apex_range else 1
-	
 	# upon jump release, add force downwards
 	if not Input.is_action_pressed("jump") and velocity.y < 0:
 		release_jump()
-	# apply gravity if in air
+	# apply gravity if in air while clamping to max fall speed
 	if not is_on_floor():
 		velocity.y = clampf(velocity.y + (gravity * delta * y_apex_mod), -999999, max_fall_velocity)
 
@@ -87,17 +101,17 @@ func handle_direction():
 		velocity.x = lerpf(velocity.x, direction * move_speed, move_lerp)
 	else:
 		if is_on_floor():
-			velocity.x = lerpf(velocity.x, 0, stop_lerp)
+			velocity.x = lerpf(velocity.x, 0, friction_lerp)
 		else:
 			velocity.x = lerpf(velocity.x, 0, air_friction_lerp)
 	if velocity.y < apex_range and velocity.y > -apex_range and velocity.y != 0:
-		velocity.x *= apex_x_multiplier
+		velocity.x = lerpf(velocity.x, velocity.x * apex_x_multiplier, 0.5)
 
 func _physics_process(delta):
 	handle_jump()
 	handle_gravity(delta)
 	handle_direction()
-	print(velocity.y)
+	#print(velocity)
 	move_and_slide()
 
 
