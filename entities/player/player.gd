@@ -76,7 +76,7 @@ func handle_coyote():
 		has_coyote = true
 		coyote_timer.start()
 	# detect the frame the player leaves a wall
-	elif last_wall == true and is_on_wall_only() == false:
+	elif last_wall == true and is_on_wall_only() == false and not is_wall_jumping:
 		has_coyote = true
 		coyote_timer.start()
 	last_floor = is_on_floor()
@@ -104,7 +104,7 @@ func handle_jump():
 	# bump head = stop jump
 	if is_on_ceiling():
 		release_jump()
-	
+
 func execute_jump():
 	is_jumping = true
 	velocity.y = jump_velocity
@@ -120,15 +120,14 @@ func release_jump():
 	velocity.y *= release_cancel_mult
 #endregion
 
+
 #region WallJump
 var wall_jump_time = 0
 var is_wall_jumping = false
 var last_wall_normal = Vector2.ZERO
 func handle_wall_jump():
-	print("norm: " + str(wall_normal.x))
-	print("last: " + str(last_wall_normal.x))
 	if is_wall_jumping:
-		if wall_normal.x != last_wall_normal.x:
+		if signf(wall_normal.x) != signf(last_wall_normal.x):
 			release_jump()
 		else:
 			velocity.x = wall_jump_pushback * last_wall_normal.x
@@ -136,11 +135,15 @@ func handle_wall_jump():
 		# wall slide
 		if (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")):
 			velocity.y = lerpf(velocity.y, max_wall_slide_velocity, wall_slide_lerp)
-		if Input.is_action_just_pressed("jump") or has_buffer or has_coyote:
+		#FIXME: ricochete issue still persists
+		if (Input.is_action_just_pressed("jump") or has_buffer or has_coyote) and not is_jumping:
 			execute_jump()
 			is_wall_jumping = true
 			last_wall_normal = wall_normal
 			$Timers/WallJumpXBoostTimer.start()
+		# prevents jump into wall -> stick and hold jump -> let go and launch again. weird movement
+		if (Input.is_action_just_released("move_left") or Input.is_action_just_released("move_right")):
+			release_jump()
 #endregion
 
 func handle_gravity(delta):
@@ -199,7 +202,7 @@ func _physics_process(delta):
 	handle_jump()
 	handle_gravity(delta)
 	handle_direction()
-	#handle_wall_jump()
+	handle_wall_jump()
 	handle_dash()
 	
 	#print(velocity)

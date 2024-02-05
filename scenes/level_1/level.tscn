@@ -7,7 +7,7 @@
 [node name="Level" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_37hb1")]
-position = Vector2(979, 197)
+position = Vector2(1327, 673)
 move_speed = 500
 max_fall_velocity = 1000
 wall_jump_pushback = 300.0
@@ -20,8 +20,11 @@ apex_grav_multiplier = 0.815
 [node name="LeftWall18" parent="." instance=ExtResource("2_loud2")]
 position = Vector2(1272, 479)
 
+[node name="LeftWall19" parent="." instance=ExtResource("2_loud2")]
+position = Vector2(1465, 553)
+
 [node name="LeftWall2" parent="." instance=ExtResource("2_loud2")]
-position = Vector2(543, 752)
+position = Vector2(741, 749)
 rotation = 1.5708
 
 [node name="LeftWall3" parent="." instance=ExtResource("2_loud2")]
