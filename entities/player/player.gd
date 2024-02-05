@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var direction
+#region Movement
 @export_group("Movement")
 # base move speed
 @export var move_speed = 200
@@ -21,6 +21,8 @@ var direction
 @export_range(0, 1.0) var apex_grav_multiplier: float = 0.7
 # boost x velocity at jump apex
 @export_range(1.0, 2.0) var apex_x_multiplier: float = 1.5
+@export_subgroup("Dash")
+@export_range(0, 10) var dash_velocity_multiplier: float = 5
 @export_group("")
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -30,6 +32,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var jump_hold_timer: Timer = $Timers/JumpHoldTimer
 @onready var coyote_timer: Timer = $Timers/CoyoteTimer
 @onready var buffer_timer: Timer = $Timers/BufferTimer
+# this is not for character animation, but controls dash timings precisely
+@onready var dash_anim: AnimationPlayer = $Animators/DashAnimationPlayer
 
 # apply constant force up while holding like hollow knight jump
 var can_hold_jump: bool = true
@@ -37,8 +41,21 @@ var can_hold_jump: bool = true
 var has_buffer: bool = false
 var has_coyote: bool = false
 var is_jumping = false
+var can_dash = true
+var is_dashing = false
 # tracks if floor has just been left
 var last_floor
+# left (-1) or right (1)
+var facing_dir = 1
+#endregion
+
+var is_invincible = false
+
+func check_collisions():
+	if is_on_floor() and not is_dashing and !can_dash:
+		can_dash = true
+	handle_coyote()
+	handle_buffer()
 
 # handles has_coyote variable
 func handle_coyote():
@@ -54,8 +71,6 @@ func handle_buffer():
 		buffer_timer.start()
 
 func handle_jump():
-	handle_coyote()
-	handle_buffer()
 	# jump if on floor or coyote time active
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or has_coyote):
 		execute_jump()
@@ -71,7 +86,6 @@ func handle_jump():
 		release_jump()
 	
 func execute_jump():
-	print("jump")
 	is_jumping = true
 	velocity.y = jump_velocity * 2
 	can_hold_jump = true
@@ -93,9 +107,10 @@ func handle_gravity(delta):
 	if not is_on_floor():
 		velocity.y = clampf(velocity.y + (gravity * delta * y_apex_mod), -999999, max_fall_velocity)
 
-
 func handle_direction():
+	# keep facing_dir to last direction facing when staying still
 	var direction = Input.get_axis("move_left", "move_right")
+	facing_dir = direction if direction != 0 and not is_dashing else facing_dir
 	if direction:
 		#velocity.x = velocity.x + (direction * move_speed)
 		velocity.x = lerpf(velocity.x, direction * move_speed, move_lerp)
@@ -104,13 +119,34 @@ func handle_direction():
 			velocity.x = lerpf(velocity.x, 0, friction_lerp)
 		else:
 			velocity.x = lerpf(velocity.x, 0, air_friction_lerp)
+	# add x boost when jump at apex
 	if velocity.y < apex_range and velocity.y > -apex_range and velocity.y != 0:
 		velocity.x = lerpf(velocity.x, velocity.x * apex_x_multiplier, 0.5)
 
+func handle_dash():
+	if Input.is_action_just_pressed("dash") and can_dash and not dash_anim.is_playing():
+		execute_dash()
+	if is_dashing:
+		velocity.x = facing_dir * dash_velocity_multiplier * move_speed
+		velocity.y = 0
+
+func execute_dash():
+	is_dashing = true
+	can_dash = false
+	dash_anim.play("dash")
+	
+func finish_dash():
+	is_dashing = false
+
+func set_invincible(value: bool):
+	is_invincible = value
+
 func _physics_process(delta):
+	check_collisions()
 	handle_jump()
 	handle_gravity(delta)
 	handle_direction()
+	handle_dash()
 	#print(velocity)
 	move_and_slide()
 

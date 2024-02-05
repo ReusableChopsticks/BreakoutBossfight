@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmrdkjqxvde8w"]
+[gd_scene load_steps=7 format=3 uid="uid://bmrdkjqxvde8w"]
 
 [ext_resource type="Texture2D" uid="uid://kmd51y4qv6mg" path="res://entities/player/dg2kcv3-c10a0bcc-f58a-488d-ba93-6fc6ec166b02.png" id="1_ly0om"]
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_pe5m7"]
@@ -6,8 +6,87 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hs8eb"]
 size = Vector2(20, 31.4634)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x1eyk"]
-size = Vector2(76.5366, 20)
+[sub_resource type="Animation" id="Animation_bg51y"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"set_invincible"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_2jlfd"]
+resource_name = "dash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0.164706), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finish_dash"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"set_invincible"
+}, {
+"args": [false],
+"method": &"set_invincible"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0rr4b"]
+_data = {
+"RESET": SubResource("Animation_bg51y"),
+"dash": SubResource("Animation_2jlfd")
+}
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.931818, 0.931818)
@@ -15,17 +94,18 @@ script = ExtResource("1_pe5m7")
 jump_velocity = -600.0
 max_fall_velocity = 2000
 move_lerp = 0.895
-friction_lerp = 0.266
-air_friction_lerp = 0.105
+friction_lerp = 0.549
+air_friction_lerp = 0.216
 apex_range = 138.095
 apex_grav_multiplier = 0.145
 apex_x_multiplier = 1.143
+dash_velocity_multiplier = 3.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.04, 0.04)
 texture = ExtResource("1_ly0om")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5.73171)
 shape = SubResource("RectangleShape2D_hs8eb")
 
@@ -44,11 +124,16 @@ wait_time = 0.1
 [node name="BufferTimer" type="Timer" parent="Timers"]
 wait_time = 0.5
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="DashCooldownTimer" type="Timer" parent="Timers"]
+wait_time = 0.2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-1.07317, 19.3171)
-shape = SubResource("RectangleShape2D_x1eyk")
+[node name="Animators" type="Node" parent="."]
+
+[node name="DashAnimationPlayer" type="AnimationPlayer" parent="Animators"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_0rr4b")
+}
 
 [connection signal="timeout" from="Timers/JumpHoldTimer" to="." method="_on_jump_hold_timer_timeout"]
 [connection signal="timeout" from="Timers/CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
