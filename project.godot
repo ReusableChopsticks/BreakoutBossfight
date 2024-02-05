@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="BreakoutBossfightGame"
-run/main_scene="res://scenes/ui/OLD_game_display.tscn"
+run/main_scene="res://scenes/level_1/level.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://entities/projectiles/Bullet.png"
 
