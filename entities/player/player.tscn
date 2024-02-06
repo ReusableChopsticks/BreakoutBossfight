@@ -37,7 +37,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_2jlfd"]
 resource_name = "dash"
-length = 0.2
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -96,9 +96,6 @@ max_fall_velocity = 2000
 move_lerp = 0.895
 friction_lerp = 0.549
 air_friction_lerp = 0.216
-wall_jump_pushback = 4000.0
-wall_slide_lerp = 0.85
-max_wall_slide_velocity = 3000.0
 apex_range = 138.095
 apex_grav_multiplier = 0.145
 apex_x_multiplier = 1.143
@@ -126,8 +123,12 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
+[node name="WallCoyoteTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+one_shot = true
+
 [node name="BufferTimer" type="Timer" parent="Timers"]
-wait_time = 0.3
+wait_time = 0.1
 one_shot = true
 
 [node name="WallJumpBufferTimer" type="Timer" parent="Timers"]
@@ -152,6 +153,8 @@ libraries = {
 
 [connection signal="timeout" from="Timers/JumpHoldTimer" to="." method="_on_jump_hold_timer_timeout"]
 [connection signal="timeout" from="Timers/CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="Timers/WallCoyoteTimer" to="." method="_on_wall_coyote_timer_timeout"]
 [connection signal="timeout" from="Timers/BufferTimer" to="." method="_on_buffer_timer_timeout"]
 [connection signal="timeout" from="Timers/WallJumpBufferTimer" to="." method="_on_wall_jump_buffer_timer_timeout"]
 [connection signal="timeout" from="Timers/WallJumpXBoostTimer" to="." method="_on_wall_jump_x_boost_timer_timeout"]
+[connection signal="timeout" from="Timers/DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]

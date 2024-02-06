@@ -7,12 +7,9 @@
 [node name="Level" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_37hb1")]
-position = Vector2(1513, 776)
+position = Vector2(1367, 686)
 move_speed = 500
 max_fall_velocity = 1000
-wall_jump_pushback = 300.0
-wall_slide_lerp = 0.743
-max_wall_slide_velocity = 100.0
 apex_grav_multiplier = 0.815
 
 [node name="LeftWall" parent="." instance=ExtResource("2_loud2")]
