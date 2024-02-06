@@ -122,23 +122,27 @@ func release_jump():
 
 
 #region WallJump
-@export var wall_slide_multiplier = 0.9
+@export var wall_slide_speed = 500
 var has_wall_coyote = false
 var has_wall_buffer = false
 func handle_wall_jump():
 	if is_on_wall_only() and direction:
 		is_jumping = false
 		can_hold_jump = false
-		velocity.y *= wall_slide_multiplier
+		velocity.y = lerpf(velocity.y, wall_slide_speed, 0.2)
+		print(velocity.y)
 	if Input.is_action_just_pressed("jump") and (is_on_wall_only() or has_wall_coyote):
 		execute_wall_jump()
 		
-var wall_boost = 2000
+var wall_boost = 1000
 func execute_wall_jump():
 	velocity.y = -700
 	velocity.x = wall_boost * wall_normal.x
 	#print(wall_normal.x)
 	has_wall_coyote = false
+	has_wall_buffer = false
+	is_wall_jumping = true
+	$Timers/WallJumpXBoostTimer.start()
 #endregion
 
 func handle_gravity(delta):
@@ -161,7 +165,7 @@ func handle_direction():
 	# keep facing_dir to last direction facing when staying still
 	direction = signf(Input.get_axis("move_left", "move_right"))
 	facing_dir = direction if direction != 0 and not is_dashing else facing_dir
-	if direction:
+	if direction and not is_wall_jumping:
 		#velocity.x = velocity.x + (direction * move_speed)
 		velocity.x = lerpf(velocity.x, direction * move_speed, move_lerp)
 	else:
@@ -201,7 +205,7 @@ func _physics_process(delta):
 	handle_wall_jump()
 	handle_dash()
 	
-	print(velocity)
+	#print(velocity)
 	move_and_slide()
 	wall_normal = get_wall_normal()
 

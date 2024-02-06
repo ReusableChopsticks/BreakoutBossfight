@@ -123,20 +123,20 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="WallCoyoteTimer" type="Timer" parent="Timers"]
-wait_time = 0.1
-one_shot = true
-
 [node name="BufferTimer" type="Timer" parent="Timers"]
-wait_time = 0.1
+wait_time = 0.3
 one_shot = true
 
 [node name="WallJumpBufferTimer" type="Timer" parent="Timers"]
-wait_time = 0.1
+wait_time = 0.3
+one_shot = true
+
+[node name="WallCoyoteTimer" type="Timer" parent="Timers"]
+wait_time = 0.2
 one_shot = true
 
 [node name="WallJumpXBoostTimer" type="Timer" parent="Timers"]
-wait_time = 0.38
+wait_time = 0.1
 one_shot = true
 
 [node name="DashCooldownTimer" type="Timer" parent="Timers"]
@@ -153,8 +153,8 @@ libraries = {
 
 [connection signal="timeout" from="Timers/JumpHoldTimer" to="." method="_on_jump_hold_timer_timeout"]
 [connection signal="timeout" from="Timers/CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
-[connection signal="timeout" from="Timers/WallCoyoteTimer" to="." method="_on_wall_coyote_timer_timeout"]
 [connection signal="timeout" from="Timers/BufferTimer" to="." method="_on_buffer_timer_timeout"]
 [connection signal="timeout" from="Timers/WallJumpBufferTimer" to="." method="_on_wall_jump_buffer_timer_timeout"]
+[connection signal="timeout" from="Timers/WallCoyoteTimer" to="." method="_on_wall_coyote_timer_timeout"]
 [connection signal="timeout" from="Timers/WallJumpXBoostTimer" to="." method="_on_wall_jump_x_boost_timer_timeout"]
 [connection signal="timeout" from="Timers/DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]

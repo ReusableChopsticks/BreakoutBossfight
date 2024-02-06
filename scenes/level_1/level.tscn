@@ -7,7 +7,7 @@
 [node name="Level" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_37hb1")]
-position = Vector2(1367, 686)
+position = Vector2(1378, 650)
 move_speed = 500
 max_fall_velocity = 1000
 apex_grav_multiplier = 0.815
