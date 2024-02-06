@@ -120,21 +120,27 @@ limit_bottom = 1100
 
 [node name="JumpHoldTimer" type="Timer" parent="Timers"]
 wait_time = 0.4
+one_shot = true
 
 [node name="CoyoteTimer" type="Timer" parent="Timers"]
 wait_time = 0.1
+one_shot = true
 
 [node name="BufferTimer" type="Timer" parent="Timers"]
 wait_time = 0.3
+one_shot = true
 
 [node name="WallJumpBufferTimer" type="Timer" parent="Timers"]
 wait_time = 0.1
+one_shot = true
 
 [node name="WallJumpXBoostTimer" type="Timer" parent="Timers"]
 wait_time = 0.38
+one_shot = true
 
 [node name="DashCooldownTimer" type="Timer" parent="Timers"]
 wait_time = 0.2
+one_shot = true
 
 [node name="Animators" type="Node" parent="."]
 

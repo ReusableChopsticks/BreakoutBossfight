@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+var i = 0
 #region Movement
 @export_group("Movement")
 @export_subgroup("Basic Controls")
@@ -49,7 +49,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var can_hold_jump: bool = true
 # allow player to jump if they press key before hitting ground
 var has_buffer: bool = false
-var has_coyote: bool = false
+var has_coyote: bool = false:
+	set(val):
+		has_coyote = val
+		#print(val)
 var is_jumping = false
 var can_dash = true
 var is_dashing = false
@@ -86,7 +89,7 @@ func handle_buffer():
 	if Input.is_action_just_pressed("jump") and not is_on_floor():
 		has_buffer = true
 		buffer_timer.start()
-	elif Input.is_action_just_pressed("jump") and is_on_wall_only():
+	elif Input.is_action_just_pressed("jump") and not is_on_wall_only():
 		has_wall_jump_buffer = true
 		wall_jump_buffer_timer.start()
 
@@ -101,6 +104,8 @@ func handle_jump():
 	# Hold jump to go higher
 	elif is_jumping and Input.is_action_pressed("jump") and can_hold_jump and not is_on_ceiling():
 		velocity.y = jump_velocity
+		print(i)
+		i += 1
 	# bump head = stop jump
 	if is_on_ceiling():
 		release_jump()
@@ -127,21 +132,25 @@ var is_wall_jumping = false
 var last_wall_normal = Vector2.ZERO
 func handle_wall_jump():
 	if is_wall_jumping:
-		if signf(wall_normal.x) != signf(last_wall_normal.x):
-			release_jump()
-		else:
-			velocity.x = wall_jump_pushback * last_wall_normal.x
+		#if signf(wall_normal.x) != signf(last_wall_normal.x):
+			#release_jump()
+		#if is_on_wall_only():
+			#release_jump()
+		#else:
+			#velocity.x = wall_jump_pushback * last_wall_normal.x
+		velocity.x = wall_jump_pushback * last_wall_normal.x
+		print(last_wall_normal.x)
 	if is_on_wall_only():
 		# wall slide
 		if (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")):
 			velocity.y = lerpf(velocity.y, max_wall_slide_velocity, wall_slide_lerp)
-		#FIXME: ricochete issue still persists
-		if (Input.is_action_just_pressed("jump") or has_buffer or has_coyote) and not is_jumping:
-			execute_jump()
-			is_wall_jumping = true
-			last_wall_normal = wall_normal
-			$Timers/WallJumpXBoostTimer.start()
-		# prevents jump into wall -> stick and hold jump -> let go and launch again. weird movement
+			#FIXME: ricochete issue still persists
+			if (Input.is_action_just_pressed("jump") or has_buffer or has_coyote) and not is_jumping:
+				execute_jump()
+				is_wall_jumping = true
+				last_wall_normal = wall_normal
+				$Timers/WallJumpXBoostTimer.start()
+			# prevents jump into wall -> stick and hold jump -> let go and launch again. weird movement
 		if (Input.is_action_just_released("move_left") or Input.is_action_just_released("move_right")):
 			release_jump()
 #endregion
