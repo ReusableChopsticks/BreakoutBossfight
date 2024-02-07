@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0cc5xv8i4owg"]
+[gd_scene load_steps=8 format=3 uid="uid://d0cc5xv8i4owg"]
 
-[ext_resource type="Texture2D" uid="uid://btuyqbjlvg3sf" path="res://entities/projectiles/Bullet.png" id="1_yyxsa"]
 [ext_resource type="Script" path="res://scenes/level_1/Sprite2D.gd" id="2_2eolx"]
+[ext_resource type="Texture2D" uid="uid://kmd51y4qv6mg" path="res://entities/player/dg2kcv3-c10a0bcc-f58a-488d-ba93-6fc6ec166b02.png" id="2_t6e4e"]
+[ext_resource type="Script" path="res://components/hitbox_component.gd" id="3_326c5"]
 
 [sub_resource type="Animation" id="Animation_wlxeo"]
 length = 0.001
@@ -22,18 +23,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(300, 0)]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2D:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(300, 0)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qwv8n"]
 _data = {
@@ -41,21 +30,24 @@ _data = {
 "test": SubResource("Animation_ctaic")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_282v0"]
-radius = 22.0907
+[sub_resource type="CircleShape2D" id="CircleShape2D_jf8gu"]
+radius = 23.1948
 
-[node name="Sprite2D" type="Area2D"]
+[node name="Sprite2D" type="Node2D"]
 script = ExtResource("2_2eolx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_yyxsa")
+modulate = Color(1, 0.121569, 0, 1)
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("2_t6e4e")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_qwv8n")
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_282v0")
+[node name="HitboxComponent" type="Area2D" parent="."]
+script = ExtResource("3_326c5")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_jf8gu")

@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bmrdkjqxvde8w"]
+[gd_scene load_steps=10 format=3 uid="uid://bmrdkjqxvde8w"]
 
 [ext_resource type="Texture2D" uid="uid://kmd51y4qv6mg" path="res://entities/player/dg2kcv3-c10a0bcc-f58a-488d-ba93-6fc6ec166b02.png" id="1_ly0om"]
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_pe5m7"]
+[ext_resource type="PackedScene" uid="uid://d0fobv6xejsab" path="res://components/hurtbox_component.tscn" id="3_wxa5a"]
+[ext_resource type="PackedScene" uid="uid://cqi1nqkntnpql" path="res://components/health_component.tscn" id="4_xw0fu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hs8eb"]
 size = Vector2(27.9024, 30.3902)
@@ -88,6 +90,9 @@ _data = {
 "dash": SubResource("Animation_2jlfd")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_u187l"]
+radius = 12.9227
+
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.931818, 0.931818)
 script = ExtResource("1_pe5m7")
@@ -104,17 +109,17 @@ apex_grav_multiplier = 0.145
 apex_x_multiplier = 1.143
 dash_velocity_multiplier = 3.0
 
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -200)
+limit_bottom = 1100
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.04, 0.04)
 texture = ExtResource("1_ly0om")
 
-[node name="Hitbox" type="CollisionShape2D" parent="."]
+[node name="PlayerHitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5.19513)
 shape = SubResource("RectangleShape2D_hs8eb")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(0, -200)
-limit_bottom = 1100
 
 [node name="Timers" type="Node" parent="."]
 
@@ -153,6 +158,14 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_0rr4b")
 }
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_wxa5a")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_u187l")
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_xw0fu")]
 
 [connection signal="timeout" from="Timers/JumpHoldTimer" to="." method="_on_jump_hold_timer_timeout"]
 [connection signal="timeout" from="Timers/CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -12,9 +12,10 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-	if body.name == "Player":
-		print("ow")
-		call_deferred("reset")
+	pass
+	#if body.name == "Player":
+		#print("ow")
+		#call_deferred("reset")
 
 func reset():
 	get_tree().reload_current_scene()
