@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxbj8ogd4hjvk"]
+
+[ext_resource type="PackedScene" uid="uid://btib1nx7dphkj" path="res://character_body_2d.tscn" id="1_ppv3y"]
+[ext_resource type="PackedScene" uid="uid://d0cc5xv8i4owg" path="res://BULLETBACKANDFORTH.tscn" id="2_x3x1h"]
+[ext_resource type="PackedScene" uid="uid://bmrdkjqxvde8w" path="res://entities/player/player.tscn" id="3_k5gsm"]
+[ext_resource type="PackedScene" uid="uid://dk4abp6w1e7fu" path="res://scenes/wall.tscn" id="3_tfit4"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" parent="." instance=ExtResource("2_x3x1h")]
+position = Vector2(301, 152)
+
+[node name="Player" parent="." instance=ExtResource("3_k5gsm")]
+position = Vector2(166, 160)
+
+[node name="LeftWall" parent="." instance=ExtResource("3_tfit4")]
+position = Vector2(400, 225)
+rotation = 1.5708
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_ppv3y")]
+position = Vector2(402, 154)

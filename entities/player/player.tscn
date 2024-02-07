@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bmrdkjqxvde8w"]
+[gd_scene load_steps=11 format=3 uid="uid://bmrdkjqxvde8w"]
 
 [ext_resource type="Texture2D" uid="uid://kmd51y4qv6mg" path="res://entities/player/dg2kcv3-c10a0bcc-f58a-488d-ba93-6fc6ec166b02.png" id="1_ly0om"]
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_pe5m7"]
 [ext_resource type="PackedScene" uid="uid://d0fobv6xejsab" path="res://components/hurtbox_component.tscn" id="3_wxa5a"]
+[ext_resource type="Texture2D" uid="uid://bfliobf12x6i0" path="res://graphics/256x256.png" id="4_x5yej"]
 [ext_resource type="PackedScene" uid="uid://cqi1nqkntnpql" path="res://components/health_component.tscn" id="4_xw0fu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hs8eb"]
@@ -91,7 +92,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u187l"]
-radius = 12.9227
+radius = 15.0244
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.931818, 0.931818)
@@ -164,6 +165,11 @@ health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("CircleShape2D_u187l")
+
+[node name="DebugSprite" type="Sprite2D" parent="HurtboxComponent"]
+modulate = Color(0.329412, 0.639216, 1, 0.458824)
+scale = Vector2(0.114472, 0.114472)
+texture = ExtResource("4_x5yej")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_xw0fu")]
 
