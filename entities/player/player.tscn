@@ -96,6 +96,9 @@ max_fall_velocity = 2000
 move_lerp = 0.895
 friction_lerp = 0.549
 air_friction_lerp = 0.216
+wjump_x_velocity = 600
+wjump_y_velocity = -800
+release_cancel_mult = 0.149
 apex_range = 138.095
 apex_grav_multiplier = 0.145
 apex_x_multiplier = 1.143
@@ -132,7 +135,7 @@ wait_time = 0.3
 one_shot = true
 
 [node name="WallCoyoteTimer" type="Timer" parent="Timers"]
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [node name="WallJumpXBoostTimer" type="Timer" parent="Timers"]

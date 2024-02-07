@@ -16,6 +16,12 @@ var i = 0
 
 @export_subgroup("Wall Jump")
 var is_wall_jumping = false
+@export var wall_slide_speed = 500
+@export var wall_slide_lerp = 0.1
+@export var wjump_x_velocity = 1000
+@export var wjump_y_velocity = -1000
+var has_wall_coyote = false
+var has_wall_buffer = false
 
 @export_subgroup("Apex Bonuses")
 # how much to cut off your y velocity after releasing jump / hit ceiling
@@ -99,14 +105,14 @@ func handle_jump():
 	# Hold jump to go higher
 	elif is_jumping and Input.is_action_pressed("jump") and can_hold_jump and not is_on_ceiling():
 		velocity.y = jump_velocity
-		print(i)
+		#print(i)
 		i += 1
 	# bump head = stop jump
 	if is_on_ceiling():
 		release_jump()
 
 func execute_jump():
-	print("jump")
+	#print("jump")
 	is_jumping = true
 	velocity.y = jump_velocity
 	can_hold_jump = true
@@ -122,22 +128,24 @@ func release_jump():
 
 
 #region WallJump
-@export var wall_slide_speed = 500
-var has_wall_coyote = false
-var has_wall_buffer = false
+var last_wall_normal_x = 0
 func handle_wall_jump():
-	if is_on_wall_only() and direction:
+	if is_on_wall_only():
 		is_jumping = false
 		can_hold_jump = false
-		velocity.y = lerpf(velocity.y, wall_slide_speed, 0.2)
-		print(velocity.y)
+		is_wall_jumping = false
+		if direction:
+			velocity.y = lerpf(velocity.y, wall_slide_speed, wall_slide_lerp)
+		#print(velocity.y)
 	if Input.is_action_just_pressed("jump") and (is_on_wall_only() or has_wall_coyote):
 		execute_wall_jump()
+	if is_wall_jumping:
+		velocity.x = wjump_x_velocity * last_wall_normal_x
 		
-var wall_boost = 1000
 func execute_wall_jump():
-	velocity.y = -700
-	velocity.x = wall_boost * wall_normal.x
+	last_wall_normal_x = wall_normal.x
+	velocity.y = wjump_y_velocity
+	velocity.x = wjump_x_velocity * last_wall_normal_x
 	#print(wall_normal.x)
 	has_wall_coyote = false
 	has_wall_buffer = false

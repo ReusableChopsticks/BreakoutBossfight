@@ -13,8 +13,8 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if body.name == "Player":
-		#call_deferred("reset")
 		print("ow")
+		call_deferred("reset")
 
 func reset():
 	get_tree().reload_current_scene()

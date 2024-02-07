@@ -7,7 +7,7 @@
 [node name="Level" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_37hb1")]
-position = Vector2(1378, 650)
+position = Vector2(1003, -21)
 move_speed = 500
 max_fall_velocity = 1000
 apex_grav_multiplier = 0.815
@@ -57,34 +57,26 @@ rotation = -1.5565
 scale = Vector2(0.141422, 0.396859)
 
 [node name="LeftWall15" parent="." instance=ExtResource("2_loud2")]
-position = Vector2(668, -302)
-rotation = -1.5565
+position = Vector2(664, -405)
+rotation = -1.46819
 scale = Vector2(0.141422, 0.916232)
 
-[node name="LeftWall10" parent="." instance=ExtResource("2_loud2")]
-position = Vector2(924, 61)
-rotation = 1.50051
+[node name="LeftWall13" parent="." instance=ExtResource("2_loud2")]
+position = Vector2(972, -350)
+rotation = 1.5708
 scale = Vector2(0.080942, 0.396274)
 
 [node name="LeftWall11" parent="." instance=ExtResource("2_loud2")]
 position = Vector2(1074, 52)
-rotation = 0.0171833
-scale = Vector2(0.803143, 0.45145)
+scale = Vector2(1.72095, 0.45145)
 
 [node name="LeftWall12" parent="." instance=ExtResource("2_loud2")]
-position = Vector2(1012, -150)
-rotation = 0.0171833
-scale = Vector2(0.080942, 0.396274)
-
-[node name="LeftWall13" parent="." instance=ExtResource("2_loud2")]
-position = Vector2(1012, -237)
-rotation = 1.58286
-scale = Vector2(0.080942, 0.396274)
+position = Vector2(1004, -242)
+scale = Vector2(0.080942, 0.99682)
 
 [node name="LeftWall14" parent="." instance=ExtResource("2_loud2")]
-position = Vector2(1193, -107)
-rotation = 0.0171833
-scale = Vector2(0.146529, 0.396912)
+position = Vector2(1170, -212)
+scale = Vector2(0.146529, 1.27678)
 
 [node name="LeftWall7" parent="." instance=ExtResource("2_loud2")]
 position = Vector2(401, 232)
@@ -97,38 +89,39 @@ rotation = -2.12892
 scale = Vector2(0.141422, 0.485903)
 
 [node name="LeftWall17" parent="." instance=ExtResource("2_loud2")]
-position = Vector2(13, -572)
-rotation = -1.33329
-scale = Vector2(0.141422, 0.485903)
+position = Vector2(47, -352)
+rotation = 1.5708
+scale = Vector2(0.160305, 1.12449)
 
 [node name="Sprite2D" parent="." instance=ExtResource("3_708g1")]
 position = Vector2(444, 397)
 
 [node name="Sprite2D4" parent="." instance=ExtResource("3_708g1")]
-position = Vector2(136, 140)
+position = Vector2(140, 179)
 
 [node name="Sprite2D6" parent="." instance=ExtResource("3_708g1")]
 position = Vector2(7, 500)
 
 [node name="Sprite2D7" parent="." instance=ExtResource("3_708g1")]
-position = Vector2(666, 20)
+position = Vector2(554, 19)
 
 [node name="Sprite2D8" parent="." instance=ExtResource("3_708g1")]
-position = Vector2(666, -57)
+position = Vector2(554, -58)
 
 [node name="Sprite2D9" parent="." instance=ExtResource("3_708g1")]
-position = Vector2(585, -363)
-
-[node name="Sprite2D11" parent="." instance=ExtResource("3_708g1")]
-position = Vector2(1159, -198)
-
-[node name="LeftWall16" parent="." instance=ExtResource("2_loud2")]
-position = Vector2(298, -426)
-rotation = -1.5565
-scale = Vector2(0.141422, 0.916232)
+position = Vector2(581, -466)
 
 [node name="Sprite2D10" parent="." instance=ExtResource("3_708g1")]
-position = Vector2(215, -487)
+position = Vector2(244, -556)
+
+[node name="Sprite2D13" parent="." instance=ExtResource("3_708g1")]
+position = Vector2(241, -481)
+
+[node name="Sprite2D12" parent="." instance=ExtResource("3_708g1")]
+position = Vector2(243, -680)
+
+[node name="Sprite2D14" parent="." instance=ExtResource("3_708g1")]
+position = Vector2(246, -757)
 
 [node name="Sprite2D2" parent="." instance=ExtResource("3_708g1")]
 position = Vector2(700, 513)
@@ -138,3 +131,11 @@ position = Vector2(416, 586)
 
 [node name="Sprite2D3" parent="." instance=ExtResource("3_708g1")]
 position = Vector2(3, 611)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -15.0
+offset_top = -468.0
+offset_right = 164.0
+offset_bottom = -410.0
+theme_override_font_sizes/font_size = 31
+text = "YOU WIN"
