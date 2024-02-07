@@ -2,10 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/level_1/Sprite2D.gd" id="2_2eolx"]
 [ext_resource type="Texture2D" uid="uid://kmd51y4qv6mg" path="res://entities/player/dg2kcv3-c10a0bcc-f58a-488d-ba93-6fc6ec166b02.png" id="2_t6e4e"]
-[ext_resource type="PackedScene" uid="uid://cfrxt4vfmroyh" path="res://components/hitbox_component.tscn" id="3_rnr0v"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_icrl4"]
-radius = 21.095
+[ext_resource type="Script" path="res://components/hitbox_component.gd" id="3_326c5"]
 
 [sub_resource type="Animation" id="Animation_wlxeo"]
 length = 0.001
@@ -33,21 +30,24 @@ _data = {
 "test": SubResource("Animation_ctaic")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_jf8gu"]
+radius = 23.1948
+
 [node name="Sprite2D" type="Node2D"]
 script = ExtResource("2_2eolx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0, 0.564706, 1, 1)
+modulate = Color(1, 0.121569, 0, 1)
 scale = Vector2(0.04, 0.04)
 texture = ExtResource("2_t6e4e")
-
-[node name="HitboxComponent" parent="Sprite2D" instance=ExtResource("3_rnr0v")]
-scale = Vector2(25, 25)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HitboxComponent"]
-shape = SubResource("CircleShape2D_icrl4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_qwv8n")
 }
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+script = ExtResource("3_326c5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_jf8gu")

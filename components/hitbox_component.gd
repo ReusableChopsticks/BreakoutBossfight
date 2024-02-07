@@ -5,7 +5,7 @@ class_name HitboxComponent
 
 func _on_area_entered(area):
 	print("waaaah")
-	if area.has_method("damage"):
+	if area is HurtboxComponent:
 		var attack = Attack.new()
 		attack.attack_damage = attack_damage
 		area.damage(attack)
