@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bmrdkjqxvde8w" path="res://entities/player/player.tscn" id="1_37hb1"]
 [ext_resource type="PackedScene" uid="uid://dk4abp6w1e7fu" path="res://scenes/wall.tscn" id="2_loud2"]
 [ext_resource type="PackedScene" uid="uid://d0cc5xv8i4owg" path="res://BULLETBACKANDFORTH.tscn" id="3_708g1"]
-[ext_resource type="PackedScene" uid="uid://bm8hpd35b4y32" path="res://entities/projectiles/bullet_base.tscn" id="4_6ixpf"]
+[ext_resource type="PackedScene" uid="uid://rtah0mxab7rn" path="res://entities/projectiles/basic_bullet.tscn" id="5_7qx5f"]
 [ext_resource type="Script" path="res://components/hitbox_component.gd" id="5_khwkk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ghsr5"]
@@ -11,7 +11,7 @@
 [node name="Level" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_37hb1")]
-position = Vector2(631, 602)
+position = Vector2(1054, 680)
 move_speed = 500
 max_fall_velocity = 1000
 apex_grav_multiplier = 0.815
@@ -149,12 +149,12 @@ offset_bottom = -410.0
 theme_override_font_sizes/font_size = 31
 text = "YOU WIN"
 
-[node name="bullet_base" parent="." instance=ExtResource("4_6ixpf")]
-position = Vector2(934, 447)
-
 [node name="HitboxComponent" type="Area2D" parent="."]
 position = Vector2(673, 610)
 script = ExtResource("5_khwkk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("RectangleShape2D_ghsr5")
+
+[node name="BasicBullet" parent="." instance=ExtResource("5_7qx5f")]
+position = Vector2(1028, 555)

@@ -12,9 +12,9 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-	pass
-	#if body.name == "Player":
-		#print("ow")
+	#pass
+	if body.name == "Player":
+		print("ow")
 		#call_deferred("reset")
 
 func reset():
