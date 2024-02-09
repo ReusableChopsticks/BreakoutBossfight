@@ -15,7 +15,7 @@ func _on_body_entered(body):
 	#pass
 	if body.name == "Player":
 		print("ow")
-		#call_deferred("reset")
+		call_deferred("reset")
 
 func reset():
 	get_tree().reload_current_scene()

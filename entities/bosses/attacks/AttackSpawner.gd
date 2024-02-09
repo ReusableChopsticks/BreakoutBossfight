@@ -1,4 +1,5 @@
 extends Node2D
+class_name AttackSpawner
 
 @export var bullet_scene: PackedScene = preload("res://entities/projectiles/basic_bullet.tscn")
 

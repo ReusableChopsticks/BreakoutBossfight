@@ -10,12 +10,6 @@
 
 [node name="Level" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_37hb1")]
-position = Vector2(1054, 680)
-move_speed = 500
-max_fall_velocity = 1000
-apex_grav_multiplier = 0.815
-
 [node name="LeftWall" parent="." instance=ExtResource("2_loud2")]
 
 [node name="LeftWall18" parent="." instance=ExtResource("2_loud2")]
@@ -160,3 +154,7 @@ shape = SubResource("RectangleShape2D_ghsr5")
 position = Vector2(1028, 555)
 collision_layer = 1
 collision_mask = 1
+
+[node name="Player" parent="." instance=ExtResource("1_37hb1")]
+position = Vector2(1350, 631)
+wjump_x_velocity = 1000

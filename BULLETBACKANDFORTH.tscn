@@ -42,6 +42,7 @@ scale = Vector2(0.04, 0.04)
 texture = ExtResource("2_t6e4e")
 
 [node name="HitboxComponent" parent="Sprite2D" instance=ExtResource("3_7yudx")]
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HitboxComponent"]
 shape = SubResource("CircleShape2D_hmwkw")
@@ -50,3 +51,5 @@ shape = SubResource("CircleShape2D_hmwkw")
 libraries = {
 "": SubResource("AnimationLibrary_qwv8n")
 }
+
+[connection signal="area_entered" from="Sprite2D/HitboxComponent" to="." method="_on_hitbox_component_area_entered"]

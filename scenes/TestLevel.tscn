@@ -10,8 +10,7 @@
 position = Vector2(291, 413)
 rotation = 1.5708
 
-[node name="Player" parent="." instance=ExtResource("2_eqnup")]
-position = Vector2(121, 367)
-
 [node name="AttackSpawner" parent="." instance=ExtResource("3_hdudn")]
 position = Vector2(208, 151)
+
+[node name="Player" parent="." instance=ExtResource("2_eqnup")]
