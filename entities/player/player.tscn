@@ -95,6 +95,7 @@ radius = 12.9227
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.931818, 0.931818)
+collision_mask = 37
 script = ExtResource("1_pe5m7")
 jump_velocity = -600.0
 max_fall_velocity = 2000
@@ -160,6 +161,7 @@ libraries = {
 }
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_wxa5a")]
+collision_mask = 10
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]

@@ -158,3 +158,5 @@ shape = SubResource("RectangleShape2D_ghsr5")
 
 [node name="BasicBullet" parent="." instance=ExtResource("5_7qx5f")]
 position = Vector2(1028, 555)
+collision_layer = 1
+collision_mask = 1
