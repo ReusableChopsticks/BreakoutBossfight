@@ -12,7 +12,6 @@ radius = 30.0167
 
 [node name="BasicBullet" instance=ExtResource("1_yyb4r")]
 script = ExtResource("2_ofm20")
-initial_velocity = Vector2(100, 300)
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_65yj3")
