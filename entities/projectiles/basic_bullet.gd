@@ -4,7 +4,7 @@ class_name BasicBullet
 func setup(bullet: BulletConfig):
 	position = bullet.spawn_pos
 	velocity = bullet.start_velocity
-
+	return self
 
 func _physics_process(delta):
 	var col_info = move_and_collide(velocity * delta)

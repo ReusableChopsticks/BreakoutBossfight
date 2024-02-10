@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cfoss4ealx7so"]
 
-[ext_resource type="Script" path="res://entities/bosses/attacks/AttackSpawner.gd" id="1_es2dd"]
+[ext_resource type="Script" path="res://entities/attacks/AttackSpawner.gd" id="1_es2dd"]
 [ext_resource type="Texture2D" uid="uid://2wrj4s618ni1" path="res://graphics/scribbly_circle.png" id="2_5usuu"]
 
 [node name="AttackSpawner" type="Node2D"]
