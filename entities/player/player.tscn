@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://bmrdkjqxvde8w"]
+[gd_scene load_steps=11 format=3 uid="uid://bmrdkjqxvde8w"]
 
 [ext_resource type="Texture2D" uid="uid://kmd51y4qv6mg" path="res://entities/player/dg2kcv3-c10a0bcc-f58a-488d-ba93-6fc6ec166b02.png" id="1_ly0om"]
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_pe5m7"]
 [ext_resource type="PackedScene" uid="uid://d0fobv6xejsab" path="res://components/hurtbox_component.tscn" id="3_wxa5a"]
 [ext_resource type="PackedScene" uid="uid://cqi1nqkntnpql" path="res://components/health_component.tscn" id="4_xw0fu"]
+[ext_resource type="PackedScene" uid="uid://b87gbpvxlbfcy" path="res://entities/weapon/weapon.tscn" id="5_0jjoe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hs8eb"]
-size = Vector2(36.4878, 47.2195)
+size = Vector2(36.4878, 51.5122)
 
 [sub_resource type="Animation" id="Animation_bg51y"]
 resource_name = "RESET"
@@ -102,20 +103,17 @@ max_fall_velocity = 1000
 move_lerp = 0.378
 friction_lerp = 0.5
 air_friction_lerp = 0.3
+wall_slide_speed = 200
 wjump_x_velocity = 800
 wjump_y_velocity = -800
 dash_velocity_multiplier = 2.0
 
-[node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(0, -200)
-limit_bottom = 1100
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.04, 0.04)
+scale = Vector2(0.0536585, 0.0536585)
 texture = ExtResource("1_ly0om")
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
-position = Vector2(-3.83796e-07, 0)
+position = Vector2(-3.83796e-07, 2.14635)
 shape = SubResource("RectangleShape2D_hs8eb")
 
 [node name="Timers" type="Node" parent="."]
@@ -140,7 +138,7 @@ one_shot = true
 one_shot = true
 
 [node name="WallCoyoteTimer" type="Timer" parent="Timers"]
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [node name="WallJumpXBoostTimer" type="Timer" parent="Timers"]
@@ -167,6 +165,9 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("CircleShape2D_u187l")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_xw0fu")]
+max_health = 10
+
+[node name="Weapon" parent="." instance=ExtResource("5_0jjoe")]
 
 [connection signal="timeout" from="Timers/JumpHoldTimer" to="." method="_on_jump_hold_timer_timeout"]
 [connection signal="timeout" from="Timers/CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

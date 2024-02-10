@@ -9,6 +9,6 @@ func _ready():
 
 func damage(attack: Attack):
 	health -= attack.attack_damage
-	print("HEALTH: " + str(health))
+	#print("HEALTH: " + str(health))
 	if health <= 0:
-		print("HEALTH COMPONENT ANNOUNCES I AM DEAD")
+		print(get_parent().name + " IS DEAD")

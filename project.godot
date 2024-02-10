@@ -15,6 +15,10 @@ run/main_scene="res://scenes/level_1/level.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://entities/projectiles/BasicBulletSprite.png"
 
+[autoload]
+
+PlayerStats="*res://components/player_stats.gd"
+
 [display]
 
 window/size/viewport_width=1920
@@ -23,6 +27,19 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
+
+[file_customization]
+
+folder_colors={
+"res://components/": "gray",
+"res://entities/": "orange",
+"res://entities/attacks/": "red",
+"res://entities/bosses/": "yellow",
+"res://entities/player/": "green",
+"res://entities/projectiles/": "pink",
+"res://graphics/": "yellow",
+"res://scenes/": "green"
+}
 
 [input]
 
@@ -76,6 +93,7 @@ attack={
 2d_physics/layer_4="EnemyBullets"
 2d_physics/layer_5="PlayerBullets"
 2d_physics/layer_6="PassableFloor"
+2d_physics/layer_7="Weapon"
 
 [physics]
 

@@ -1,9 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://bletqh7nbk4d4"]
 
 [ext_resource type="PackedScene" uid="uid://dp4we7hilr4fx" path="res://entities/attacks/base_attack.tscn" id="1_ehk2l"]
-[ext_resource type="Script" path="res://basic_attack.gd" id="2_i044q"]
+[ext_resource type="Script" path="res://entities/attacks/basic_attack.gd" id="2_7xksu"]
 [ext_resource type="PackedScene" uid="uid://rtah0mxab7rn" path="res://entities/projectiles/basic_bullet.tscn" id="3_idm1q"]
 
 [node name="BasicAttack" instance=ExtResource("1_ehk2l")]
-script = ExtResource("2_i044q")
+script = ExtResource("2_7xksu")
 bullet_scene = ExtResource("3_idm1q")

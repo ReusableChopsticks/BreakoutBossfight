@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://b87gbpvxlbfcy"]
+
+[ext_resource type="Script" path="res://entities/weapon/weapon.gd" id="1_pl645"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_45dfk"]
+size = Vector2(84, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hfdvy"]
+size = Vector2(66, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w36ce"]
+size = Vector2(34, 104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_80u2e"]
+size = Vector2(33, 98)
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_pl645")
+
+[node name="UpAttackArea" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpAttackArea"]
+position = Vector2(0, -54)
+shape = SubResource("RectangleShape2D_45dfk")
+
+[node name="DownAttackArea" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DownAttackArea"]
+position = Vector2(0, 30)
+shape = SubResource("RectangleShape2D_hfdvy")
+
+[node name="LeftAttackArea" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftAttackArea"]
+position = Vector2(-46, -12)
+shape = SubResource("RectangleShape2D_w36ce")
+
+[node name="RightAttackArea" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightAttackArea"]
+position = Vector2(45, -12)
+shape = SubResource("RectangleShape2D_80u2e")

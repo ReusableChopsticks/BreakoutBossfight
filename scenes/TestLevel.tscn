@@ -2,19 +2,65 @@
 
 [ext_resource type="PackedScene" uid="uid://dk4abp6w1e7fu" path="res://scenes/wall.tscn" id="1_6glxx"]
 [ext_resource type="PackedScene" uid="uid://bmrdkjqxvde8w" path="res://entities/player/player.tscn" id="2_eqnup"]
-[ext_resource type="PackedScene" uid="uid://cfoss4ealx7so" path="res://entities/attacks/attack_spawner.tscn" id="3_hdudn"]
+[ext_resource type="Texture2D" uid="uid://ch3gjk3kydrwv" path="res://graphics/biblically_accurate_angel_by_daniel_ironside_de9cdvn-pre.png" id="4_55tju"]
 [ext_resource type="PackedScene" uid="uid://bletqh7nbk4d4" path="res://entities/attacks/basic_attack.tscn" id="4_n21kn"]
 
 [node name="TestLevel" type="Node2D"]
 
 [node name="LeftWall" parent="." instance=ExtResource("1_6glxx")]
-position = Vector2(291, 413)
+position = Vector2(785, 1523)
 rotation = 1.5708
+scale = Vector2(0.141422, 19.665)
+collision_layer = 32
+collision_mask = 1
 
-[node name="AttackSpawner" parent="." instance=ExtResource("3_hdudn")]
-position = Vector2(208, 151)
+[node name="LeftWall7" parent="." instance=ExtResource("1_6glxx")]
+position = Vector2(781, 1599)
+rotation = 1.5708
+scale = Vector2(0.141422, 19.665)
+collision_mask = 1
 
 [node name="Player" parent="." instance=ExtResource("2_eqnup")]
+position = Vector2(770, 1028)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+scale = Vector2(1.07317, 1.07317)
+offset = Vector2(0, -200)
 
 [node name="BasicAttack" parent="." instance=ExtResource("4_n21kn")]
-position = Vector2(359, 107)
+position = Vector2(1706, 517)
+start_velocity = Vector2(500, 600)
+fire_interval = 0.3
+fire_amount = 10
+
+[node name="BasicAttack2" parent="." instance=ExtResource("4_n21kn")]
+position = Vector2(260, 957)
+start_velocity = Vector2(-300, 600)
+fire_interval = 0.3
+fire_amount = 10
+
+[node name="LeftWall2" parent="." instance=ExtResource("1_6glxx")]
+position = Vector2(-1347, 179)
+scale = Vector2(0.141422, 11.825)
+
+[node name="LeftWall4" parent="." instance=ExtResource("1_6glxx")]
+position = Vector2(711, -983)
+rotation = 1.5708
+scale = Vector2(0.0159966, 22.7834)
+
+[node name="LeftWall3" parent="." instance=ExtResource("1_6glxx")]
+position = Vector2(2888, 137)
+scale = Vector2(0.141422, 12.545)
+
+[node name="BiblicallyAccurateAngelByDanielIronsideDe9Cdvn-pre" type="Sprite2D" parent="."]
+position = Vector2(726, 250)
+scale = Vector2(2.00597, 2.00597)
+texture = ExtResource("4_55tju")
+
+[node name="LeftWall5" parent="." instance=ExtResource("1_6glxx")]
+position = Vector2(-465, 941)
+scale = Vector2(0.141422, 1.98497)
+
+[node name="LeftWall6" parent="." instance=ExtResource("1_6glxx")]
+position = Vector2(2199, 941)
+scale = Vector2(0.141422, 1.98497)

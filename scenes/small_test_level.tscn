@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck26egagsemx1"]
+
+[ext_resource type="PackedScene" uid="uid://bmrdkjqxvde8w" path="res://entities/player/player.tscn" id="1_kbjuk"]
+[ext_resource type="PackedScene" uid="uid://dk4abp6w1e7fu" path="res://scenes/wall.tscn" id="2_ud0kp"]
+[ext_resource type="Texture2D" uid="uid://ch3gjk3kydrwv" path="res://graphics/biblically_accurate_angel_by_daniel_ironside_de9cdvn-pre.png" id="3_m1ugf"]
+[ext_resource type="PackedScene" uid="uid://bletqh7nbk4d4" path="res://entities/attacks/basic_attack.tscn" id="4_rxm1x"]
+
+[node name="SmallTestLevel" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_kbjuk")]
+position = Vector2(961, 958)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+offset = Vector2(0, -200)
+limit_bottom = 1400
+editor_draw_limits = true
+
+[node name="LeftWall" parent="." instance=ExtResource("2_ud0kp")]
+position = Vector2(-214, 503)
+
+[node name="LeftWall4" parent="." instance=ExtResource("2_ud0kp")]
+position = Vector2(185, 766)
+scale = Vector2(0.141422, 1.10497)
+
+[node name="LeftWall5" parent="." instance=ExtResource("2_ud0kp")]
+position = Vector2(1706, 764)
+scale = Vector2(0.141422, 1.10497)
+
+[node name="LeftWall6" parent="." instance=ExtResource("2_ud0kp")]
+position = Vector2(965, 742)
+scale = Vector2(0.141422, 1.10497)
+
+[node name="LeftWall2" parent="." instance=ExtResource("2_ud0kp")]
+position = Vector2(2223, 503)
+
+[node name="LeftWall3" parent="." instance=ExtResource("2_ud0kp")]
+position = Vector2(961, 1078)
+rotation = 1.5708
+scale = Vector2(0.141422, 11.545)
+
+[node name="LeftWall7" parent="." instance=ExtResource("2_ud0kp")]
+position = Vector2(1001, -199)
+rotation = 1.5708
+scale = Vector2(0.141422, 11.545)
+
+[node name="BiblicallyAccurateAngelByDanielIronsideDe9Cdvn-pre" type="Sprite2D" parent="."]
+position = Vector2(969, 205)
+scale = Vector2(0.608955, 0.608955)
+texture = ExtResource("3_m1ugf")
+
+[node name="BasicAttack" parent="." instance=ExtResource("4_rxm1x")]
+position = Vector2(296, 557)
+start_velocity = Vector2(100, 500)
+fire_amount = 10
+
+[node name="BasicAttack2" parent="." instance=ExtResource("4_rxm1x")]
+position = Vector2(1695, 966)
+start_velocity = Vector2(-100, 500)
+fire_amount = 10
+
+[node name="BasicAttack4" parent="." instance=ExtResource("4_rxm1x")]
+position = Vector2(826, 569)
+start_velocity = Vector2(-100, 500)
+fire_amount = 10
+
+[node name="BasicAttack3" parent="." instance=ExtResource("4_rxm1x")]
+position = Vector2(1196, 575)
+start_velocity = Vector2(100, 500)
+fire_amount = 10

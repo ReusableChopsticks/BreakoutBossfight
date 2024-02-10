@@ -70,7 +70,7 @@ var wall_normal = 0
 var is_invincible = false
 
 func check_collisions():
-	if is_on_floor() and not is_dashing and !can_dash:
+	if (is_on_floor() or is_on_wall_only()) and not is_dashing and !can_dash:
 		can_dash = true
 	handle_coyote()
 	handle_buffer()
@@ -182,6 +182,7 @@ func handle_direction():
 	# keep facing_dir to last direction facing when staying still
 	direction = signf(Input.get_axis("move_left", "move_right"))
 	facing_dir = direction if direction != 0 and not is_dashing else facing_dir
+	PlayerStats.facing_dir = facing_dir
 	# left and right movement on ground and air
 	if direction and not is_wall_jumping:
 		velocity.x = lerpf(velocity.x, direction * move_speed, move_lerp)

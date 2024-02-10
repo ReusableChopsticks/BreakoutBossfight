@@ -6,6 +6,14 @@ func setup(bullet: BulletConfig):
 	velocity = bullet.start_velocity
 	return self
 
+func deflect():
+	is_deflected = true
+	# set to bounce off environment (walls)
+	set_collision_mask_value(3, true)
+	# set to player bullet
+	set_collision_layer_value(5, true)
+	set_collision_layer_value(4, false)
+
 func _physics_process(delta):
 	var col_info = move_and_collide(velocity * delta)
 	if col_info:

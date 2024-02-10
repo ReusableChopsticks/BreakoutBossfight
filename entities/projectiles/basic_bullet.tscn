@@ -11,6 +11,7 @@ radius = 30.0167
 radius = 31.0161
 
 [node name="BasicBullet" instance=ExtResource("1_yyb4r")]
+collision_mask = 64
 script = ExtResource("2_ofm20")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
