@@ -104,8 +104,6 @@ move_lerp = 0.378
 friction_lerp = 0.5
 air_friction_lerp = 0.3
 wall_slide_speed = 200
-wjump_x_velocity = 800
-wjump_y_velocity = -800
 dash_velocity_multiplier = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

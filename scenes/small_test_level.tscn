@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ck26egagsemx1"]
+[gd_scene load_steps=6 format=3 uid="uid://ck26egagsemx1"]
 
 [ext_resource type="PackedScene" uid="uid://bmrdkjqxvde8w" path="res://entities/player/player.tscn" id="1_kbjuk"]
 [ext_resource type="PackedScene" uid="uid://dk4abp6w1e7fu" path="res://scenes/wall.tscn" id="2_ud0kp"]
 [ext_resource type="Texture2D" uid="uid://ch3gjk3kydrwv" path="res://graphics/biblically_accurate_angel_by_daniel_ironside_de9cdvn-pre.png" id="3_m1ugf"]
 [ext_resource type="PackedScene" uid="uid://bletqh7nbk4d4" path="res://entities/attacks/basic_attack.tscn" id="4_rxm1x"]
+[ext_resource type="PackedScene" uid="uid://cnffthbwjp8xx" path="res://entities/projectiles/kinematic_bullet.tscn" id="5_vp05k"]
 
 [node name="SmallTestLevel" type="Node2D"]
 
@@ -11,12 +12,9 @@
 position = Vector2(961, 958)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-offset = Vector2(0, -200)
+offset = Vector2(0, -300)
 limit_bottom = 1400
 editor_draw_limits = true
-
-[node name="LeftWall" parent="." instance=ExtResource("2_ud0kp")]
-position = Vector2(-214, 503)
 
 [node name="LeftWall4" parent="." instance=ExtResource("2_ud0kp")]
 position = Vector2(185, 766)
@@ -27,24 +25,22 @@ position = Vector2(1706, 764)
 scale = Vector2(0.141422, 1.10497)
 
 [node name="LeftWall6" parent="." instance=ExtResource("2_ud0kp")]
-position = Vector2(965, 742)
+position = Vector2(329, 873)
+rotation = 1.5708
 scale = Vector2(0.141422, 1.10497)
 
-[node name="LeftWall2" parent="." instance=ExtResource("2_ud0kp")]
-position = Vector2(2223, 503)
+[node name="LeftWall8" parent="." instance=ExtResource("2_ud0kp")]
+position = Vector2(1564, 873)
+rotation = 1.5708
+scale = Vector2(0.141422, 1.10497)
 
 [node name="LeftWall3" parent="." instance=ExtResource("2_ud0kp")]
 position = Vector2(961, 1078)
 rotation = 1.5708
 scale = Vector2(0.141422, 11.545)
 
-[node name="LeftWall7" parent="." instance=ExtResource("2_ud0kp")]
-position = Vector2(1001, -199)
-rotation = 1.5708
-scale = Vector2(0.141422, 11.545)
-
 [node name="BiblicallyAccurateAngelByDanielIronsideDe9Cdvn-pre" type="Sprite2D" parent="."]
-position = Vector2(969, 205)
+position = Vector2(969, 264)
 scale = Vector2(0.608955, 0.608955)
 texture = ExtResource("3_m1ugf")
 
@@ -60,8 +56,10 @@ fire_amount = 10
 
 [node name="BasicAttack4" parent="." instance=ExtResource("4_rxm1x")]
 position = Vector2(826, 569)
-start_velocity = Vector2(-100, 500)
-fire_amount = 10
+bullet_scene = ExtResource("5_vp05k")
+start_velocity = Vector2(-100, -500)
+fire_interval = 0.2
+fire_amount = 20
 
 [node name="BasicAttack3" parent="." instance=ExtResource("4_rxm1x")]
 position = Vector2(1196, 575)

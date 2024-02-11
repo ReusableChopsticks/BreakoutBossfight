@@ -17,7 +17,6 @@ func _ready():
 
 func attack():
 	for i in range(fire_amount):
-		var bullet: BasicBullet = bullet_scene.instantiate().setup(bullet_config)
-		#bullet.setup(bullet_config)
+		var bullet: BaseBullet = bullet_scene.instantiate().setup(bullet_config)
 		add_child(bullet)
 		await get_tree().create_timer(fire_interval).timeout

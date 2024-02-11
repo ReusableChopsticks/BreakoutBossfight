@@ -12,7 +12,7 @@ func _ready():
 
 var attack_area
 func _process(delta):
-	print(PlayerStats.facing_dir)
+	#print(PlayerStats.facing_dir)
 	if Input.is_action_just_pressed("attack"):
 		if Input.is_action_pressed("face up"):
 			attack_area = up_attack_area
@@ -26,8 +26,7 @@ func _process(delta):
 		for area in attack_area.get_overlapping_areas():
 			if area.get_parent() is BaseBullet:
 				area.get_parent().deflect()
-		
-		
+
 
 func weapon_attack():
 	pass

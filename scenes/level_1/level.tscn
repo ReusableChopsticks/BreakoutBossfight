@@ -157,4 +157,3 @@ collision_mask = 1
 
 [node name="Player" parent="." instance=ExtResource("1_37hb1")]
 position = Vector2(1350, 631)
-wjump_x_velocity = 1000
