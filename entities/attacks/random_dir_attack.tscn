@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgsc2tah4rpwv"]
+
+[ext_resource type="PackedScene" uid="uid://dp4we7hilr4fx" path="res://entities/attacks/base_attack.tscn" id="1_n3k1t"]
+[ext_resource type="Script" path="res://entities/attacks/random_dir_attack.gd" id="2_jcwne"]
+
+[node name="RandomDirAttack" instance=ExtResource("1_n3k1t")]
+script = ExtResource("2_jcwne")
