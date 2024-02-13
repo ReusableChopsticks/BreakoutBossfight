@@ -11,12 +11,13 @@ var bullet_config: BulletConfig
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	bullet_config = BulletConfig.new()
-	bullet_config.start_velocity = start_velocity
-	attack()
+	preview_attack()
 
 func attack():
 	for i in range(fire_amount):
+		bullet_config = BulletConfig.new()
+		bullet_config.spawn_pos = global_position
+		bullet_config.start_velocity = start_velocity
 		var bullet: BaseBullet = bullet_scene.instantiate().setup(bullet_config)
-		add_child(bullet)
+		$Bullets.add_child(bullet)
 		await get_tree().create_timer(fire_interval).timeout

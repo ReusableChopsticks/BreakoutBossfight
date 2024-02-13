@@ -1,3 +1,5 @@
 [gd_scene format=3 uid="uid://dp4we7hilr4fx"]
 
 [node name="BaseAttack" type="Node2D"]
+
+[node name="Bullets" type="Node" parent="."]

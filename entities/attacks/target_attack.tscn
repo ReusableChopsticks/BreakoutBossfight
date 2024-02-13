@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://clc00k3p5l3vy"]
+
+[ext_resource type="PackedScene" uid="uid://dp4we7hilr4fx" path="res://entities/attacks/base_attack.tscn" id="1_17cje"]
+[ext_resource type="Script" path="res://entities/attacks/target_attack.gd" id="2_s5v2y"]
+[ext_resource type="PackedScene" uid="uid://douuwu2uf32ge" path="res://entities/projectiles/exploding_bullet.tscn" id="3_p7481"]
+
+[node name="TargetAttack" instance=ExtResource("1_17cje")]
+script = ExtResource("2_s5v2y")
+bullet_scene = ExtResource("3_p7481")
+target_pos = Vector2(200, 200)
+travel_time = 0.2
+fire_interval = 0.287
+fire_amount = 10
+set_preview = true

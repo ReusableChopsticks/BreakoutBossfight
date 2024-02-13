@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://douuwu2uf32ge"]
+
+[ext_resource type="PackedScene" uid="uid://bm8hpd35b4y32" path="res://entities/projectiles/base_bullet.tscn" id="1_1kxcq"]
+[ext_resource type="Texture2D" uid="uid://bdtaw3saty56x" path="res://entities/projectiles/mine.png" id="2_l5jig"]
+[ext_resource type="Script" path="res://entities/projectiles/exploding_bullet.gd" id="2_prfr7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ey43"]
+radius = 58.0775
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wyrlb"]
+
+[node name="ExplodingBullet" instance=ExtResource("1_1kxcq")]
+script = ExtResource("2_prfr7")
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_l5jig")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
+shape = SubResource("CircleShape2D_6ey43")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CircleShape2D_wyrlb")

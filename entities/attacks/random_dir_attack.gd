@@ -15,6 +15,7 @@ func _ready():
 func attack():
 	for i in range(fire_amount):
 		bullet_config = BulletConfig.new()
+		bullet_config.spawn_pos = global_position
 		bullet_config.start_velocity = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * speed
-		add_child(bullet_scene.instantiate().setup(bullet_config))
+		$Bullets.add_child(bullet_scene.instantiate().setup(bullet_config))
 		await get_tree().create_timer(fire_interval).timeout
