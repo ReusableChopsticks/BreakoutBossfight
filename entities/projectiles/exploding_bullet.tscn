@@ -1,11 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://douuwu2uf32ge"]
+[gd_scene load_steps=8 format=3 uid="uid://douuwu2uf32ge"]
 
 [ext_resource type="PackedScene" uid="uid://bm8hpd35b4y32" path="res://entities/projectiles/base_bullet.tscn" id="1_1kxcq"]
 [ext_resource type="Texture2D" uid="uid://bdtaw3saty56x" path="res://entities/projectiles/mine.png" id="2_l5jig"]
 [ext_resource type="Script" path="res://entities/projectiles/exploding_bullet.gd" id="2_prfr7"]
+[ext_resource type="PackedScene" uid="uid://bi7vg7jftevte" path="res://entities/attacks/radial_attack.tscn" id="4_vf56o"]
+[ext_resource type="PackedScene" uid="uid://rtah0mxab7rn" path="res://entities/projectiles/basic_bullet.tscn" id="5_0w35u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ey43"]
-radius = 58.0775
+radius = 18.0278
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wyrlb"]
 
@@ -13,7 +15,7 @@ radius = 58.0775
 script = ExtResource("2_prfr7")
 
 [node name="Sprite2D" parent="." index="0"]
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.0948718, 0.0948718)
 texture = ExtResource("2_l5jig")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
@@ -21,3 +23,8 @@ shape = SubResource("CircleShape2D_6ey43")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 shape = SubResource("CircleShape2D_wyrlb")
+
+[node name="RadialAttack" parent="." index="3" instance=ExtResource("4_vf56o")]
+bullet_scene = ExtResource("5_0w35u")
+degrees_offset_per_burst = 0
+fire_amount = 1

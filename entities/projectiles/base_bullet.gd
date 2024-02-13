@@ -12,6 +12,9 @@ All bullets must have these functions:
 var is_normal: bool
 var is_deflected: bool
 
+func _ready():
+	pass
+
 # sets is_deflected to true and sets collision layer to player bullet
 func setup_deflected():
 	is_deflected = true
@@ -25,3 +28,7 @@ func set_environment_collision(val: bool = true):
 		set_collision_mask_value(3, true)
 	else:
 		set_collision_mask_value(3, false)
+
+# despawn self after certain amount of time
+func _on_delete_timer_timeout():
+	call_deferred("queue_free")

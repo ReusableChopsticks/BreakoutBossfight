@@ -1,5 +1,8 @@
-[gd_scene format=3 uid="uid://dp4we7hilr4fx"]
+[gd_scene load_steps=2 format=3 uid="uid://dp4we7hilr4fx"]
+
+[ext_resource type="Script" path="res://entities/attacks/base_attack.gd" id="1_gcysj"]
 
 [node name="BaseAttack" type="Node2D"]
+script = ExtResource("1_gcysj")
 
 [node name="Bullets" type="Node" parent="."]

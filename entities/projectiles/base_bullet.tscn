@@ -13,3 +13,8 @@ metadata/_edit_group_ = true
 
 [node name="HitboxComponent" parent="." instance=ExtResource("2_lv403")]
 collision_layer = 8
+
+[node name="DeleteTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_delete_timer_timeout"]

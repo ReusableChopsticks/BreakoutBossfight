@@ -7,3 +7,6 @@
 [node name="BasicAttack" instance=ExtResource("1_ehk2l")]
 script = ExtResource("2_7xksu")
 bullet_scene = ExtResource("3_idm1q")
+start_velocity = Vector2(0, 500)
+fire_interval = 0.5
+fire_amount = 3

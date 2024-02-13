@@ -22,7 +22,7 @@ func attack():
 			bullet_config = BulletConfig.new()
 			bullet_config.spawn_pos = global_position
 			bullet_config.start_velocity = Vector2.UP.rotated((angle_interval * i) + rotate_offset) * speed
-			$Bullets.add_child(bullet_scene.instantiate().setup(bullet_config))
+			var bullet = spawn_bullet(bullet_scene, bullet_config)
 			
 		await get_tree().create_timer(fire_interval).timeout
 		rotate_offset += degrees_offset_per_burst

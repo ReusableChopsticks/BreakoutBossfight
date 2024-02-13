@@ -4,9 +4,9 @@ class_name KinematicBullet
 @export var gravity: int = 1000
 @export_range(0, 1) var bounce_decrease: float = 0.8
 
-func setup(config: BulletConfig):
-	position = config.spawn_pos
-	velocity = config.start_velocity
+func setup(bullet_config: BulletConfig):
+	position = bullet_config.spawn_pos
+	velocity = bullet_config.start_velocity
 	return self
 	
 func deflect():
