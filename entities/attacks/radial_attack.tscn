@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi7vg7jftevte"]
+
+[ext_resource type="PackedScene" uid="uid://dp4we7hilr4fx" path="res://entities/attacks/base_attack.tscn" id="1_54qdg"]
+[ext_resource type="Script" path="res://entities/attacks/radial_attack.gd" id="2_3l31x"]
+
+[node name="RadialAttack" instance=ExtResource("1_54qdg")]
+script = ExtResource("2_3l31x")
