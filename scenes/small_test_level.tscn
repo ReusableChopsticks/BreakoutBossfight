@@ -22,7 +22,6 @@ scale = Vector2(0.141422, 1.10497)
 
 [node name="LeftWall5" parent="." instance=ExtResource("2_ud0kp")]
 position = Vector2(1706, 764)
-scale = Vector2(0.141422, 1.10497)
 
 [node name="LeftWall6" parent="." instance=ExtResource("2_ud0kp")]
 position = Vector2(329, 873)
@@ -30,7 +29,7 @@ rotation = 1.5708
 scale = Vector2(0.141422, 1.10497)
 
 [node name="LeftWall8" parent="." instance=ExtResource("2_ud0kp")]
-position = Vector2(1564, 873)
+position = Vector2(1666, 877)
 rotation = 1.5708
 scale = Vector2(0.141422, 1.10497)
 
@@ -47,4 +46,4 @@ texture = ExtResource("3_m1ugf")
 [node name="RadialAttack" parent="." instance=ExtResource("4_2ojce")]
 position = Vector2(956, 580)
 bullet_scene = ExtResource("6_061oo")
-set_preview = true
+fire_amount = 1

@@ -150,8 +150,8 @@ func handle_wall_jump():
 		execute_wall_jump()
 	# controls moment where wall jump velocity is forced
 	if is_wall_jumping:
-		velocity.x = lerpf(wjump_x_velocity * last_wall_normal_x, move_speed, air_friction_lerp)
-		
+		velocity.x = lerpf(wjump_x_velocity * last_wall_normal_x, move_speed * last_wall_normal_x, air_friction_lerp)
+
 func execute_wall_jump():
 	last_wall_normal_x = wall_normal.x
 	velocity.y = wjump_y_velocity
