@@ -1,146 +1,245 @@
-[gd_scene load_steps=15 format=3 uid="uid://b14mjug8xedxd"]
+[gd_scene load_steps=21 format=3 uid="uid://b14mjug8xedxd"]
 
-[ext_resource type="Texture2D" uid="uid://ch3gjk3kydrwv" path="res://graphics/biblically_accurate_angel_by_daniel_ironside_de9cdvn-pre.png" id="1_y5eap"]
+[ext_resource type="Texture2D" uid="uid://cap1h0x66msw7" path="res://entities/bosses/outer_body.png" id="1_7x1j8"]
+[ext_resource type="Texture2D" uid="uid://chamcmarvxah2" path="res://entities/bosses/inner_body.png" id="2_co8sh"]
+[ext_resource type="Texture2D" uid="uid://dewnt3164lp7m" path="res://entities/bosses/eyeball.png" id="3_5bn0c"]
+[ext_resource type="Texture2D" uid="uid://bypkfeu0m0bwk" path="res://entities/bosses/iris.png" id="4_ajrxk"]
+
+[sub_resource type="GDScript" id="GDScript_ytuw1"]
+script/source = "extends Sprite2D
+
+@export var spin_speed = 20
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta):
+	rotation_degrees += spin_speed * delta
+"
+
+[sub_resource type="GDScript" id="GDScript_jubds"]
+script/source = "extends Sprite2D
+
+@export var spin_speed = 20
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta):
+	rotation_degrees += spin_speed * delta
+"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nr4r4"]
 
-[sub_resource type="Animation" id="Animation_cyq3s"]
-resource_name = "test"
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 120)]
-}
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgt82"]
+atlas = ExtResource("3_5bn0c")
+region = Rect2(0, 0, 130, 70)
 
-[sub_resource type="Animation" id="Animation_nyuk4"]
-length = 0.001
+[sub_resource type="AtlasTexture" id="AtlasTexture_sumkr"]
+atlas = ExtResource("3_5bn0c")
+region = Rect2(390, 0, 130, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vo612"]
+atlas = ExtResource("3_5bn0c")
+region = Rect2(130, 0, 130, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xg8bj"]
+atlas = ExtResource("3_5bn0c")
+region = Rect2(260, 0, 130, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4e0mo"]
+atlas = ExtResource("3_5bn0c")
+region = Rect2(390, 0, 130, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2mmo"]
+atlas = ExtResource("3_5bn0c")
+region = Rect2(260, 0, 130, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_381db"]
+atlas = ExtResource("3_5bn0c")
+region = Rect2(130, 0, 130, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5auqa"]
+atlas = ExtResource("3_5bn0c")
+region = Rect2(0, 0, 130, 70)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ut0j0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgt82")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sumkr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgt82")
+}],
+"loop": false,
+"name": &"blink",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgt82")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vo612")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xg8bj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sumkr")
+}],
+"loop": false,
+"name": &"close_eye",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4e0mo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2mmo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_381db")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5auqa")
+}],
+"loop": false,
+"name": &"open_eye",
+"speed": 10.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_1ht1u"]
+script/source = "extends Sprite2D
+
+var start_pos
+
+func _ready():
+	start_pos = global_position
+	#global_position = PlayerStats.player_pos - global_position
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta):
+	position = lerp(Vector2.ZERO, PlayerStats.player_pos - global_position, 0.03)
+	pass
+"
+
+[sub_resource type="Animation" id="Animation_jde8p"]
+resource_name = "test"
+length = 2.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("Eyeball:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
+"update": 1,
+"values": [&"close_eye"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Eyeball:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 2, 1, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Eyeball:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
-[sub_resource type="Animation" id="Animation_ku2jo"]
-resource_name = "side_to_side"
-length = 2.0
-loop_mode = 2
+[sub_resource type="Animation" id="Animation_161n8"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("Eyeball:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(323, 0)]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"close_eye"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Eyeball:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Eyeball:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_we2uu"]
-resource_name = "hop"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -92), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_mc0ht"]
-resource_name = "bob"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 66), Vector2(0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_phgk1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vesn3"]
 _data = {
-"RESET": SubResource("Animation_nyuk4"),
-"bob": SubResource("Animation_mc0ht"),
-"hop": SubResource("Animation_we2uu"),
-"side_to_side": SubResource("Animation_ku2jo"),
-"test": SubResource("Animation_cyq3s")
+"RESET": SubResource("Animation_161n8"),
+"test": SubResource("Animation_jde8p")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_245kc"]
-animation = &"side_to_side"
+[node name="EyeBoss" type="Node2D"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ewobd"]
-animation = &"bob"
+[node name="Eye" type="CharacterBody2D" parent="."]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_momfc"]
-animation = &"RESET"
+[node name="OuterBody" type="Sprite2D" parent="Eye"]
+scale = Vector2(1.18438, 1.18438)
+texture = ExtResource("1_7x1j8")
+script = SubResource("GDScript_ytuw1")
 
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_ca2qb"]
+[node name="InnerBody" type="Sprite2D" parent="Eye"]
+scale = Vector2(1.18567, 1.18567)
+texture = ExtResource("2_co8sh")
+script = SubResource("GDScript_jubds")
+spin_speed = -30
 
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_57wxc"]
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_fr3ic"]
-graph_offset = Vector2(-427.443, -65.5538)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_momfc")
-nodes/Animation/position = Vector2(-60, 40)
-"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_245kc")
-"nodes/Animation 2/position" = Vector2(180, 300)
-"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_ewobd")
-"nodes/Animation 3/position" = Vector2(-40, 220)
-nodes/Blend2/node = SubResource("AnimationNodeBlend2_ca2qb")
-nodes/Blend2/position = Vector2(480, 120)
-nodes/OneShot/node = SubResource("AnimationNodeOneShot_57wxc")
-nodes/OneShot/position = Vector2(180, 40)
-nodes/output/position = Vector2(700, 80)
-node_connections = [&"Blend2", 0, &"OneShot", &"Blend2", 1, &"Animation 2", &"OneShot", 0, &"Animation", &"OneShot", 1, &"Animation 3", &"output", 0, &"Blend2"]
-
-[node name="EyeBoss" type="CharacterBody2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_y5eap")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Eye"]
 shape = SubResource("CircleShape2D_nr4r4")
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_phgk1")
-}
-tree_root = SubResource("AnimationNodeBlendTree_fr3ic")
-anim_player = NodePath("../AnimationPlayer")
-parameters/Blend2/blend_amount = 0.19
-parameters/OneShot/active = false
-parameters/OneShot/internal_active = false
-parameters/OneShot/request = 0
+[node name="Eyeball" type="AnimatedSprite2D" parent="Eye"]
+clip_children = 2
+sprite_frames = SubResource("SpriteFrames_ut0j0")
+animation = &"close_eye"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Iris" type="Sprite2D" parent="Eye/Eyeball"]
+texture = ExtResource("4_ajrxk")
+script = SubResource("GDScript_1ht1u")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Eye"]
 libraries = {
-"": SubResource("AnimationLibrary_phgk1")
+"": SubResource("AnimationLibrary_vesn3")
 }
+autoplay = "test"

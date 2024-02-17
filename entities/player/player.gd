@@ -227,6 +227,7 @@ func _physics_process(delta):
 	#print(velocity)
 	move_and_slide()
 	wall_normal = get_wall_normal()
+	PlayerStats.player_pos = global_position
 
 func print_inputs():
 	if Input.is_action_just_pressed("jump"):
