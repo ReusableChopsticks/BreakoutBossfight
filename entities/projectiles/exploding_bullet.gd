@@ -18,6 +18,7 @@ func explode():
 
 # cannot be deflected?
 func deflect():
+	#set_deflected()
 	pass
 
 func _physics_process(delta):

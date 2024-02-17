@@ -228,6 +228,7 @@ func _physics_process(delta):
 	move_and_slide()
 	wall_normal = get_wall_normal()
 	PlayerStats.player_pos = global_position
+	print_inputs()
 
 func print_inputs():
 	if Input.is_action_just_pressed("jump"):
@@ -248,7 +249,7 @@ func print_inputs():
 
 #region Timers
 func _on_jump_hold_timer_timeout():
-	if velocity.y < 0:
+	if velocity.y < 0 and is_jumping:
 		release_jump()
 	can_hold_jump = false
 

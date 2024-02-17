@@ -1,22 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://ck26egagsemx1"]
+[gd_scene load_steps=7 format=3 uid="uid://ck26egagsemx1"]
 
 [ext_resource type="PackedScene" uid="uid://bmrdkjqxvde8w" path="res://entities/player/player.tscn" id="1_kbjuk"]
 [ext_resource type="PackedScene" uid="uid://dk4abp6w1e7fu" path="res://scenes/wall.tscn" id="2_ud0kp"]
 [ext_resource type="PackedScene" uid="uid://bi7vg7jftevte" path="res://entities/attacks/radial_attack.tscn" id="4_2ojce"]
 [ext_resource type="PackedScene" uid="uid://b14mjug8xedxd" path="res://entities/bosses/eye_boss.tscn" id="5_lpul3"]
 [ext_resource type="PackedScene" uid="uid://douuwu2uf32ge" path="res://entities/projectiles/exploding_bullet.tscn" id="6_061oo"]
+[ext_resource type="PackedScene" uid="uid://rtah0mxab7rn" path="res://entities/projectiles/basic_bullet.tscn" id="6_ds7hp"]
 
 [node name="SmallTestLevel" type="Node2D"]
-
-[node name="Player" parent="." instance=ExtResource("1_kbjuk")]
-position = Vector2(922, 756)
-metadata/_edit_group_ = true
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-offset = Vector2(0, -300)
-zoom = Vector2(0.9, 0.9)
-limit_bottom = 1400
-editor_draw_limits = true
 
 [node name="LeftWall4" parent="." instance=ExtResource("2_ud0kp")]
 position = Vector2(185, 766)
@@ -47,3 +38,20 @@ fire_amount = 1
 
 [node name="EyeBoss" parent="." instance=ExtResource("5_lpul3")]
 position = Vector2(912, 323)
+
+[node name="Player" parent="." instance=ExtResource("1_kbjuk")]
+position = Vector2(922, 756)
+metadata/_edit_group_ = true
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+offset = Vector2(0, -300)
+zoom = Vector2(0.9, 0.9)
+limit_bottom = 1400
+editor_draw_limits = true
+
+[node name="RadialAttack2" parent="." instance=ExtResource("4_2ojce")]
+position = Vector2(919, 455)
+bullet_scene = ExtResource("6_ds7hp")
+fire_interval = 0.604
+fire_amount = 30
+set_preview = true

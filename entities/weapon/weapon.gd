@@ -11,7 +11,7 @@ func _ready():
 
 
 var attack_area
-func _process(delta):
+func _process(_delta):
 	#print(PlayerStats.facing_dir)
 	if Input.is_action_just_pressed("attack"):
 		if Input.is_action_pressed("face up"):

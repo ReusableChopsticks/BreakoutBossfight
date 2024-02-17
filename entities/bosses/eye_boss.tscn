@@ -1,9 +1,23 @@
-[gd_scene load_steps=21 format=3 uid="uid://b14mjug8xedxd"]
+[gd_scene load_steps=22 format=3 uid="uid://b14mjug8xedxd"]
 
 [ext_resource type="Texture2D" uid="uid://cap1h0x66msw7" path="res://entities/bosses/outer_body.png" id="1_7x1j8"]
 [ext_resource type="Texture2D" uid="uid://chamcmarvxah2" path="res://entities/bosses/inner_body.png" id="2_co8sh"]
 [ext_resource type="Texture2D" uid="uid://dewnt3164lp7m" path="res://entities/bosses/eyeball.png" id="3_5bn0c"]
 [ext_resource type="Texture2D" uid="uid://bypkfeu0m0bwk" path="res://entities/bosses/iris.png" id="4_ajrxk"]
+
+[sub_resource type="GDScript" id="GDScript_7i5ic"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	BossStats.centre_pos = global_position
+"
 
 [sub_resource type="GDScript" id="GDScript_ytuw1"]
 script/source = "extends Sprite2D
@@ -120,10 +134,48 @@ func _ready():
 	#global_position = PlayerStats.player_pos - global_position
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 	position = lerp(Vector2.ZERO, PlayerStats.player_pos - global_position, 0.03)
-	pass
 "
+
+[sub_resource type="Animation" id="Animation_161n8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Eyeball:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"close_eye"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Eyeball:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Eyeball:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_jde8p"]
 resource_name = "test"
@@ -166,45 +218,6 @@ tracks/2/keys = {
 "values": [false, true]
 }
 
-[sub_resource type="Animation" id="Animation_161n8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Eyeball:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"close_eye"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Eyeball:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Eyeball:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vesn3"]
 _data = {
 "RESET": SubResource("Animation_161n8"),
@@ -212,6 +225,7 @@ _data = {
 }
 
 [node name="EyeBoss" type="Node2D"]
+script = SubResource("GDScript_7i5ic")
 
 [node name="Eye" type="CharacterBody2D" parent="."]
 
@@ -228,6 +242,7 @@ spin_speed = -30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Eye"]
 shape = SubResource("CircleShape2D_nr4r4")
+disabled = true
 
 [node name="Eyeball" type="AnimatedSprite2D" parent="Eye"]
 clip_children = 2

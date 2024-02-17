@@ -18,6 +18,7 @@ config/icon="res://entities/projectiles/BasicBulletSprite.png"
 [autoload]
 
 PlayerStats="*res://components/player_stats.gd"
+BossStats="*res://components/boss_stats.gd"
 
 [display]
 

@@ -1,7 +1,7 @@
 extends BaseBullet
 class_name KinematicBullet
 
-@export var gravity: int = 1000
+@export var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export_range(0, 1) var bounce_decrease: float = 0.8
 
 func setup(bullet_config: BulletConfig):
@@ -10,8 +10,9 @@ func setup(bullet_config: BulletConfig):
 	return self
 	
 func deflect():
-	setup_deflected()
+	set_deflected()
 	set_environment_collision()
+	velocity *= 1.5
 
 func _physics_process(delta):
 	velocity.y += gravity * delta

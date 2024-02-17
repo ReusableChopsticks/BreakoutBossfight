@@ -11,16 +11,15 @@ All bullets must have these functions:
 
 var is_normal: bool
 var is_deflected: bool
-
-func _ready():
-	pass
+var speed: float
 
 # sets is_deflected to true and sets collision layer to player bullet
-func setup_deflected():
+func set_deflected():
 	is_deflected = true
 	# set to player bullet
 	set_collision_layer_value(5, true)
 	set_collision_layer_value(4, false)
+	velocity = -(global_position - BossStats.centre_pos).normalized() * velocity.length()
 
 # set bullet to bounce off environment (walls)
 func set_environment_collision(val: bool = true):
