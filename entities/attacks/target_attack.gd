@@ -32,3 +32,4 @@ func attack():
 		var tween = bullet.create_tween().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 		tween.tween_property(bullet, "global_position", target_pos, travel_time)
 		await get_tree().create_timer(fire_interval).timeout
+	finished.emit()

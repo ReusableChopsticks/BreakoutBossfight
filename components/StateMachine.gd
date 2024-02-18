@@ -33,8 +33,8 @@ state: the state that called it
 new_state_name: what state you want to transition to
 """
 func on_child_transition(state, new_state_name: String):
-	#FIXME: this may be wrong? confirm, then change != to ==
 	if state != current_state:
+		printerr("%s != %s. Current states do not match" % [state.name, current_state.name])
 		return
 	
 	var new_state = states.get(new_state_name.to_lower())
@@ -44,5 +44,5 @@ func on_child_transition(state, new_state_name: String):
 		
 	if current_state:
 		current_state.exit()
-	new_state.enter()
 	current_state = new_state
+	new_state.enter()

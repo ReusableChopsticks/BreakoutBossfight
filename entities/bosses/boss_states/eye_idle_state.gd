@@ -1,17 +1,17 @@
 extends State
-class_name EyeBossIdleState
+class_name EyeIdleState
 
 @export var idle_time: float = 4
 @export var anim: AnimationPlayer
-var time: float = 0
+
 
 func enter():
 	anim.play("idle")
+	await get_tree().create_timer(idle_time).timeout
+	transitioned.emit(self, "EyeChooseAttack")
 
 func update(delta: float):
-	time += delta
-	if time >= idle_time:
-		transitioned.emit(self, "DecideAttack")
+	pass
 
 func exit():
 	pass

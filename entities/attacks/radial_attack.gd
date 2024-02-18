@@ -26,3 +26,4 @@ func attack():
 			
 		await get_tree().create_timer(fire_interval).timeout
 		rotate_offset += degrees_offset_per_burst
+	finished.emit()

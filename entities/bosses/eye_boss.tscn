@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b14mjug8xedxd"]
+[gd_scene load_steps=33 format=3 uid="uid://b14mjug8xedxd"]
 
 [ext_resource type="Texture2D" uid="uid://cap1h0x66msw7" path="res://entities/bosses/outer_body.png" id="1_7x1j8"]
 [ext_resource type="Script" path="res://entities/bosses/eye_boss.gd" id="1_8i05s"]
@@ -6,8 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://dewnt3164lp7m" path="res://entities/bosses/eyeball.png" id="3_5bn0c"]
 [ext_resource type="Texture2D" uid="uid://bypkfeu0m0bwk" path="res://entities/bosses/iris.png" id="4_ajrxk"]
 [ext_resource type="Script" path="res://components/StateMachine.gd" id="6_hmgcb"]
-[ext_resource type="Script" path="res://entities/bosses/attack_states/idle.gd" id="7_1k40u"]
-[ext_resource type="Script" path="res://entities/bosses/attack_states/eye_boss_intro.gd" id="8_1txo7"]
+[ext_resource type="PackedScene" uid="uid://bletqh7nbk4d4" path="res://entities/attacks/basic_attack.tscn" id="6_k4pdw"]
+[ext_resource type="PackedScene" uid="uid://bi7vg7jftevte" path="res://entities/attacks/radial_attack.tscn" id="7_64inh"]
+[ext_resource type="PackedScene" uid="uid://rtah0mxab7rn" path="res://entities/projectiles/basic_bullet.tscn" id="8_cj3i4"]
+[ext_resource type="PackedScene" uid="uid://cx1bes5236qyc" path="res://entities/attacks/direction_attack.tscn" id="9_ut28g"]
+[ext_resource type="Script" path="res://entities/bosses/boss_states/eye_idle_state.gd" id="10_4sswx"]
+[ext_resource type="Script" path="res://entities/bosses/boss_states/eye_intro.gd" id="11_xxj5g"]
+[ext_resource type="Script" path="res://entities/bosses/boss_states/eye_choose_attack.gd" id="12_ghtuw"]
+[ext_resource type="Script" path="res://entities/bosses/boss_states/eye_burst_attack.gd" id="13_xky0h"]
+[ext_resource type="Script" path="res://entities/bosses/boss_states/eye_shoot_player_attack.gd" id="15_5hkvr"]
 
 [sub_resource type="GDScript" id="GDScript_ytuw1"]
 script/source = "extends Sprite2D
@@ -301,14 +308,39 @@ libraries = {
 "": SubResource("AnimationLibrary_vesn3")
 }
 
+[node name="Attacks" type="Node2D" parent="Eye"]
+
+[node name="BasicAttack" parent="Eye/Attacks" instance=ExtResource("6_k4pdw")]
+
+[node name="RadialAttack" parent="Eye/Attacks" instance=ExtResource("7_64inh")]
+bullet_scene = ExtResource("8_cj3i4")
+degrees_offset_per_burst = 30
+fire_amount = 5
+
+[node name="DirectionAttack" parent="Eye/Attacks" instance=ExtResource("9_ut28g")]
+bullet_scene = ExtResource("8_cj3i4")
+speed = 700
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_hmgcb")
-initial_state = NodePath("EyeBossIntroState")
+initial_state = NodePath("EyeIntroState")
 
-[node name="EyeBossIdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim")]
-script = ExtResource("7_1k40u")
+[node name="EyeIdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim")]
+script = ExtResource("10_4sswx")
+idle_time = 1.0
 anim = NodePath("../../Eye/AnimationPlayer")
 
-[node name="EyeBossIntroState" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim")]
-script = ExtResource("8_1txo7")
+[node name="EyeIntroState" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim")]
+script = ExtResource("11_xxj5g")
 anim = NodePath("../../Eye/AnimationPlayer")
+
+[node name="EyeChooseAttack" type="Node" parent="StateMachine"]
+script = ExtResource("12_ghtuw")
+
+[node name="EyeBurstAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_node")]
+script = ExtResource("13_xky0h")
+attack_node = NodePath("../../Eye/Attacks/RadialAttack")
+
+[node name="EyeShootPlayerAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_node")]
+script = ExtResource("15_5hkvr")
+attack_node = NodePath("../../Eye/Attacks/DirectionAttack")

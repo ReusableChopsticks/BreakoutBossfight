@@ -19,3 +19,4 @@ func attack():
 		bullet_config.start_velocity = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * speed
 		$Bullets.add_child(bullet_scene.instantiate().setup(bullet_config))
 		await get_tree().create_timer(fire_interval).timeout
+	finished.emit()
