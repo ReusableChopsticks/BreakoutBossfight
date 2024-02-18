@@ -7,7 +7,7 @@ var anim: AnimationPlayer
 
 func enter():
 	anim = boss.get_node("AnimationPlayer")
-	anim.play("test")
+	anim.play("idle")
 
 func exit():
 	anim.stop()

@@ -70,8 +70,9 @@ var wall_normal = 0
 var is_invincible = false
 
 func check_collisions():
-	if (is_on_floor() or is_on_wall_only()) and not is_dashing and !can_dash:
+	if (is_on_floor() or is_on_wall_only()) and !can_dash:
 		can_dash = true
+		is_dashing = false
 	handle_coyote()
 	handle_buffer()
 
