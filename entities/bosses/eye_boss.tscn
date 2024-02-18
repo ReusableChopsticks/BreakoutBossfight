@@ -1,12 +1,13 @@
-[gd_scene load_steps=24 format=3 uid="uid://b14mjug8xedxd"]
+[gd_scene load_steps=26 format=3 uid="uid://b14mjug8xedxd"]
 
 [ext_resource type="Texture2D" uid="uid://cap1h0x66msw7" path="res://entities/bosses/outer_body.png" id="1_7x1j8"]
 [ext_resource type="Script" path="res://entities/bosses/eye_boss.gd" id="1_8i05s"]
 [ext_resource type="Texture2D" uid="uid://chamcmarvxah2" path="res://entities/bosses/inner_body.png" id="2_co8sh"]
 [ext_resource type="Texture2D" uid="uid://dewnt3164lp7m" path="res://entities/bosses/eyeball.png" id="3_5bn0c"]
 [ext_resource type="Texture2D" uid="uid://bypkfeu0m0bwk" path="res://entities/bosses/iris.png" id="4_ajrxk"]
-[ext_resource type="Script" path="res://entities/bosses/StateMachine.gd" id="6_kwdfx"]
-[ext_resource type="Script" path="res://entities/bosses/idle_bob.gd" id="7_p7fv7"]
+[ext_resource type="Script" path="res://components/StateMachine.gd" id="6_hmgcb"]
+[ext_resource type="Script" path="res://entities/bosses/attack_states/idle.gd" id="7_1k40u"]
+[ext_resource type="Script" path="res://entities/bosses/attack_states/eye_boss_intro.gd" id="8_1txo7"]
 
 [sub_resource type="GDScript" id="GDScript_ytuw1"]
 script/source = "extends Sprite2D
@@ -177,6 +178,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Eyeball/Iris:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_jde8p"]
 resource_name = "test"
@@ -231,10 +244,27 @@ tracks/3/keys = {
 "values": [Vector2(0, 0), Vector2(0, 54)]
 }
 
+[sub_resource type="Animation" id="Animation_48y5o"]
+resource_name = "intro"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Eyeball/Iris:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.6, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -82), Vector2(0, 5), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vesn3"]
 _data = {
 "RESET": SubResource("Animation_161n8"),
-"idle": SubResource("Animation_jde8p")
+"idle": SubResource("Animation_jde8p"),
+"intro": SubResource("Animation_48y5o")
 }
 
 [node name="EyeBoss" type="Node2D"]
@@ -270,11 +300,15 @@ script = SubResource("GDScript_1ht1u")
 libraries = {
 "": SubResource("AnimationLibrary_vesn3")
 }
-autoplay = "idle"
 
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource("6_kwdfx")
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("6_hmgcb")
+initial_state = NodePath("EyeBossIntroState")
 
-[node name="IdleBob" type="Node" parent="StateMachine" node_paths=PackedStringArray("boss")]
-script = ExtResource("7_p7fv7")
-boss = NodePath("../../Eye")
+[node name="EyeBossIdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim")]
+script = ExtResource("7_1k40u")
+anim = NodePath("../../Eye/AnimationPlayer")
+
+[node name="EyeBossIntroState" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim")]
+script = ExtResource("8_1txo7")
+anim = NodePath("../../Eye/AnimationPlayer")

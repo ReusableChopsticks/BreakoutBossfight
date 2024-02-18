@@ -32,13 +32,14 @@ func _physics_process(delta):
 state: the state that called it
 new_state_name: what state you want to transition to
 """
-func on_child_transition(state, new_state_name):
+func on_child_transition(state, new_state_name: String):
 	#FIXME: this may be wrong? confirm, then change != to ==
 	if state != current_state:
 		return
 	
-	var new_state: State = states.get(new_state_name.to_lower())
-	if !new_state_name:
+	var new_state = states.get(new_state_name.to_lower())
+	if !new_state:
+		printerr("State %s tried to transition to %s which does not exist" % [state.name, new_state_name])
 		return
 		
 	if current_state:
