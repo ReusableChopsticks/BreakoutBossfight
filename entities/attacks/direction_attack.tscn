@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cx1bes5236qyc"]
+
+[ext_resource type="PackedScene" uid="uid://dp4we7hilr4fx" path="res://entities/attacks/base_attack.tscn" id="1_sjgqw"]
+[ext_resource type="Script" path="res://entities/attacks/direction_attack.gd" id="2_l3aiq"]
+
+[node name="DirectionAttack" instance=ExtResource("1_sjgqw")]
+script = ExtResource("2_l3aiq")
+bullet_scene = null
+speed = 500
+fire_interval = 0.5
+fire_amount = 3

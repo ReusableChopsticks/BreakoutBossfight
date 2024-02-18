@@ -19,7 +19,7 @@ func set_deflected():
 	# set to player bullet
 	set_collision_layer_value(5, true)
 	set_collision_layer_value(4, false)
-	velocity = -(global_position - BossStats.centre_pos).normalized() * velocity.length()
+	velocity = (BossStats.centre_pos - global_position).normalized() * velocity.length()
 
 # set bullet to bounce off environment (walls)
 func set_environment_collision(val: bool = true):
@@ -27,6 +27,9 @@ func set_environment_collision(val: bool = true):
 		set_collision_mask_value(3, true)
 	else:
 		set_collision_mask_value(3, false)
+
+func setup(config: BulletConfig):
+	pass
 
 # despawn self after certain amount of time
 func _on_delete_timer_timeout():

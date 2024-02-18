@@ -9,7 +9,10 @@ func preview_attack():
 		call("attack")
 
 func spawn_bullet(bullet_scene: PackedScene, bullet_config: BulletConfig):
-	var bullet = bullet_scene.instantiate()
+	var bullet: BaseBullet = bullet_scene.instantiate()
 	$Bullets.add_child(bullet)
 	bullet.setup(bullet_config)
 	return bullet
+
+func attack():
+	pass

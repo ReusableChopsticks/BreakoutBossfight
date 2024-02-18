@@ -6,7 +6,7 @@ class_name StateMachine
 var current_state: State
 var states: Dictionary = {}
 
-# Called when the node enters the scene tree for the first time.
+# get all children states and connect to "transitioned" signal in State.gd
 func _ready():
 	for child in get_children():
 		if child is State:
@@ -33,7 +33,7 @@ state: the state that called it
 new_state_name: what state you want to transition to
 """
 func on_child_transition(state, new_state_name):
-	#FIXME: this may be wrong? change != to ==
+	#FIXME: this may be wrong? confirm, then change != to ==
 	if state != current_state:
 		return
 	
