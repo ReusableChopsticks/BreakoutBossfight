@@ -33,6 +33,12 @@ position = Vector2(912, 323)
 
 [node name="Player" parent="." instance=ExtResource("1_kbjuk")]
 position = Vector2(922, 756)
+max_fall_velocity = 2000
+move_lerp = 1.0
+friction_lerp = 1.0
+air_friction_lerp = 1.0
+wall_slide_speed = 500
+release_cancel_mult = 0.2
 metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]

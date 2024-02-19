@@ -1,5 +1,7 @@
-extends CharacterBody2D
-class_name Player
+extends State
+class_name PlayerMoveState
+
+@onready var p: CharacterBody2D = get_parent().get_parent()
 
 #region Movement
 @export_group("Movement")
@@ -48,8 +50,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var buffer_timer: Timer = $Timers/BufferTimer
 @onready var wall_jump_buffer_timer: Timer = $Timers/WallJumpBufferTimer
 @onready var move_buffer_timer: Timer = $Timers/MoveBufferTimer
-
-@onready var dash_anim: AnimationPlayer = $AnimationPlayer
+# this is not for character animation, but controls dash timings precisely
+@onready var dash_anim: AnimationPlayer = $"../PlayerNodeReferences".anim_player
 
 # apply constant force up while holding like hollow knight jump
 var can_hold_jump: bool = true
@@ -70,9 +72,9 @@ var wall_normal = 0
 var is_invincible = false
 
 func check_collisions():
-	if (is_on_floor() or is_on_wall_only()) and !can_dash and !is_dashing:
+	if (p.is_on_floor() or p.is_on_wall_only()) and !can_dash and !is_dashing:
 		can_dash = true
-	if is_on_wall_only() and is_dashing:
+	if p.is_on_wall_only() and is_dashing:
 		is_dashing = false
 		can_dash = true
 	handle_coyote()
@@ -82,21 +84,21 @@ func check_collisions():
 # handles has_coyote variable
 func handle_coyote():
 	# detect the frame the player leaves the floor
-	if last_floor == true and is_on_floor() == false:
+	if last_floor == true and p.is_on_floor() == false:
 		has_coyote = true
 		coyote_timer.start()
 	# detect the frame the player leaves a wall
-	if last_wall == true and is_on_wall_only() == false and not is_wall_jumping:
+	if last_wall == true and p.is_on_wall_only() == false and not is_wall_jumping:
 		has_wall_coyote = true
 		wall_coyote_timer.start()
-	last_floor = is_on_floor()
-	last_wall = is_on_wall_only()
+	last_floor = p.is_on_floor()
+	last_wall = p.is_on_wall_only()
 
 func handle_buffer():
-	if Input.is_action_just_pressed("jump") and not is_on_floor():
+	if Input.is_action_just_pressed("jump") and not p.is_on_floor():
 		has_buffer = true
 		buffer_timer.start()
-	if Input.is_action_just_pressed("jump") and not is_on_wall_only():
+	if Input.is_action_just_pressed("jump") and not p.is_on_wall_only():
 		has_wall_buffer = true
 		wall_jump_buffer_timer.start()
 	if ((Input.is_action_just_pressed("move_left") or Input.is_action_just_pressed("move_right"))):
@@ -105,21 +107,21 @@ func handle_buffer():
 
 func handle_jump():
 	# jump if on floor or coyote time active
-	if Input.is_action_just_pressed("jump") and (is_on_floor() or has_coyote):
+	if Input.is_action_just_pressed("jump") and (p.is_on_floor() or has_coyote):
 		execute_jump()
 	# jump if buffer is active 
-	elif is_on_floor() and has_buffer:
+	elif p.is_on_floor() and has_buffer:
 		execute_jump()
 	# Hold jump to go higher
-	elif is_jumping and Input.is_action_pressed("jump") and can_hold_jump and not is_on_ceiling():
-		velocity.y = jump_velocity
+	elif is_jumping and Input.is_action_pressed("jump") and can_hold_jump and not p.is_on_ceiling():
+		p.velocity.y = jump_velocity
 	# bump head = stop jump
-	if is_on_ceiling():
+	if p.is_on_ceiling():
 		release_jump()
 
 func execute_jump():
 	is_jumping = true
-	velocity.y = jump_velocity
+	p.velocity.y = jump_velocity
 	can_hold_jump = true
 	jump_hold_timer.start()
 	has_coyote = false
@@ -129,7 +131,7 @@ func execute_jump():
 func release_jump():
 	is_jumping = false
 	can_hold_jump = false
-	velocity.y *= release_cancel_mult
+	p.velocity.y *= release_cancel_mult
 #endregion
 
 
@@ -137,28 +139,28 @@ func release_jump():
 var last_wall_normal_x = 0
 func handle_wall_jump():
 	# stop previous jump when landing on wall
-	if is_on_wall_only() and not is_jumping:
+	if p.is_on_wall_only() and not is_jumping:
 		is_jumping = false
 		can_hold_jump = false
 		is_wall_jumping = false
 		# wall slide logic
 		if direction:
-			velocity.y = lerpf(velocity.y, wall_slide_speed, wall_slide_lerp)
+			p.velocity.y = lerpf(p.velocity.y, wall_slide_speed, wall_slide_lerp)
 	# detect when to wall jump
 	if (Input.is_action_just_pressed("jump") 
-				and (is_on_wall_only() or has_wall_coyote)
+				and (p.is_on_wall_only() or has_wall_coyote)
 				and (direction or has_move_buffer)):
 		execute_wall_jump()
-	elif is_on_wall_only() and has_wall_buffer:
+	elif p.is_on_wall_only() and has_wall_buffer:
 		execute_wall_jump()
 	# controls moment where wall jump velocity is forced
 	if is_wall_jumping:
-		velocity.x = lerpf(wjump_x_velocity * last_wall_normal_x, move_speed * last_wall_normal_x, air_friction_lerp)
+		p.velocity.x = lerpf(wjump_x_velocity * last_wall_normal_x, move_speed * last_wall_normal_x, air_friction_lerp)
 
 func execute_wall_jump():
 	last_wall_normal_x = wall_normal.x
-	velocity.y = wjump_y_velocity
-	velocity.x = wjump_x_velocity * last_wall_normal_x
+	p.velocity.y = wjump_y_velocity
+	p.velocity.x = wjump_x_velocity * last_wall_normal_x
 	has_wall_coyote = false
 	has_wall_buffer = false
 	is_wall_jumping = true
@@ -168,17 +170,17 @@ func execute_wall_jump():
 func handle_gravity(delta):
 	# only apply gravity multiplier if within jump apex
 	var y_apex_mod = apex_grav_multiplier if (
-				velocity.y < apex_range 
-				and velocity.y > -apex_range 
-				and not is_on_wall()
+				p.velocity.y < apex_range 
+				and p.velocity.y > -apex_range 
+				and not p.is_on_wall()
 						) else 1.0
 	# upon jump release, add force downwards
-	if not Input.is_action_pressed("jump") and velocity.y < 0:
+	if not Input.is_action_pressed("jump") and p.velocity.y < 0:
 		release_jump()
 	# apply gravity if in air while clamping to max fall speed
-	if not is_on_floor():
+	if not p.is_on_floor():
 		# basically unlimited up velocity explaining the -999999
-		velocity.y = clampf(velocity.y + (gravity * delta * y_apex_mod), -999999, max_fall_velocity)
+		p.velocity.y = clampf(p.velocity.y + (gravity * delta * y_apex_mod), -999999, max_fall_velocity)
 
 var direction = 0
 func handle_direction():
@@ -188,24 +190,24 @@ func handle_direction():
 	PlayerStats.facing_dir = facing_dir
 	# left and right movement on ground and air
 	if direction and not is_wall_jumping:
-		velocity.x = lerpf(velocity.x, direction * move_speed, move_lerp)
+		p.velocity.x = lerpf(p.velocity.x, direction * move_speed, move_lerp)
 	else:
 		# floor and air frictions
-		if is_on_floor():
-			velocity.x = lerpf(velocity.x, 0, friction_lerp)
+		if p.is_on_floor():
+			p.velocity.x = lerpf(p.velocity.x, 0, friction_lerp)
 		else:
-			velocity.x = lerpf(velocity.x, 0, air_friction_lerp)
+			p.velocity.x = lerpf(p.velocity.x, 0, air_friction_lerp)
 	# add x boost when jump at apex
-	if velocity.y < apex_range and velocity.y > -apex_range and velocity.y != 0:
-		velocity.x = lerpf(velocity.x, move_speed * apex_x_multiplier * direction, 0.2)
+	if p.velocity.y < apex_range and p.velocity.y > -apex_range and p.velocity.y != 0:
+		p.velocity.x = lerpf(p.velocity.x, move_speed * apex_x_multiplier * direction, 0.2)
 
 #region Dash
 func handle_dash():
 	if Input.is_action_just_pressed("dash") and can_dash and not dash_anim.is_playing():
 		execute_dash()
 	if is_dashing:
-		velocity.x = facing_dir * dash_velocity_multiplier * move_speed
-		velocity.y = 0
+		p.velocity.x = facing_dir * dash_velocity_multiplier * move_speed
+		p.velocity.y = 0
 
 func execute_dash():
 	is_dashing = true
@@ -220,7 +222,10 @@ func set_invincible(value: bool):
 #endregion
 
 
-func _physics_process(delta):
+func enter():
+	pass
+
+func physics_update(delta):
 	check_collisions()
 	handle_jump()
 	handle_gravity(delta)
@@ -228,33 +233,40 @@ func _physics_process(delta):
 	handle_wall_jump()
 	handle_dash()
 
-	move_and_slide()
-	wall_normal = get_wall_normal()
-	PlayerStats.player_pos = global_position
+	p.move_and_slide()
+	wall_normal = p.get_wall_normal()
+	PlayerStats.player_pos = p.global_position
 	#print(velocity)
 	#print_inputs()
-
+	
+	if Input.is_action_just_pressed("attack"):
+		transitioned.emit(self, "PlayerAttackState")
+	
+func exit():
+	is_dashing = false
+	is_wall_jumping = false
+	is_jumping = false
 
 func print_inputs():
 	if Input.is_action_just_pressed("jump"):
 		print("jump")
-		print(is_on_wall_only())
+		print(p.is_on_wall_only())
 	elif Input.is_action_just_pressed("move_left"):
 		print("left")
-		print(is_on_wall_only())
+		print(p.is_on_wall_only())
 	elif Input.is_action_just_pressed("move_right"):
 		print("right")
-		print(is_on_wall_only())
+		print(p.is_on_wall_only())
 	#elif Input.is_anything_pressed():
 		#print("############")
-	if is_on_wall_only():
-		modulate = Color.DARK_RED
+	if p.is_on_wall_only():
+		p.modulate = Color.DARK_RED
 	else:
-		modulate = Color.WHITE
+		p.modulate = Color.WHITE
 
 #region Timers
 func _on_jump_hold_timer_timeout():
-	if velocity.y < 0 and is_jumping:
+	if p.velocity.y < 0 and is_jumping:
 		release_jump()
 	can_hold_jump = false
 

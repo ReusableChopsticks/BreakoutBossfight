@@ -12,8 +12,8 @@ func _ready():
 		if child is State:
 			states[child.name.to_lower()] = child
 			child.transitioned.connect(on_child_transition)
-		else:
-			printerr("State machine in %s has non-state child" % get_parent().name)
+		#else:
+			#printerr("State machine in %s has non-state child" % get_parent().name)
 	
 	if initial_state:
 		initial_state.enter()
