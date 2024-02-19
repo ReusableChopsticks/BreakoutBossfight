@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://bmrdkjqxvde8w"]
+[gd_scene load_steps=16 format=3 uid="uid://bmrdkjqxvde8w"]
 
 [ext_resource type="Texture2D" uid="uid://kmd51y4qv6mg" path="res://entities/player/dg2kcv3-c10a0bcc-f58a-488d-ba93-6fc6ec166b02.png" id="1_ly0om"]
+[ext_resource type="Script" path="res://entities/player/player.gd" id="1_pe5m7"]
 [ext_resource type="PackedScene" uid="uid://d0fobv6xejsab" path="res://components/hurtbox_component.tscn" id="3_wxa5a"]
 [ext_resource type="PackedScene" uid="uid://cqi1nqkntnpql" path="res://components/health_component.tscn" id="4_xw0fu"]
 [ext_resource type="PackedScene" uid="uid://b87gbpvxlbfcy" path="res://entities/weapon/weapon.tscn" id="5_0jjoe"]
@@ -116,9 +117,27 @@ tracks/4/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_dj8r6"]
+resource_name = "attack"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [null],
+"method": &"use_weapon"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0rr4b"]
 _data = {
 "RESET": SubResource("Animation_bg51y"),
+"attack": SubResource("Animation_dj8r6"),
 "dash": SubResource("Animation_2jlfd")
 }
 
@@ -131,6 +150,7 @@ radius = 10.7317
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.931818, 0.931818)
 collision_mask = 37
+script = ExtResource("1_pe5m7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -144,39 +164,6 @@ texture = ExtResource("1_ly0om")
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
 position = Vector2(-3.83796e-07, 2.14635)
 shape = SubResource("RectangleShape2D_hs8eb")
-
-[node name="Timers" type="Node" parent="."]
-
-[node name="JumpHoldTimer" type="Timer" parent="Timers"]
-wait_time = 0.4
-one_shot = true
-
-[node name="CoyoteTimer" type="Timer" parent="Timers"]
-wait_time = 0.1
-one_shot = true
-
-[node name="BufferTimer" type="Timer" parent="Timers"]
-wait_time = 0.3
-one_shot = true
-
-[node name="WallJumpBufferTimer" type="Timer" parent="Timers"]
-wait_time = 0.1
-one_shot = true
-
-[node name="MoveBufferTimer" type="Timer" parent="Timers"]
-one_shot = true
-
-[node name="WallCoyoteTimer" type="Timer" parent="Timers"]
-wait_time = 0.1
-one_shot = true
-
-[node name="WallJumpXBoostTimer" type="Timer" parent="Timers"]
-wait_time = 0.1
-one_shot = true
-
-[node name="DashCooldownTimer" type="Timer" parent="Timers"]
-wait_time = 0.2
-one_shot = true
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_wxa5a")]
 collision_mask = 10
@@ -237,14 +224,6 @@ script = ExtResource("8_vw6pg")
 script = ExtResource("6_58vn7")
 anim_player = NodePath("../../AnimationPlayer")
 
-[connection signal="timeout" from="Timers/JumpHoldTimer" to="." method="_on_jump_hold_timer_timeout"]
-[connection signal="timeout" from="Timers/CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
-[connection signal="timeout" from="Timers/BufferTimer" to="." method="_on_buffer_timer_timeout"]
-[connection signal="timeout" from="Timers/WallJumpBufferTimer" to="." method="_on_wall_jump_buffer_timer_timeout"]
-[connection signal="timeout" from="Timers/MoveBufferTimer" to="." method="_on_move_buffer_timer_timeout"]
-[connection signal="timeout" from="Timers/WallCoyoteTimer" to="." method="_on_wall_coyote_timer_timeout"]
-[connection signal="timeout" from="Timers/WallJumpXBoostTimer" to="." method="_on_wall_jump_x_boost_timer_timeout"]
-[connection signal="timeout" from="Timers/DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]
 [connection signal="timeout" from="StateMachine/PlayerMoveState/Timers/JumpHoldTimer" to="StateMachine/PlayerMoveState" method="_on_jump_hold_timer_timeout"]
 [connection signal="timeout" from="StateMachine/PlayerMoveState/Timers/CoyoteTimer" to="StateMachine/PlayerMoveState" method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="StateMachine/PlayerMoveState/Timers/BufferTimer" to="StateMachine/PlayerMoveState" method="_on_buffer_timer_timeout"]

@@ -34,3 +34,8 @@ func setup(config: BulletConfig):
 # despawn self after certain amount of time
 func _on_delete_timer_timeout():
 	call_deferred("queue_free")
+
+
+func _on_hitbox_component_area_entered(area):
+	if area.get_parent() is Player:
+		call_deferred("queue_free")

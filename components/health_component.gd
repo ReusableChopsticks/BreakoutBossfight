@@ -8,7 +8,8 @@ func _ready():
 	health = max_health
 
 func damage(attack: Attack):
-	health -= attack.attack_damage
-	print("HEALTH: " + str(health))
-	if health <= 0:
+	health -= max(attack.attack_damage, 0)
+	if health > 0:
+		print("HEALTH: " + str(health))
+	if health == 0:
 		print(get_parent().name + " IS DEAD")

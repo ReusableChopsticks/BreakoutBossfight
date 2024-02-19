@@ -236,7 +236,7 @@ func physics_update(delta):
 
 	p.move_and_slide()
 	wall_normal = p.get_wall_normal()
-	PlayerStats.player_pos = p.global_position
+	
 	#print(velocity)
 	#print_inputs()
 	
