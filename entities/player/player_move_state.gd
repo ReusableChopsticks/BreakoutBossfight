@@ -71,6 +71,7 @@ var wall_normal = 0
 
 var is_invincible = false
 
+
 func check_collisions():
 	if (p.is_on_floor() or p.is_on_wall_only()) and !can_dash and !is_dashing:
 		can_dash = true
@@ -287,5 +288,7 @@ func _on_wall_coyote_timer_timeout():
 
 func _on_move_buffer_timer_timeout():
 	has_move_buffer = false
-#endregion
 
+func _on_dash_cooldown_timer_timeout():
+	pass # Replace with function body.
+#endregion
