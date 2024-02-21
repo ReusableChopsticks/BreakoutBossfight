@@ -29,7 +29,7 @@ rotation = 1.5708
 scale = Vector2(0.141422, 11.545)
 
 [node name="EyeBoss" parent="." instance=ExtResource("5_lpul3")]
-position = Vector2(912, 323)
+position = Vector2(1263, 989)
 
 [node name="Player" parent="." instance=ExtResource("1_kbjuk")]
 position = Vector2(922, 756)

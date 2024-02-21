@@ -1,19 +1,8 @@
-[gd_scene load_steps=33 format=3 uid="uid://b87gbpvxlbfcy"]
+[gd_scene load_steps=34 format=3 uid="uid://b87gbpvxlbfcy"]
 
 [ext_resource type="Script" path="res://entities/weapon/weapon.gd" id="1_pl645"]
 [ext_resource type="Texture2D" uid="uid://cdgh8ksom2u3l" path="res://entities/weapon/sword_slash_placeholder.png" id="2_rma3v"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_45dfk"]
-size = Vector2(124, 73)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hfdvy"]
-size = Vector2(119, 58)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w36ce"]
-size = Vector2(88, 104)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_80u2e"]
-size = Vector2(92, 118)
+[ext_resource type="PackedScene" uid="uid://cfrxt4vfmroyh" path="res://components/hitbox_component.tscn" id="3_dojwa"]
 
 [sub_resource type="Animation" id="Animation_dctiw"]
 resource_name = "RESET"
@@ -431,40 +420,20 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_45dfk"]
+size = Vector2(124, 106)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hfdvy"]
+size = Vector2(119, 58)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w36ce"]
+size = Vector2(113, 104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_80u2e"]
+size = Vector2(622, 496)
+
 [node name="Weapon" type="Node2D"]
 script = ExtResource("1_pl645")
-
-[node name="UpAttackArea" type="Area2D" parent="."]
-collision_layer = 64
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UpAttackArea"]
-position = Vector2(1, -80.5)
-shape = SubResource("RectangleShape2D_45dfk")
-
-[node name="DownAttackArea" type="Area2D" parent="."]
-collision_layer = 64
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DownAttackArea"]
-position = Vector2(0.5, 42)
-shape = SubResource("RectangleShape2D_hfdvy")
-
-[node name="LeftAttackArea" type="Area2D" parent="."]
-collision_layer = 64
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftAttackArea"]
-position = Vector2(-73, -12)
-shape = SubResource("RectangleShape2D_w36ce")
-
-[node name="RightAttackArea" type="Area2D" parent="."]
-collision_layer = 64
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightAttackArea"]
-position = Vector2(71, -8)
-shape = SubResource("RectangleShape2D_80u2e")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -476,3 +445,39 @@ scale = Vector2(1.81111, 1.81111)
 sprite_frames = SubResource("SpriteFrames_iy24q")
 animation = &"side_attack"
 frame = 7
+
+[node name="UpAttackArea" parent="." instance=ExtResource("3_dojwa")]
+collision_layer = 64
+collision_mask = 26
+attack_damage = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpAttackArea"]
+position = Vector2(1, -64)
+shape = SubResource("RectangleShape2D_45dfk")
+
+[node name="DownAttackArea" parent="." instance=ExtResource("3_dojwa")]
+collision_layer = 64
+collision_mask = 26
+attack_damage = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DownAttackArea"]
+position = Vector2(0.5, 42)
+shape = SubResource("RectangleShape2D_hfdvy")
+
+[node name="LeftAttackArea" parent="." instance=ExtResource("3_dojwa")]
+collision_layer = 64
+collision_mask = 26
+attack_damage = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftAttackArea"]
+position = Vector2(-60.5, -12)
+shape = SubResource("RectangleShape2D_w36ce")
+
+[node name="RightAttackArea" parent="." instance=ExtResource("3_dojwa")]
+collision_layer = 64
+collision_mask = 26
+attack_damage = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightAttackArea"]
+position = Vector2(61, -8)
+shape = SubResource("RectangleShape2D_80u2e")

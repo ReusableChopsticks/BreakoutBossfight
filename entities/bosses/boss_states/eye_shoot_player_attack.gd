@@ -1,7 +1,7 @@
 extends AttackState
 class_name EyeShootPlayerAttack
 
-@export var attack_node: BaseAttack
+@export var attack_node: DirectionAttack
 
 func enter():
 	attack_node.attack()

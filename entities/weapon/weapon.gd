@@ -6,7 +6,15 @@ extends Node2D
 @onready var right_attack_area: Area2D = $RightAttackArea
 @onready var anim: AnimationPlayer = $AnimationPlayer
 
+@onready var attack_areas := [up_attack_area, down_attack_area, left_attack_area, right_attack_area]
+# the chosen attack
 var attack_area: Area2D
+
+func _ready():
+	for i in attack_areas:
+		i.enabled = false
+	pass
+
 func use_weapon(_delta):
 	#print(PlayerStats.facing_dir)
 	#if Input.is_action_just_pressed("attack"):
@@ -27,6 +35,10 @@ func use_weapon(_delta):
 
 # this is called in the attack animation (call method track)
 func get_hits():
+	#attack_area.enabled = true
 	for area in attack_area.get_overlapping_areas():
 		if area.get_parent() is BaseBullet:
 			area.get_parent().deflect()
+		elif area is HurtboxComponent:
+			attack_area.attack_hurtbox(area)
+	#attack_area.enabled = false

@@ -7,7 +7,6 @@ class_name PlayerAttackState
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func enter():
-	anim.mixer_updated
 	anim.play("attack")
 	await anim.animation_finished
 	transitioned.emit(self, "PlayerMoveState")

@@ -8,7 +8,7 @@ func enter():
 	await anim.animation_finished
 	transitioned.emit(self, "EyeIdleState")
 
-func update(delta: float):
+func update(_delta: float):
 	pass
 
 func exit():

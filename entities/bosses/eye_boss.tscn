@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://b14mjug8xedxd"]
+[gd_scene load_steps=38 format=3 uid="uid://b14mjug8xedxd"]
 
 [ext_resource type="Texture2D" uid="uid://cap1h0x66msw7" path="res://entities/bosses/outer_body.png" id="1_7x1j8"]
 [ext_resource type="Script" path="res://entities/bosses/eye_boss.gd" id="1_8i05s"]
@@ -11,8 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://rtah0mxab7rn" path="res://entities/projectiles/basic_bullet.tscn" id="8_cj3i4"]
 [ext_resource type="PackedScene" uid="uid://cx1bes5236qyc" path="res://entities/attacks/direction_attack.tscn" id="9_ut28g"]
 [ext_resource type="Script" path="res://entities/bosses/boss_states/eye_idle_state.gd" id="10_4sswx"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="10_5nu60"]
+[ext_resource type="PackedScene" uid="uid://cfrxt4vfmroyh" path="res://components/hitbox_component.tscn" id="11_xsi86"]
 [ext_resource type="Script" path="res://entities/bosses/boss_states/eye_intro.gd" id="11_xxj5g"]
 [ext_resource type="Script" path="res://entities/bosses/boss_states/eye_choose_attack.gd" id="12_ghtuw"]
+[ext_resource type="PackedScene" uid="uid://d0fobv6xejsab" path="res://components/hurtbox_component.tscn" id="12_h8pvv"]
 [ext_resource type="Script" path="res://entities/bosses/boss_states/eye_burst_attack.gd" id="13_xky0h"]
 [ext_resource type="Script" path="res://entities/bosses/boss_states/eye_shoot_player_attack.gd" id="15_5hkvr"]
 
@@ -274,6 +277,12 @@ _data = {
 "intro": SubResource("Animation_48y5o")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_q1fjc"]
+radius = 98.4886
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_acrlf"]
+radius = 147.085
+
 [node name="EyeBoss" type="Node2D"]
 script = ExtResource("1_8i05s")
 
@@ -320,6 +329,23 @@ fire_amount = 5
 [node name="DirectionAttack" parent="Eye/Attacks" instance=ExtResource("9_ut28g")]
 bullet_scene = ExtResource("8_cj3i4")
 speed = 700
+
+[node name="HealthComponent" type="Node" parent="Eye"]
+script = ExtResource("10_5nu60")
+
+[node name="HitboxComponent" parent="Eye" instance=ExtResource("11_xsi86")]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Eye/HitboxComponent"]
+shape = SubResource("CircleShape2D_q1fjc")
+
+[node name="HurtboxComponent" parent="Eye" node_paths=PackedStringArray("health_component") instance=ExtResource("12_h8pvv")]
+collision_layer = 2
+collision_mask = 80
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Eye/HurtboxComponent"]
+shape = SubResource("CircleShape2D_acrlf")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_hmgcb")

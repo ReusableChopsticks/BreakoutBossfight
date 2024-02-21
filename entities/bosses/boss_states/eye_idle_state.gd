@@ -10,7 +10,7 @@ func enter():
 	await get_tree().create_timer(idle_time).timeout
 	transitioned.emit(self, "EyeChooseAttack")
 
-func update(delta: float):
+func update(_delta: float):
 	pass
 
 func exit():

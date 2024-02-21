@@ -18,6 +18,6 @@ func attack():
 		bullet_config = BulletConfig.new()
 		bullet_config.spawn_pos = global_position
 		bullet_config.start_velocity = start_velocity
-		var bullet = spawn_bullet(bullet_scene, bullet_config)
+		spawn_bullet(bullet_scene, bullet_config)
 		await get_tree().create_timer(fire_interval).timeout
 	finished.emit()

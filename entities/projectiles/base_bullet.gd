@@ -16,9 +16,15 @@ var speed: float
 # sets is_deflected to true and sets collision layer to player bullet
 func set_deflected():
 	is_deflected = true
-	# set to player bullet
-	set_collision_layer_value(5, true)
-	set_collision_layer_value(4, false)
+	# for both self and the hitbox component
+	for i: CollisionObject2D in [self, $HitboxComponent]:
+		# set to player bullet
+		i.set_collision_layer_value(5, true)
+		i.set_collision_layer_value(4, false)
+		# mask with enemy instead of player
+		i.set_collision_mask_value(1, false)
+		i.set_collision_mask_value(2, true)
+
 	velocity = (BossStats.centre_pos - global_position).normalized() * velocity.length()
 
 # set bullet to bounce off environment (walls)
@@ -28,7 +34,7 @@ func set_environment_collision(val: bool = true):
 	else:
 		set_collision_mask_value(3, false)
 
-func setup(config: BulletConfig):
+func setup(_config: BulletConfig):
 	pass
 
 # despawn self after certain amount of time
