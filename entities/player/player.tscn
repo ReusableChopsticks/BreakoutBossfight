@@ -39,6 +39,23 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_dj8r6"]
+resource_name = "attack"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [null],
+"method": &"use_weapon"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_2jlfd"]
 resource_name = "dash"
 length = 0.5
@@ -117,23 +134,6 @@ tracks/4/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_dj8r6"]
-resource_name = "attack"
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Weapon")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [null],
-"method": &"use_weapon"
-}]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0rr4b"]
 _data = {
 "RESET": SubResource("Animation_bg51y"),
@@ -183,6 +183,10 @@ initial_state = NodePath("PlayerMoveState")
 
 [node name="PlayerMoveState" type="Node" parent="StateMachine"]
 script = ExtResource("7_3l48t")
+max_fall_velocity = 1000
+move_lerp = 0.392
+friction_lerp = 0.345
+air_friction_lerp = 0.183
 
 [node name="Timers" type="Node" parent="StateMachine/PlayerMoveState"]
 

@@ -23,6 +23,7 @@ func use_weapon(_delta):
 	else:
 		attack_area = left_attack_area
 		anim.play("left_attack")
+	await anim.animation_finished
 
 # this is called in the attack animation (call method track)
 func get_hits():
