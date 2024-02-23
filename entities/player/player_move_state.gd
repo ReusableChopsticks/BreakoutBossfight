@@ -229,7 +229,6 @@ func set_invincible(value: bool):
 	hurtbox.monitorable = !value
 #endregion
 
-
 func enter():
 	pass
 

@@ -11,3 +11,5 @@ bullet_burst_amount = 10
 degrees_offset_per_burst = 5
 fire_interval = 0.3
 fire_amount = 10
+clockwise = false
+rand_clockwise = true

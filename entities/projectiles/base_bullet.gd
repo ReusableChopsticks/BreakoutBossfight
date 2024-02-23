@@ -5,9 +5,12 @@ class_name BaseBullet
 All bullets must have these functions:
 	setup(config: BulletConfig) # constructor
 	deflect() # changes bullet state after player attack
+	hit() # get slapped nerd
 	
 	BulletConfig is a contract where you look into the bullet code and pass in the required values
 """
+
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var is_normal: bool
 var is_deflected: bool

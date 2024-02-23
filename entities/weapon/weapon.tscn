@@ -1,8 +1,9 @@
-[gd_scene load_steps=37 format=3 uid="uid://b87gbpvxlbfcy"]
+[gd_scene load_steps=38 format=3 uid="uid://b87gbpvxlbfcy"]
 
 [ext_resource type="Script" path="res://entities/weapon/weapon.gd" id="1_pl645"]
 [ext_resource type="Texture2D" uid="uid://2wrj4s618ni1" path="res://graphics/scribbly_circle.png" id="2_53cjm"]
 [ext_resource type="Texture2D" uid="uid://cdgh8ksom2u3l" path="res://entities/weapon/sword_slash_placeholder.png" id="2_rma3v"]
+[ext_resource type="Texture2D" uid="uid://dnv4pguhvb133" path="res://graphics/1x1.png" id="3_xv5gd"]
 
 [sub_resource type="Animation" id="Animation_dctiw"]
 resource_name = "RESET"
@@ -28,7 +29,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [7]
+"values": [0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -40,7 +41,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"side_attack"]
+"values": [&"idle"]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -65,6 +66,24 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w8ooq"]
+resource_name = "deflect_attack"
+length = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"deflect_bullets"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_ppoyu"]
@@ -267,24 +286,6 @@ tracks/3/keys = {
 "values": [Vector2(-1, -40), Vector2(0, -60)]
 }
 
-[sub_resource type="Animation" id="Animation_w8ooq"]
-resource_name = "deflect_attack"
-length = 0.1
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"deflect_bullets"
-}]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_340tu"]
 _data = {
 "RESET": SubResource("Animation_dctiw"),
@@ -294,6 +295,21 @@ _data = {
 "right_attack": SubResource("Animation_2bd40"),
 "up_attack": SubResource("Animation_6vqqo")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w36ce"]
+size = Vector2(113, 104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_80u2e"]
+size = Vector2(115, 103)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jtm1o"]
+size = Vector2(122, 108)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_27lel"]
+size = Vector2(121, 89.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sbv2j"]
+radius = 246.008
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d5xea"]
 atlas = ExtResource("2_53cjm")
@@ -387,6 +403,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("3_xv5gd")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_vbhjp")
 }, {
 "duration": 1.0,
@@ -453,21 +477,6 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w36ce"]
-size = Vector2(113, 104)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_80u2e"]
-size = Vector2(115, 103)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jtm1o"]
-size = Vector2(122, 108)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_27lel"]
-size = Vector2(121, 89.5)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_sbv2j"]
-radius = 246.008
-
 [node name="Weapon" type="Node2D"]
 script = ExtResource("1_pl645")
 
@@ -475,11 +484,7 @@ script = ExtResource("1_pl645")
 libraries = {
 "": SubResource("AnimationLibrary_340tu")
 }
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(1.81111, 1.81111)
-sprite_frames = SubResource("SpriteFrames_iy24q")
-animation = &"side_attack"
+speed_scale = 2.0
 
 [node name="LeftAttackArea" type="Area2D" parent="."]
 collision_layer = 64
@@ -519,3 +524,8 @@ collision_mask = 26
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeflectArea"]
 shape = SubResource("CircleShape2D_sbv2j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.81111, 1.81111)
+sprite_frames = SubResource("SpriteFrames_iy24q")
+animation = &"idle"

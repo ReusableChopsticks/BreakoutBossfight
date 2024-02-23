@@ -12,8 +12,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var _hold_time = 0
 var attack_dir: String
-
-	#transitioned.emit(self, "PlayerMoveState")
 	
 func enter():
 	_hold_time = 0
@@ -47,7 +45,8 @@ func physics_update(delta):
 func handle_physics(delta):
 	# handle gravity while attacking; no movement! 
 	var weight = move_settings.friction_lerp if player.is_on_floor() else move_settings.air_friction_lerp 
-	player.velocity.x = lerpf(player.velocity.x, 0, weight)
+	# this line ends up just awkwardly stopping the player
+	#player.velocity.x = lerpf(player.velocity.x, 0, weight)
 	player.velocity.y += gravity * delta
 	player.move_and_slide()
 

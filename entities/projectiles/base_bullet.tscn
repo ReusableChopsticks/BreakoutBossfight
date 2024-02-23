@@ -1,15 +1,71 @@
-[gd_scene load_steps=3 format=3 uid="uid://bm8hpd35b4y32"]
+[gd_scene load_steps=11 format=3 uid="uid://bm8hpd35b4y32"]
 
 [ext_resource type="Script" path="res://entities/projectiles/base_bullet.gd" id="1_voc8i"]
 [ext_resource type="PackedScene" uid="uid://cfrxt4vfmroyh" path="res://components/hitbox_component.tscn" id="2_lv403"]
+[ext_resource type="Texture2D" uid="uid://ch2wj0gv466jg" path="res://entities/projectiles/bullet_sprites.png" id="3_od2ts"]
+[ext_resource type="Texture2D" uid="uid://bjkbr4rts3apd" path="res://entities/projectiles/explode_bullet_red.png" id="4_m1wjg"]
+[ext_resource type="Texture2D" uid="uid://uph0x6kjf08x" path="res://entities/projectiles/explode_bullet_blue.png" id="5_jsayy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7miio"]
+atlas = ExtResource("3_od2ts")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkghs"]
+atlas = ExtResource("3_od2ts")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dk7yj"]
+atlas = ExtResource("3_od2ts")
+region = Rect2(0, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fv24u"]
+atlas = ExtResource("3_od2ts")
+region = Rect2(64, 256, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mj23l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7miio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xkghs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_m1wjg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jsayy")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dk7yj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fv24u")
+}],
+"loop": true,
+"name": &"tear_drop",
+"speed": 5.0
+}]
 
 [node name="BaseBullet" type="CharacterBody2D"]
 collision_layer = 8
-collision_mask = 4
+collision_mask = 68
 script = ExtResource("1_voc8i")
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mj23l")
 
 [node name="DeleteTimer" type="Timer" parent="."]
 wait_time = 10.0

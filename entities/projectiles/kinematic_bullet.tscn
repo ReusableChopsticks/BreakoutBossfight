@@ -1,26 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://cnffthbwjp8xx"]
+[gd_scene load_steps=5 format=3 uid="uid://cnffthbwjp8xx"]
 
 [ext_resource type="PackedScene" uid="uid://bm8hpd35b4y32" path="res://entities/projectiles/base_bullet.tscn" id="1_50tnb"]
-[ext_resource type="Texture2D" uid="uid://2wrj4s618ni1" path="res://graphics/scribbly_circle.png" id="2_8uicp"]
 [ext_resource type="Script" path="res://entities/projectiles/kinematic_bullet.gd" id="2_oflsd"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_y5hi3"]
-radius = 26.1725
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_jj3bc"]
-radius = 30.0167
+radius = 26.0192
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y5hi3"]
+radius = 21.0
 
 [node name="KinematicBullet" instance=ExtResource("1_50tnb")]
+collision_mask = 64
 script = ExtResource("2_oflsd")
-gravity = null
+gravity = 1000
 bounce_decrease = 0.8
 
-[node name="Sprite2D" parent="." index="0"]
-scale = Vector2(0.204, 0.204)
-texture = ExtResource("2_8uicp")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
-shape = SubResource("CircleShape2D_y5hi3")
+[node name="AnimatedSprite2D" parent="." index="0"]
+animation = &"tear_drop"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 shape = SubResource("CircleShape2D_jj3bc")
+
+[node name="HitboxComponent" parent="." index="3"]
+position = Vector2(0, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
+shape = SubResource("CircleShape2D_y5hi3")

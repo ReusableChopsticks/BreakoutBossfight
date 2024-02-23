@@ -10,12 +10,15 @@ func setup(bullet_config: BulletConfig):
 	return self
 	
 func deflect():
+	sprite.frame = 1
 	set_deflected()
 	set_environment_collision()
-	velocity *= 1.5
+	velocity.x *= 1.3
+	velocity.y *= 1.5
 
 func _physics_process(delta):
 	velocity.y += gravity * delta
 	var col_info = move_and_collide(velocity * delta)
 	if col_info:
 		velocity = velocity.bounce(col_info.get_normal()) * bounce_decrease
+	rotation = velocity.angle() - PI/2

@@ -7,6 +7,9 @@
 
 [node name="EyeBossArena" type="Node2D"]
 
+[node name="EyeBoss" parent="." instance=ExtResource("3_60h7x")]
+position = Vector2(3, -609)
+
 [node name="LeftWall" parent="." instance=ExtResource("1_kfdmg")]
 scale = Vector2(0.141422, 8.82497)
 
@@ -30,18 +33,6 @@ scale = Vector2(0.141422, 0.744971)
 position = Vector2(657, -407)
 scale = Vector2(0.141422, 0.744971)
 
-[node name="Player" parent="." instance=ExtResource("2_uyukp")]
-position = Vector2(8, -79)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-offset = Vector2(0, -200)
-zoom = Vector2(0.9, 0.9)
-limit_bottom = 250
-editor_draw_limits = true
-
-[node name="EyeBoss" parent="." instance=ExtResource("3_60h7x")]
-position = Vector2(3, -609)
-
 [node name="LeftWall2" parent="." instance=ExtResource("4_m0ygp")]
 position = Vector2(-580, -308)
 scale = Vector2(0.141422, 1.02497)
@@ -57,3 +48,12 @@ scale = Vector2(0.141422, 1.02497)
 [node name="LeftWall3" parent="." instance=ExtResource("4_m0ygp")]
 position = Vector2(589, -308)
 scale = Vector2(0.141422, 1.02497)
+
+[node name="Player" parent="." instance=ExtResource("2_uyukp")]
+position = Vector2(8, -79)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+offset = Vector2(0, -200)
+zoom = Vector2(0.9, 0.9)
+limit_bottom = 250
+editor_draw_limits = true
