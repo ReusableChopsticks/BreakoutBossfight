@@ -3,6 +3,10 @@ class_name PlayerMoveState
 
 @onready var p: CharacterBody2D = get_parent().get_parent()
 
+@export_group("Components")
+@export var hurtbox: HurtboxComponent
+@export_group("")
+
 #region Movement
 @export_group("Movement")
 @export_subgroup("Basic Controls")
@@ -215,11 +219,14 @@ func execute_dash():
 	can_dash = false
 	dash_anim.play("dash")
 	
+# used while dashing in dash animation
 func finish_dash():
 	is_dashing = false
 
+# used while dashing in dash animation
 func set_invincible(value: bool):
 	is_invincible = value
+	hurtbox.monitorable = !value
 #endregion
 
 

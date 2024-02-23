@@ -61,5 +61,5 @@ func get_hits():
 			attack.attack_damage = 5
 			area.damage(attack)
 
-func add_charge(amount = 1):
-	charge += 1
+func add_charge(amount: int = 1):
+	charge += amount

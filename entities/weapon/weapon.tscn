@@ -269,6 +269,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_w8ooq"]
 resource_name = "deflect_attack"
+length = 0.1
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true

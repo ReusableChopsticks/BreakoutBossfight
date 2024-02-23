@@ -33,15 +33,16 @@ func physics_update(delta):
 	# regular attack
 	if Input.is_action_just_released("attack") and _hold_time < deflect_hold_time:
 		weapon.use_weapon(attack_dir)
-		await weapon.attack_finished
+		#await weapon.attack_finished
 		transitioned.emit(self, "PlayerMoveState")
 	elif !is_attacking and _hold_time >= deflect_hold_time:
 		is_attacking = true
 		weapon.use_deflect_attack()
 		await weapon.attack_finished
 		transitioned.emit(self, "PlayerMoveState")
-
-	handle_physics(delta)
+	
+	if _hold_time < 0.3:
+		handle_physics(delta)
 	
 func handle_physics(delta):
 	# handle gravity while attacking; no movement! 

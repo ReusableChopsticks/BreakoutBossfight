@@ -181,8 +181,9 @@ max_health = 10
 script = ExtResource("6_let22")
 initial_state = NodePath("PlayerMoveState")
 
-[node name="PlayerMoveState" type="Node" parent="StateMachine"]
+[node name="PlayerMoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("hurtbox")]
 script = ExtResource("7_3l48t")
+hurtbox = NodePath("../../HurtboxComponent")
 max_fall_velocity = 1000
 move_lerp = 0.392
 friction_lerp = 0.345
