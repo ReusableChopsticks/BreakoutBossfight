@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d2ibk7hp06n6o"]
 
-[ext_resource type="PackedScene" uid="uid://c3txh2t24m8j8" path="res://scenes/level_1/level.tscn" id="1_kdax1"]
+[ext_resource type="PackedScene" uid="uid://c3txh2t24m8j8" path="res://scenes/test_levels/platformer_level.tscn" id="1_kdax1"]
 [ext_resource type="Texture2D" uid="uid://2wrj4s618ni1" path="res://graphics/scribbly_circle.png" id="2_oo3dl"]
 
 [node name="GameDisplay" type="CanvasLayer"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfu3g53b82tnj"]
+
+[ext_resource type="Texture2D" uid="uid://bfliobf12x6i0" path="res://graphics/256x256.png" id="1_dodhr"]
+
+[node name="LeftWall" type="StaticBody2D"]
+rotation = 1.5708
+scale = Vector2(0.141422, 6.58497)
+collision_layer = 4
+collision_mask = 63
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_dodhr")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(112.5, 112.5, -112.5, 112.5, -112.5, -112.5, 112.5, -112.5)

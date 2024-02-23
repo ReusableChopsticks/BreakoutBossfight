@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://d0cc5xv8i4owg"]
 
-[ext_resource type="Script" path="res://scenes/level_1/Sprite2D.gd" id="2_2eolx"]
+[ext_resource type="Script" path="res://scenes/test_levels/reset_on_hit.gd" id="2_2eolx"]
 [ext_resource type="Texture2D" uid="uid://kmd51y4qv6mg" path="res://entities/player/dg2kcv3-c10a0bcc-f58a-488d-ba93-6fc6ec166b02.png" id="2_t6e4e"]
 [ext_resource type="PackedScene" uid="uid://cfrxt4vfmroyh" path="res://components/hitbox_component.tscn" id="3_7yudx"]
 

@@ -1,8 +1,8 @@
-[gd_scene load_steps=34 format=3 uid="uid://b87gbpvxlbfcy"]
+[gd_scene load_steps=37 format=3 uid="uid://b87gbpvxlbfcy"]
 
 [ext_resource type="Script" path="res://entities/weapon/weapon.gd" id="1_pl645"]
+[ext_resource type="Texture2D" uid="uid://2wrj4s618ni1" path="res://graphics/scribbly_circle.png" id="2_53cjm"]
 [ext_resource type="Texture2D" uid="uid://cdgh8ksom2u3l" path="res://entities/weapon/sword_slash_placeholder.png" id="2_rma3v"]
-[ext_resource type="PackedScene" uid="uid://cfrxt4vfmroyh" path="res://components/hitbox_component.tscn" id="3_dojwa"]
 
 [sub_resource type="Animation" id="Animation_dctiw"]
 resource_name = "RESET"
@@ -67,8 +67,12 @@ tracks/4/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_ppoyu"]
+resource_name = "down_attack"
+
 [sub_resource type="Animation" id="Animation_03orl"]
 resource_name = "left_attack"
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -88,10 +92,10 @@ tracks/1/path = NodePath("AnimatedSprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
+"values": [2, 3, 4, 5, 6, 7]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -100,7 +104,7 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -146,6 +150,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_2bd40"]
 resource_name = "right_attack"
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -153,10 +158,10 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
+"values": [3, 4, 5, 6, 7]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -177,7 +182,7 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.1),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -262,17 +267,36 @@ tracks/3/keys = {
 "values": [Vector2(-1, -40), Vector2(0, -60)]
 }
 
-[sub_resource type="Animation" id="Animation_ppoyu"]
-resource_name = "down_attack"
+[sub_resource type="Animation" id="Animation_w8ooq"]
+resource_name = "deflect_attack"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"deflect_bullets"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_340tu"]
 _data = {
 "RESET": SubResource("Animation_dctiw"),
+"deflect_attack": SubResource("Animation_w8ooq"),
 "down_attack": SubResource("Animation_ppoyu"),
 "left_attack": SubResource("Animation_03orl"),
 "right_attack": SubResource("Animation_2bd40"),
 "up_attack": SubResource("Animation_6vqqo")
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5xea"]
+atlas = ExtResource("2_53cjm")
+region = Rect2(0, 0, 500, 500)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vbhjp"]
 atlas = ExtResource("2_rma3v")
@@ -354,6 +378,14 @@ region = Rect2(720, 720, 180, 180)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_d5xea")
+}],
+"loop": true,
+"name": &"deflect_attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_vbhjp")
 }, {
 "duration": 1.0,
@@ -420,17 +452,20 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_45dfk"]
-size = Vector2(124, 106)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hfdvy"]
-size = Vector2(119, 58)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w36ce"]
 size = Vector2(113, 104)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_80u2e"]
-size = Vector2(622, 496)
+size = Vector2(115, 103)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jtm1o"]
+size = Vector2(122, 108)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_27lel"]
+size = Vector2(121, 89.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sbv2j"]
+radius = 246.008
 
 [node name="Weapon" type="Node2D"]
 script = ExtResource("1_pl645")
@@ -444,40 +479,42 @@ libraries = {
 scale = Vector2(1.81111, 1.81111)
 sprite_frames = SubResource("SpriteFrames_iy24q")
 animation = &"side_attack"
-frame = 7
 
-[node name="UpAttackArea" parent="." instance=ExtResource("3_dojwa")]
+[node name="LeftAttackArea" type="Area2D" parent="."]
 collision_layer = 64
 collision_mask = 26
-attack_damage = 5
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UpAttackArea"]
-position = Vector2(1, -64)
-shape = SubResource("RectangleShape2D_45dfk")
-
-[node name="DownAttackArea" parent="." instance=ExtResource("3_dojwa")]
-collision_layer = 64
-collision_mask = 26
-attack_damage = 5
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DownAttackArea"]
-position = Vector2(0.5, 42)
-shape = SubResource("RectangleShape2D_hfdvy")
-
-[node name="LeftAttackArea" parent="." instance=ExtResource("3_dojwa")]
-collision_layer = 64
-collision_mask = 26
-attack_damage = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftAttackArea"]
-position = Vector2(-60.5, -12)
+position = Vector2(-58, -10)
 shape = SubResource("RectangleShape2D_w36ce")
 
-[node name="RightAttackArea" parent="." instance=ExtResource("3_dojwa")]
+[node name="RightAttackArea" type="Area2D" parent="."]
 collision_layer = 64
 collision_mask = 26
-attack_damage = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightAttackArea"]
-position = Vector2(61, -8)
+position = Vector2(56.5, -10.5)
 shape = SubResource("RectangleShape2D_80u2e")
+
+[node name="UpAttackArea" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 26
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpAttackArea"]
+position = Vector2(0, -53)
+shape = SubResource("RectangleShape2D_jtm1o")
+
+[node name="DownAttackArea" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 26
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DownAttackArea"]
+position = Vector2(0, 44.25)
+shape = SubResource("RectangleShape2D_27lel")
+
+[node name="DeflectArea" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 26
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeflectArea"]
+shape = SubResource("CircleShape2D_sbv2j")

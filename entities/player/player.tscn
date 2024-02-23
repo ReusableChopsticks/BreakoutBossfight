@@ -221,8 +221,9 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
-[node name="PlayerAttackState" type="Node" parent="StateMachine"]
+[node name="PlayerAttackState" type="Node" parent="StateMachine" node_paths=PackedStringArray("weapon")]
 script = ExtResource("8_vw6pg")
+weapon = NodePath("../../Weapon")
 
 [node name="PlayerNodeReferences" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim_player")]
 script = ExtResource("6_58vn7")
