@@ -7,7 +7,6 @@
 [node name="TargetAttack" instance=ExtResource("1_17cje")]
 script = ExtResource("2_s5v2y")
 bullet_scene = ExtResource("3_p7481")
-target_pos = Vector2(200, 200)
 travel_time = 0.2
 fire_interval = 0.287
 fire_amount = 10

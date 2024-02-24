@@ -10,6 +10,8 @@ All bullets must have these functions:
 	BulletConfig is a contract where you look into the bullet code and pass in the required values
 """
 
+@export var free_on_collide: bool = true
+
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var is_normal: bool
@@ -46,5 +48,5 @@ func _on_delete_timer_timeout():
 
 
 func _on_hitbox_component_area_entered(area):
-	if area.get_parent() is Player:
+	if free_on_collide and area.get_parent() is Player:
 		call_deferred("queue_free")

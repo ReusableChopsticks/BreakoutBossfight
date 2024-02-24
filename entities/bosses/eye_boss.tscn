@@ -345,7 +345,7 @@ fire_amount = 1
 
 [node name="RadialAttack" parent="Eye/Attacks" instance=ExtResource("7_64inh")]
 bullet_scene = ExtResource("8_cj3i4")
-degrees_offset_per_burst = 30
+degrees_offset_per_burst = 60
 fire_amount = 5
 
 [node name="DirectionAttack" parent="Eye/Attacks" instance=ExtResource("9_ut28g")]
@@ -371,7 +371,8 @@ script = ExtResource("12_ghtuw")
 [node name="CryRainAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_node")]
 script = ExtResource("20_o843j")
 attack_node = NodePath("../../Eye/Attacks/CryRainAttack")
-tear_drop_amount = 30
+tears_per_attack = 3
+interval = 0.1
 max_x_velocity = 700
 y_vel = -700
 

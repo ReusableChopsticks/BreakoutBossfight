@@ -1,6 +1,10 @@
 extends BaseAttack
 class_name TargetAttack
 
+"""
+Makes a bullet move to a target position
+"""
+
 @export var bullet_scene: PackedScene
 @export var target_node: Node2D
 # time to reach target

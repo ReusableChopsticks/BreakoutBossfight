@@ -1,24 +1,32 @@
-[gd_scene load_steps=11 format=3 uid="uid://bm8hpd35b4y32"]
+[gd_scene load_steps=13 format=3 uid="uid://bm8hpd35b4y32"]
 
 [ext_resource type="Script" path="res://entities/projectiles/base_bullet.gd" id="1_voc8i"]
 [ext_resource type="PackedScene" uid="uid://cfrxt4vfmroyh" path="res://components/hitbox_component.tscn" id="2_lv403"]
-[ext_resource type="Texture2D" uid="uid://ch2wj0gv466jg" path="res://entities/projectiles/bullet_sprites.png" id="3_od2ts"]
-[ext_resource type="Texture2D" uid="uid://bjkbr4rts3apd" path="res://entities/projectiles/explode_bullet_red.png" id="4_m1wjg"]
-[ext_resource type="Texture2D" uid="uid://uph0x6kjf08x" path="res://entities/projectiles/explode_bullet_blue.png" id="5_jsayy"]
+[ext_resource type="Texture2D" uid="uid://bgvnhf80n4nx3" path="res://entities/projectiles/laser_beam.png" id="3_i8cdx"]
+[ext_resource type="Texture2D" uid="uid://cv7i7ogjbxl7i" path="res://entities/projectiles/bullet_sprites.png" id="3_od2ts"]
+[ext_resource type="Texture2D" uid="uid://dbgvvbtevjg37" path="res://entities/projectiles/laser_beam_dull.png" id="3_wldky"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7miio"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_liknw"]
 atlas = ExtResource("3_od2ts")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xkghs"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_e13x3"]
 atlas = ExtResource("3_od2ts")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dk7yj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bw7p1"]
+atlas = ExtResource("3_od2ts")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmt3r"]
+atlas = ExtResource("3_od2ts")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgcob"]
 atlas = ExtResource("3_od2ts")
 region = Rect2(0, 256, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fv24u"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_gspjl"]
 atlas = ExtResource("3_od2ts")
 region = Rect2(64, 256, 64, 64)
 
@@ -26,10 +34,10 @@ region = Rect2(64, 256, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7miio")
+"texture": SubResource("AtlasTexture_liknw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xkghs")
+"texture": SubResource("AtlasTexture_e13x3")
 }],
 "loop": true,
 "name": &"default",
@@ -37,10 +45,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_m1wjg")
+"texture": SubResource("AtlasTexture_bw7p1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_jsayy")
+"texture": SubResource("AtlasTexture_vmt3r")
 }],
 "loop": true,
 "name": &"explode",
@@ -48,10 +56,21 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dk7yj")
+"texture": ExtResource("3_wldky")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fv24u")
+"texture": ExtResource("3_i8cdx")
+}],
+"loop": true,
+"name": &"laser_beam",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgcob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gspjl")
 }],
 "loop": true,
 "name": &"tear_drop",
@@ -68,7 +87,8 @@ metadata/_edit_group_ = true
 sprite_frames = SubResource("SpriteFrames_mj23l")
 
 [node name="DeleteTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 5.0
+autostart = true
 
 [node name="HitboxComponent" parent="." instance=ExtResource("2_lv403")]
 collision_layer = 8
