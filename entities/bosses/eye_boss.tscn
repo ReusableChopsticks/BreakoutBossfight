@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://b14mjug8xedxd"]
+[gd_scene load_steps=41 format=3 uid="uid://b14mjug8xedxd"]
 
 [ext_resource type="Texture2D" uid="uid://cap1h0x66msw7" path="res://entities/bosses/outer_body.png" id="1_7x1j8"]
 [ext_resource type="Script" path="res://entities/bosses/eye_boss.gd" id="1_8i05s"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://entities/bosses/boss_states/eye_choose_attack.gd" id="12_ghtuw"]
 [ext_resource type="PackedScene" uid="uid://d0fobv6xejsab" path="res://components/hurtbox_component.tscn" id="12_h8pvv"]
 [ext_resource type="Script" path="res://entities/bosses/boss_states/eye_burst_attack.gd" id="13_xky0h"]
+[ext_resource type="PackedScene" uid="uid://b00y50g6ym1tq" path="res://entities/projectiles/tracking_bullet.tscn" id="14_mj3rv"]
 [ext_resource type="Script" path="res://entities/bosses/boss_states/eye_shoot_player_attack.gd" id="15_5hkvr"]
 [ext_resource type="Script" path="res://entities/bosses/boss_states/cry_rain_attack.gd" id="20_o843j"]
 
@@ -351,6 +352,13 @@ fire_amount = 5
 [node name="DirectionAttack" parent="Eye/Attacks" instance=ExtResource("9_ut28g")]
 bullet_scene = ExtResource("8_cj3i4")
 speed = 700
+
+[node name="TrackingBulletAttack" parent="Eye/Attacks" instance=ExtResource("6_k4pdw")]
+position = Vector2(-418, -358)
+bullet_scene = ExtResource("14_mj3rv")
+start_velocity = Vector2(0, 0)
+fire_interval = 1.0
+set_preview = true
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_hmgcb")

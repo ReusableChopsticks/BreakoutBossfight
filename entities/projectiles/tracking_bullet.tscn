@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b00y50g6ym1tq"]
+
+[ext_resource type="PackedScene" uid="uid://bm8hpd35b4y32" path="res://entities/projectiles/base_bullet.tscn" id="1_jd7qy"]
+[ext_resource type="Script" path="res://entities/projectiles/tracking_bullet.gd" id="2_qx40d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4iy71"]
+radius = 19.0263
+
+[node name="TrackingBullet" instance=ExtResource("1_jd7qy")]
+script = ExtResource("2_qx40d")
+track_speed = 20
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+scale = Vector2(1.1875, 1.1875)
+animation = &"spinning_bullet"
+frame_progress = 0.627703
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
+shape = SubResource("CircleShape2D_4iy71")

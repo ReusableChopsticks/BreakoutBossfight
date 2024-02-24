@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bm8hpd35b4y32"]
+[gd_scene load_steps=17 format=3 uid="uid://bm8hpd35b4y32"]
 
 [ext_resource type="Script" path="res://entities/projectiles/base_bullet.gd" id="1_voc8i"]
 [ext_resource type="PackedScene" uid="uid://cfrxt4vfmroyh" path="res://components/hitbox_component.tscn" id="2_lv403"]
@@ -21,6 +21,22 @@ region = Rect2(0, 192, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_vmt3r"]
 atlas = ExtResource("3_od2ts")
 region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_od743"]
+atlas = ExtResource("3_od2ts")
+region = Rect2(256, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kx311"]
+atlas = ExtResource("3_od2ts")
+region = Rect2(320, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wry6q"]
+atlas = ExtResource("3_od2ts")
+region = Rect2(384, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4wki"]
+atlas = ExtResource("3_od2ts")
+region = Rect2(448, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgcob"]
 atlas = ExtResource("3_od2ts")
@@ -67,6 +83,28 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_od743")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kx311")
+}],
+"loop": true,
+"name": &"spinning_bullet",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wry6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4wki")
+}],
+"loop": true,
+"name": &"spinning_bullet_deflected",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_vgcob")
 }, {
 "duration": 1.0,
@@ -87,7 +125,7 @@ metadata/_edit_group_ = true
 sprite_frames = SubResource("SpriteFrames_mj23l")
 
 [node name="DeleteTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 10.0
 autostart = true
 
 [node name="HitboxComponent" parent="." instance=ExtResource("2_lv403")]

@@ -5,16 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://bi7vg7jftevte" path="res://entities/attacks/radial_attack.tscn" id="4_vf56o"]
 [ext_resource type="PackedScene" uid="uid://cnffthbwjp8xx" path="res://entities/projectiles/kinematic_bullet.tscn" id="5_52up2"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_wyrlb"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ey43"]
 radius = 18.0278
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_wyrlb"]
 
 [node name="ExplodingBullet" instance=ExtResource("1_1kxcq")]
 script = ExtResource("2_prfr7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
-shape = SubResource("CircleShape2D_6ey43")
+[node name="AnimatedSprite2D" parent="." index="0"]
+animation = &"explode"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 shape = SubResource("CircleShape2D_wyrlb")
@@ -24,5 +24,5 @@ bullet_scene = ExtResource("5_52up2")
 degrees_offset_per_burst = 0
 fire_amount = 1
 
-[node name="AnimatedSprite2D" parent="." index="4"]
-animation = &"explode"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
+shape = SubResource("CircleShape2D_6ey43")

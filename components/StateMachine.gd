@@ -46,4 +46,4 @@ func on_child_transition(state, new_state_name: String):
 		current_state.exit()
 	current_state = new_state
 	new_state.enter()
-	print("entering state" + new_state_name)
+	#print("entering state" + new_state_name)
