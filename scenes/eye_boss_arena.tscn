@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b0qqi7unmcfk2"]
+[gd_scene load_steps=9 format=3 uid="uid://b0qqi7unmcfk2"]
 
 [ext_resource type="PackedScene" uid="uid://dfu3g53b82tnj" path="res://scenes/floor.tscn" id="1_kfdmg"]
 [ext_resource type="PackedScene" uid="uid://bmrdkjqxvde8w" path="res://entities/player/player.tscn" id="2_uyukp"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dk4abp6w1e7fu" path="res://scenes/wall.tscn" id="4_m0ygp"]
 [ext_resource type="PackedScene" uid="uid://bletqh7nbk4d4" path="res://entities/attacks/basic_attack.tscn" id="5_k582t"]
 [ext_resource type="PackedScene" uid="uid://k06iliw2bws2" path="res://entities/projectiles/laser_beam.tscn" id="6_gqw8r"]
+[ext_resource type="PackedScene" uid="uid://cx1bes5236qyc" path="res://entities/attacks/direction_attack.tscn" id="7_ftdyu"]
+[ext_resource type="PackedScene" uid="uid://bi7vg7jftevte" path="res://entities/attacks/radial_attack.tscn" id="8_gy545"]
 
 [node name="EyeBossArena" type="Node2D"]
 
@@ -66,4 +68,18 @@ editor_draw_limits = true
 [node name="BasicAttack" parent="." instance=ExtResource("5_k582t")]
 position = Vector2(-302, -207)
 bullet_scene = ExtResource("6_gqw8r")
+start_velocity = Vector2(20, 500)
+
+[node name="DirectionAttack" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("7_ftdyu")]
+position = Vector2(3, -609)
+bullet_scene = ExtResource("6_gqw8r")
+target_node = NodePath("../Player")
+fire_amount = 100
+
+[node name="RadialAttack" parent="." instance=ExtResource("8_gy545")]
+position = Vector2(-302, -207)
+bullet_scene = ExtResource("6_gqw8r")
+bullet_burst_amount = 3
+degrees_offset_per_burst = 31
+fire_interval = 0.634
 set_preview = true

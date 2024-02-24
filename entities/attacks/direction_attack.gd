@@ -11,6 +11,7 @@ var bullet_config: BulletConfig
 var target_pos: Vector2
 
 func _ready():
+	bullet_config = BulletConfig.new()
 	preview_attack()
 
 func attack():
@@ -21,7 +22,7 @@ func attack():
 		else:
 			target_pos = PlayerStats.player_pos
 		
-		bullet_config = BulletConfig.new()
+		#bullet_config = BulletConfig.new()
 		bullet_config.spawn_pos = global_position
 		bullet_config.start_velocity = (target_pos - global_position).normalized() * speed
 		spawn_bullet(bullet_scene, bullet_config)

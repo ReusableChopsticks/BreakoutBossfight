@@ -6,6 +6,8 @@ class_name LaserBeam
 
 func setup(bullet: BulletConfig):
 	position = bullet.spawn_pos
+	# angle based on starting velocity provided
+	rotation = bullet.start_velocity.angle() - PI/2
 	fire()
 	return self
 
