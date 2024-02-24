@@ -3,6 +3,7 @@ class_name PlayerAttackState
 
 # how long to hold attack button for deflect attack
 @export var deflect_hold_time: float = 1
+@export var hold_time_before_freeze: float = 0.2
 @export var weapon: PlayerWeapon
 
 @onready var anim: AnimationMixer = $"../PlayerNodeReferences".anim_player

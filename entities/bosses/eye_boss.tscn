@@ -344,7 +344,7 @@ shape = SubResource("CircleShape2D_acrlf")
 
 [node name="CryRainAttack" parent="Eye/Attacks" instance=ExtResource("6_k4pdw")]
 bullet_scene = ExtResource("10_5q7iq")
-fire_interval = 0.05
+fire_interval = 0.07
 fire_amount = 1
 
 [node name="RadialAttack" parent="Eye/Attacks" instance=ExtResource("7_64inh")]
@@ -355,12 +355,13 @@ fire_amount = 5
 [node name="BasicDirAttack" parent="Eye/Attacks" instance=ExtResource("9_ut28g")]
 bullet_scene = ExtResource("8_cj3i4")
 speed = 700
+fire_interval = 0.3
+fire_amount = 5
 
 [node name="TrackingBulletAttack" parent="Eye/Attacks" instance=ExtResource("6_k4pdw")]
 bullet_scene = ExtResource("14_mj3rv")
 start_velocity = Vector2(0, 0)
-fire_interval = 1.0
-fire_amount = 2
+fire_interval = 0.8
 
 [node name="RadialBeamAttack" parent="Eye/Attacks" instance=ExtResource("7_64inh")]
 bullet_scene = ExtResource("15_o1inh")
@@ -376,7 +377,7 @@ initial_state = NodePath("EyeIntroState")
 
 [node name="EyeIdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim")]
 script = ExtResource("10_4sswx")
-idle_time = 2.0
+idle_time = 1.0
 anim = NodePath("../../Eye/AnimationPlayer")
 
 [node name="EyeIntroState" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim")]
@@ -405,6 +406,7 @@ attack_node = NodePath("../../Eye/Attacks/BasicDirAttack")
 [node name="EyeTrackingBulletAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_node")]
 script = ExtResource("22_2mqxm")
 attack_node = NodePath("../../Eye/Attacks/TrackingBulletAttack")
+delay_before_attack_finished = 0.5
 
 [node name="EyeRadialBeamAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_node")]
 script = ExtResource("24_8d4se")

@@ -68,3 +68,4 @@ func _on_delete_timer_timeout():
 func _on_hitbox_component_area_entered(area):
 	if free_on_collide and area.get_parent() is Player:
 		call_deferred("queue_free")
+		print("hit by " + name)
