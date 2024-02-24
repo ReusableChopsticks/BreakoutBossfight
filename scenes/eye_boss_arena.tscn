@@ -74,7 +74,9 @@ start_velocity = Vector2(20, 500)
 position = Vector2(3, -609)
 bullet_scene = ExtResource("6_gqw8r")
 target_node = NodePath("../Player")
-fire_amount = 100
+fire_interval = 1.0
+fire_amount = 50
+set_preview = true
 
 [node name="RadialAttack" parent="." instance=ExtResource("8_gy545")]
 position = Vector2(-302, -207)
@@ -82,4 +84,3 @@ bullet_scene = ExtResource("6_gqw8r")
 bullet_burst_amount = 3
 degrees_offset_per_burst = 31
 fire_interval = 0.634
-set_preview = true
