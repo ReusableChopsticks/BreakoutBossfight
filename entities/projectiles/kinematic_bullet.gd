@@ -10,11 +10,13 @@ func setup(bullet_config: BulletConfig):
 	return self
 	
 func deflect():
-	sprite.frame = 1
-	set_deflected()
-	set_environment_collision()
+	_set_deflected()
+	_set_environment_collision()
 	velocity.x *= 1.3
 	velocity.y *= 1.5
+
+func _set_deflected_sprite():
+	sprite.frame = 1
 
 func _physics_process(delta):
 	velocity.y += gravity * delta

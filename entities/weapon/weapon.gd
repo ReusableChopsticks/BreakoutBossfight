@@ -54,6 +54,7 @@ func get_hits():
 		# charge weapon when bullets hit
 		if area.get_parent() is BaseBullet:
 			add_charge()
+			area.get_parent().hit()
 			# call a function on bullet like .hit() to indicate it was hit
 		# directly attack boss
 		elif area is HurtboxComponent:

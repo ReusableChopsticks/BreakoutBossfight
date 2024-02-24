@@ -9,11 +9,15 @@ radius = 19.0263
 [node name="TrackingBullet" instance=ExtResource("1_jd7qy")]
 script = ExtResource("2_qx40d")
 track_speed = 20
+max_speed = 600
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 scale = Vector2(1.1875, 1.1875)
 animation = &"spinning_bullet"
 frame_progress = 0.627703
+
+[node name="DeleteTimer" parent="." index="1"]
+wait_time = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
 shape = SubResource("CircleShape2D_4iy71")

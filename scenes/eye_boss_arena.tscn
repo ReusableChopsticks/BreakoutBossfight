@@ -1,12 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0qqi7unmcfk2"]
+[gd_scene load_steps=5 format=3 uid="uid://b0qqi7unmcfk2"]
 
 [ext_resource type="PackedScene" uid="uid://dfu3g53b82tnj" path="res://scenes/floor.tscn" id="1_kfdmg"]
 [ext_resource type="PackedScene" uid="uid://bmrdkjqxvde8w" path="res://entities/player/player.tscn" id="2_uyukp"]
 [ext_resource type="PackedScene" uid="uid://b14mjug8xedxd" path="res://entities/bosses/eye_boss.tscn" id="3_60h7x"]
 [ext_resource type="PackedScene" uid="uid://dk4abp6w1e7fu" path="res://scenes/wall.tscn" id="4_m0ygp"]
-[ext_resource type="PackedScene" uid="uid://k06iliw2bws2" path="res://entities/projectiles/laser_beam.tscn" id="6_gqw8r"]
-[ext_resource type="PackedScene" uid="uid://cx1bes5236qyc" path="res://entities/attacks/direction_attack.tscn" id="7_ftdyu"]
-[ext_resource type="PackedScene" uid="uid://bi7vg7jftevte" path="res://entities/attacks/radial_attack.tscn" id="8_gy545"]
 
 [node name="EyeBossArena" type="Node2D"]
 
@@ -16,7 +13,7 @@
 scale = Vector2(0.141422, 5.46497)
 
 [node name="LeftWall4" parent="Environment" instance=ExtResource("1_kfdmg")]
-position = Vector2(-656, -409)
+position = Vector2(-668, -208)
 scale = Vector2(0.141422, 0.744971)
 
 [node name="LeftWall6" parent="Environment" instance=ExtResource("1_kfdmg")]
@@ -24,31 +21,23 @@ position = Vector2(2.38431e-07, -1063)
 scale = Vector2(0.141422, 1.46497)
 
 [node name="LeftWall9" parent="Environment" instance=ExtResource("1_kfdmg")]
-position = Vector2(972, -740)
+position = Vector2(978, -389)
 scale = Vector2(0.141422, 0.744971)
 
 [node name="LeftWall10" parent="Environment" instance=ExtResource("1_kfdmg")]
-position = Vector2(-967, -740)
+position = Vector2(-961, -389)
 scale = Vector2(0.141422, 0.744971)
 
 [node name="LeftWall5" parent="Environment" instance=ExtResource("1_kfdmg")]
-position = Vector2(660, -415)
+position = Vector2(648, -214)
 scale = Vector2(0.141422, 0.744971)
 
-[node name="LeftWall2" parent="Environment" instance=ExtResource("4_m0ygp")]
-position = Vector2(-580, -308)
-scale = Vector2(0.141422, 1.02497)
-
 [node name="LeftWall7" parent="Environment" instance=ExtResource("4_m0ygp")]
-position = Vector2(-454, -769)
+position = Vector2(-643, -718)
 scale = Vector2(0.141422, 1.02497)
 
 [node name="LeftWall8" parent="Environment" instance=ExtResource("4_m0ygp")]
-position = Vector2(440, -769)
-scale = Vector2(0.141422, 1.02497)
-
-[node name="LeftWall3" parent="Environment" instance=ExtResource("4_m0ygp")]
-position = Vector2(589, -308)
+position = Vector2(632, -706)
 scale = Vector2(0.141422, 1.02497)
 
 [node name="EyeBoss" parent="." instance=ExtResource("3_60h7x")]
@@ -63,18 +52,3 @@ zoom = Vector2(0.9, 0.9)
 limit_top = -1600
 limit_bottom = 250
 editor_draw_limits = true
-
-[node name="DirectionAttack" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("7_ftdyu")]
-position = Vector2(3, -609)
-bullet_scene = ExtResource("6_gqw8r")
-target_node = NodePath("../Player")
-fire_interval = 1.0
-fire_amount = 50
-set_preview = true
-
-[node name="RadialAttack" parent="." instance=ExtResource("8_gy545")]
-position = Vector2(-292, -421)
-bullet_scene = ExtResource("6_gqw8r")
-bullet_burst_amount = 3
-degrees_offset_per_burst = 31
-fire_interval = 0.634

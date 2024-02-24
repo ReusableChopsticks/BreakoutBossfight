@@ -16,9 +16,8 @@ func explode():
 	# replace with explode animation
 	visible = false
 
-# cannot be deflected?
+# cannot be deflected
 func deflect():
-	#set_deflected()
 	pass
 
 func _physics_process(delta):

@@ -8,11 +8,12 @@ func setup(bullet: BulletConfig):
 	return self
 
 func deflect():
-	$AnimatedSprite2D.frame = 1
-	set_deflected()
+	_set_deflected()
 	# set to bounce off environment (walls)
 	set_collision_mask_value(3, true)
 
+func _set_deflected_sprite():
+	$AnimatedSprite2D.frame = 1
 
 func _physics_process(delta):
 	var col_info = move_and_collide(velocity * delta)

@@ -266,7 +266,7 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.1),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -297,13 +297,13 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w36ce"]
-size = Vector2(113, 104)
+size = Vector2(198.5, 172)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_80u2e"]
-size = Vector2(115, 103)
+size = Vector2(197, 168)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jtm1o"]
-size = Vector2(122, 108)
+size = Vector2(270, 182)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_27lel"]
 size = Vector2(121, 89.5)
@@ -491,7 +491,7 @@ collision_layer = 64
 collision_mask = 26
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftAttackArea"]
-position = Vector2(-58, -10)
+position = Vector2(-100.75, -7)
 shape = SubResource("RectangleShape2D_w36ce")
 
 [node name="RightAttackArea" type="Area2D" parent="."]
@@ -499,7 +499,7 @@ collision_layer = 64
 collision_mask = 26
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightAttackArea"]
-position = Vector2(56.5, -10.5)
+position = Vector2(97.5, -8)
 shape = SubResource("RectangleShape2D_80u2e")
 
 [node name="UpAttackArea" type="Area2D" parent="."]
@@ -507,7 +507,7 @@ collision_layer = 64
 collision_mask = 26
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UpAttackArea"]
-position = Vector2(0, -53)
+position = Vector2(6, -90)
 shape = SubResource("RectangleShape2D_jtm1o")
 
 [node name="DownAttackArea" type="Area2D" parent="."]
@@ -526,6 +526,6 @@ collision_mask = 26
 shape = SubResource("CircleShape2D_sbv2j")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(1.81111, 1.81111)
+scale = Vector2(2.47778, 2.47778)
 sprite_frames = SubResource("SpriteFrames_iy24q")
 animation = &"idle"

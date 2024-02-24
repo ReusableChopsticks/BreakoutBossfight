@@ -3,6 +3,9 @@ class_name TrackingBullet
 
 # rate of change of velocity while tracking player
 @export var track_speed = 20
+@export var max_speed = 600
+
+var deflected := false
 
 func setup(bullet: BulletConfig):
 	sprite.play("spinning_bullet")
@@ -11,12 +14,14 @@ func setup(bullet: BulletConfig):
 	return self
 
 func deflect():
-	sprite.play("spinning_bullet_deflected")
-	set_deflected()
-	# set to bounce off environment (walls)
-	set_collision_mask_value(3, true)
+	_set_deflected()
 
+func _set_deflected_sprite():
+	sprite.play("spinning_bullet_deflected")
 
 func _physics_process(delta):
 	var col_info = move_and_collide(velocity * delta)
-	velocity += (PlayerStats.player_pos - global_position).normalized() * track_speed
+	if !is_deflected:
+		velocity += (PlayerStats.player_pos - global_position).normalized() * track_speed
+		if velocity.length() > max_speed:
+			velocity = velocity.normalized() * max_speed
