@@ -1,35 +1,76 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0qqi7unmcfk2"]
+[gd_scene load_steps=8 format=3 uid="uid://b0qqi7unmcfk2"]
 
+[ext_resource type="Texture2D" uid="uid://cp0coe7a5802k" path="res://entities/environment/BackgroundSky.png" id="1_0ltd2"]
 [ext_resource type="PackedScene" uid="uid://bmrdkjqxvde8w" path="res://entities/player/player.tscn" id="2_uyukp"]
 [ext_resource type="PackedScene" uid="uid://b14mjug8xedxd" path="res://entities/bosses/eye_boss.tscn" id="3_60h7x"]
 [ext_resource type="PackedScene" uid="uid://c71a1vvrb5tyf" path="res://entities/environment/floating_platform.tscn" id="4_77t0w"]
 [ext_resource type="PackedScene" uid="uid://cwyfjvosui8rq" path="res://entities/environment/pillar.tscn" id="5_7j8pb"]
 [ext_resource type="PackedScene" uid="uid://b43p78lb3hnqn" path="res://entities/environment/main_platform.tscn" id="5_a1j7u"]
+[ext_resource type="Texture2D" uid="uid://3nesp7yxl8sb" path="res://entities/environment/Pillar.png" id="5_sdwjj"]
 
 [node name="EyeBossArena" type="Node2D"]
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="BG" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(0, -673.5)
+scale = Vector2(3, 0.899)
+texture = ExtResource("1_0ltd2")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_offset = Vector2(1000, 800)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+modulate = Color(1, 1, 1, 0.364706)
+position = Vector2(18.7504, -72.25)
+scale = Vector2(2.25, 2.25)
+texture = ExtResource("5_sdwjj")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+modulate = Color(1, 1, 1, 0.364706)
+position = Vector2(778, 190)
+scale = Vector2(1.39139, 1.39139)
+texture = ExtResource("5_sdwjj")
+
+[node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+modulate = Color(1, 1, 1, 0.364706)
+position = Vector2(-813, 105)
+scale = Vector2(1.81045, 1.81045)
+texture = ExtResource("5_sdwjj")
+
 [node name="Environment" type="Node" parent="."]
+
+[node name="MainPlatform" parent="Environment" instance=ExtResource("5_a1j7u")]
+position = Vector2(0, 300)
+
+[node name="FloatingPlatform" parent="Environment" instance=ExtResource("4_77t0w")]
+position = Vector2(-829, -220)
+
+[node name="FloatingPlatform2" parent="Environment" instance=ExtResource("4_77t0w")]
+position = Vector2(843, -220)
 
 [node name="EyeBoss" parent="." instance=ExtResource("3_60h7x")]
 position = Vector2(3, -721)
-
-[node name="MainPlatform" parent="." instance=ExtResource("5_a1j7u")]
-position = Vector2(0, 300)
-
-[node name="FloatingPlatform" parent="." instance=ExtResource("4_77t0w")]
-position = Vector2(-829, -220)
-
-[node name="FloatingPlatform2" parent="." instance=ExtResource("4_77t0w")]
-position = Vector2(843, -220)
 
 [node name="Player" parent="." instance=ExtResource("2_uyukp")]
 position = Vector2(8, -79)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -6.43903)
 offset = Vector2(0, -100)
-zoom = Vector2(0.9, 0.9)
+zoom = Vector2(0.8, 0.8)
 limit_top = -1600
 limit_bottom = 250
+position_smoothing_speed = 100.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.05
+drag_top_margin = 0.05
+drag_right_margin = 0.05
+drag_bottom_margin = 0.05
 editor_draw_limits = true
 
 [node name="Pillar" parent="." instance=ExtResource("5_7j8pb")]
