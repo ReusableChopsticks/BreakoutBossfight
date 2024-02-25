@@ -1,10 +1,9 @@
-[gd_scene load_steps=44 format=3 uid="uid://b14mjug8xedxd"]
+[gd_scene load_steps=42 format=3 uid="uid://b14mjug8xedxd"]
 
-[ext_resource type="Texture2D" uid="uid://cap1h0x66msw7" path="res://entities/bosses/outer_body.png" id="1_7x1j8"]
 [ext_resource type="Script" path="res://entities/bosses/eye_boss.gd" id="1_8i05s"]
-[ext_resource type="Texture2D" uid="uid://chamcmarvxah2" path="res://entities/bosses/inner_body.png" id="2_co8sh"]
+[ext_resource type="Texture2D" uid="uid://cdf2va2u35ula" path="res://entities/bosses/graphics/BossBody.png" id="2_ajdr8"]
 [ext_resource type="Texture2D" uid="uid://dewnt3164lp7m" path="res://entities/bosses/eyeball.png" id="3_5bn0c"]
-[ext_resource type="Texture2D" uid="uid://bypkfeu0m0bwk" path="res://entities/bosses/iris.png" id="4_ajrxk"]
+[ext_resource type="Texture2D" uid="uid://dv4c33q7tbg2f" path="res://entities/bosses/graphics/BaseIris.png" id="4_kjm63"]
 [ext_resource type="Script" path="res://components/StateMachine.gd" id="6_hmgcb"]
 [ext_resource type="PackedScene" uid="uid://bletqh7nbk4d4" path="res://entities/attacks/basic_attack.tscn" id="6_k4pdw"]
 [ext_resource type="PackedScene" uid="uid://bi7vg7jftevte" path="res://entities/attacks/radial_attack.tscn" id="7_64inh"]
@@ -26,16 +25,6 @@
 [ext_resource type="Script" path="res://entities/bosses/boss_states/eye_radial_beam_attack.gd" id="24_8d4se"]
 
 [sub_resource type="GDScript" id="GDScript_ytuw1"]
-script/source = "extends Sprite2D
-
-@export var spin_speed = 20
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	rotation_degrees += spin_speed * delta
-"
-
-[sub_resource type="GDScript" id="GDScript_jubds"]
 script/source = "extends Sprite2D
 
 @export var spin_speed = 20
@@ -295,15 +284,9 @@ script = ExtResource("1_8i05s")
 [node name="Eye" type="CharacterBody2D" parent="."]
 
 [node name="OuterBody" type="Sprite2D" parent="Eye"]
-scale = Vector2(1.18438, 1.18438)
-texture = ExtResource("1_7x1j8")
+scale = Vector2(0.508264, 0.508264)
+texture = ExtResource("2_ajdr8")
 script = SubResource("GDScript_ytuw1")
-
-[node name="InnerBody" type="Sprite2D" parent="Eye"]
-scale = Vector2(1.18567, 1.18567)
-texture = ExtResource("2_co8sh")
-script = SubResource("GDScript_jubds")
-spin_speed = -30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Eye"]
 shape = SubResource("CircleShape2D_nr4r4")
@@ -315,7 +298,8 @@ sprite_frames = SubResource("SpriteFrames_ut0j0")
 animation = &"close_eye"
 
 [node name="Iris" type="Sprite2D" parent="Eye/Eyeball"]
-texture = ExtResource("4_ajrxk")
+scale = Vector2(0.277512, 0.277512)
+texture = ExtResource("4_kjm63")
 script = SubResource("GDScript_1ht1u")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Eye"]
