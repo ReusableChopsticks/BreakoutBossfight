@@ -1,7 +1,7 @@
 extends BaseBullet
 class_name LaserBeam
 
-@export var idle_time = 1
+@export var idle_time: float = 1
 @onready var anim: AnimationPlayer = $AnimationPlayer
 
 func setup(bullet: BulletConfig):

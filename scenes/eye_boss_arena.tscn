@@ -1,54 +1,41 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0qqi7unmcfk2"]
+[gd_scene load_steps=6 format=3 uid="uid://b0qqi7unmcfk2"]
 
-[ext_resource type="PackedScene" uid="uid://dfu3g53b82tnj" path="res://scenes/floor.tscn" id="1_kfdmg"]
 [ext_resource type="PackedScene" uid="uid://bmrdkjqxvde8w" path="res://entities/player/player.tscn" id="2_uyukp"]
 [ext_resource type="PackedScene" uid="uid://b14mjug8xedxd" path="res://entities/bosses/eye_boss.tscn" id="3_60h7x"]
-[ext_resource type="PackedScene" uid="uid://dk4abp6w1e7fu" path="res://scenes/wall.tscn" id="4_m0ygp"]
+[ext_resource type="PackedScene" uid="uid://c71a1vvrb5tyf" path="res://entities/environment/floating_platform.tscn" id="4_77t0w"]
+[ext_resource type="PackedScene" uid="uid://cwyfjvosui8rq" path="res://entities/environment/pillar.tscn" id="5_7j8pb"]
+[ext_resource type="PackedScene" uid="uid://b43p78lb3hnqn" path="res://entities/environment/main_platform.tscn" id="5_a1j7u"]
 
 [node name="EyeBossArena" type="Node2D"]
 
 [node name="Environment" type="Node" parent="."]
 
-[node name="LeftWall" parent="Environment" instance=ExtResource("1_kfdmg")]
-scale = Vector2(0.141422, 5.46497)
-
-[node name="LeftWall4" parent="Environment" instance=ExtResource("1_kfdmg")]
-position = Vector2(-668, -208)
-scale = Vector2(0.141422, 0.744971)
-
-[node name="LeftWall6" parent="Environment" instance=ExtResource("1_kfdmg")]
-position = Vector2(2.38431e-07, -1063)
-scale = Vector2(0.141422, 1.46497)
-
-[node name="LeftWall9" parent="Environment" instance=ExtResource("1_kfdmg")]
-position = Vector2(978, -389)
-scale = Vector2(0.141422, 0.744971)
-
-[node name="LeftWall10" parent="Environment" instance=ExtResource("1_kfdmg")]
-position = Vector2(-961, -389)
-scale = Vector2(0.141422, 0.744971)
-
-[node name="LeftWall5" parent="Environment" instance=ExtResource("1_kfdmg")]
-position = Vector2(648, -214)
-scale = Vector2(0.141422, 0.744971)
-
-[node name="LeftWall7" parent="Environment" instance=ExtResource("4_m0ygp")]
-position = Vector2(-643, -718)
-scale = Vector2(0.141422, 1.02497)
-
-[node name="LeftWall8" parent="Environment" instance=ExtResource("4_m0ygp")]
-position = Vector2(632, -706)
-scale = Vector2(0.141422, 1.02497)
-
 [node name="EyeBoss" parent="." instance=ExtResource("3_60h7x")]
-position = Vector2(3, -609)
+position = Vector2(3, -721)
+
+[node name="MainPlatform" parent="." instance=ExtResource("5_a1j7u")]
+position = Vector2(0, 300)
+
+[node name="FloatingPlatform" parent="." instance=ExtResource("4_77t0w")]
+position = Vector2(-829, -220)
+
+[node name="FloatingPlatform2" parent="." instance=ExtResource("4_77t0w")]
+position = Vector2(843, -220)
 
 [node name="Player" parent="." instance=ExtResource("2_uyukp")]
 position = Vector2(8, -79)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-offset = Vector2(0, -200)
+offset = Vector2(0, -100)
 zoom = Vector2(0.9, 0.9)
 limit_top = -1600
 limit_bottom = 250
 editor_draw_limits = true
+
+[node name="Pillar" parent="." instance=ExtResource("5_7j8pb")]
+position = Vector2(-828, 123)
+scale = Vector2(0.858232, 0.858232)
+
+[node name="Pillar2" parent="." instance=ExtResource("5_7j8pb")]
+position = Vector2(841, 123)
+scale = Vector2(0.858232, 0.858232)
