@@ -55,7 +55,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var wall_jump_buffer_timer: Timer = $Timers/WallJumpBufferTimer
 @onready var move_buffer_timer: Timer = $Timers/MoveBufferTimer
 # this is not for character animation, but controls dash timings precisely
-@onready var dash_anim: AnimationPlayer = $"../PlayerNodeReferences".anim_player
+@onready var dash_anim: AnimationPlayer = $"../../DashAnimationPlayer"
+
+@onready var character_anim: AnimationPlayer = $"../PlayerNodeReferences".char_anim_player
+@onready var sprite: Sprite2D = $"../../PlayerSprite"
 
 # apply constant force up while holding like hollow knight jump
 var can_hold_jump: bool = true
@@ -73,6 +76,9 @@ var facing_dir = 1
 var wall_normal = 0
 #endregion
 
+const LEFT = -1
+const RIGHT = 1
+
 var is_invincible = false
 
 
@@ -82,6 +88,9 @@ func check_collisions():
 	if p.is_on_wall_only() and is_dashing:
 		is_dashing = false
 		can_dash = true
+	# return to default sprite if not on wall
+	if not p.is_on_wall_only():
+		sprite.frame = 0
 	handle_coyote()
 	handle_buffer()
 
@@ -132,6 +141,7 @@ func execute_jump():
 	has_coyote = false
 	has_buffer = false
 	has_wall_buffer = false
+	character_anim.play("jump")
 
 func release_jump():
 	is_jumping = false
@@ -151,6 +161,9 @@ func handle_wall_jump():
 		# wall slide logic
 		if direction:
 			p.velocity.y = lerpf(p.velocity.y, wall_slide_speed, wall_slide_lerp)
+			# PLAYER SPRITE FOR WALL SLIDE PROTOTYPE
+			sprite.frame = 1 if direction == LEFT else 2
+			
 	# detect when to wall jump
 	if (Input.is_action_just_pressed("jump") 
 				and (p.is_on_wall_only() or has_wall_coyote)
@@ -169,6 +182,10 @@ func execute_wall_jump():
 	has_wall_coyote = false
 	has_wall_buffer = false
 	is_wall_jumping = true
+	if last_wall_normal_x == LEFT:
+		character_anim.play("left_wall_jump")
+	else:
+		character_anim.play("right_wall_jump")
 	$Timers/WallJumpXBoostTimer.start()
 #endregion
 
@@ -218,6 +235,7 @@ func execute_dash():
 	is_dashing = true
 	can_dash = false
 	dash_anim.play("dash")
+	character_anim.play("dash")
 	
 # used while dashing in dash animation
 func finish_dash():

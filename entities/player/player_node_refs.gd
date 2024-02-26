@@ -1,4 +1,4 @@
 extends Node
 class_name PlayerNodeReferences
 
-@export var anim_player: AnimationPlayer
+@export var char_anim_player: AnimationPlayer

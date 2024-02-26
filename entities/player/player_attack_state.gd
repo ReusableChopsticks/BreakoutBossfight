@@ -6,7 +6,6 @@ class_name PlayerAttackState
 @export var hold_time_before_freeze: float = 0.2
 @export var weapon: PlayerWeapon
 
-@onready var anim: AnimationMixer = $"../PlayerNodeReferences".anim_player
 @onready var player: Player = $"../.."
 @onready var move_settings: PlayerMoveState = $"../PlayerMoveState"
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")

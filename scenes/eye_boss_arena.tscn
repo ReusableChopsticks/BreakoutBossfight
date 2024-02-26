@@ -54,6 +54,7 @@ position = Vector2(843, -220)
 
 [node name="EyeBoss" parent="." instance=ExtResource("3_60h7x")]
 position = Vector2(3, -721)
+scale = Vector2(1.43734, 1.43734)
 
 [node name="Player" parent="." instance=ExtResource("2_uyukp")]
 position = Vector2(8, -79)

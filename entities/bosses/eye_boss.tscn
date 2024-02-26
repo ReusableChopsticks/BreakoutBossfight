@@ -231,34 +231,6 @@ _data = {
 "intro": SubResource("Animation_48y5o")
 }
 
-[sub_resource type="Animation" id="Animation_bgdva"]
-resource_name = "blink"
-length = 0.40001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Eyeball:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Eyeball:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"blink"]
-}
-
 [sub_resource type="Animation" id="Animation_3no7s"]
 length = 0.001
 tracks/0/type = "value"
@@ -298,36 +270,32 @@ tracks/2/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_t3uqh"]
-resource_name = "look_up"
-length = 0.50001
+[sub_resource type="Animation" id="Animation_bgdva"]
+resource_name = "blink"
+length = 0.40001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Eyeball/Iris:position")
+tracks/0/path = NodePath("../Eyeball:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(4.59479, 25.9921),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -200)]
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
 }
-
-[sub_resource type="Animation" id="Animation_jg0eq"]
-resource_name = "look_back_down"
-length = 1.00001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Eyeball/Iris:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.8),
-"transitions": PackedFloat32Array(0.258817, 1.8025, 1),
-"update": 0,
-"values": [Vector2(0, -200), Vector2(0, 10), Vector2(0, 0)]
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Eyeball:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"blink"]
 }
 
 [sub_resource type="Animation" id="Animation_4aj6y"]
@@ -356,6 +324,38 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"all"]
+}
+
+[sub_resource type="Animation" id="Animation_jg0eq"]
+resource_name = "look_back_down"
+length = 1.00001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Eyeball/Iris:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.8),
+"transitions": PackedFloat32Array(0.258817, 1.8025, 1),
+"update": 0,
+"values": [Vector2(0, -200), Vector2(0, 10), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_t3uqh"]
+resource_name = "look_up"
+length = 0.50001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Eyeball/Iris:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(4.59479, 25.9921),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -200)]
 }
 
 [sub_resource type="Animation" id="Animation_ioa11"]

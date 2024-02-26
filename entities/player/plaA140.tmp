@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_pe5m7"]
 [ext_resource type="Texture2D" uid="uid://bnbqup2pffxsr" path="res://entities/player/graphics/PlayerSprites.png" id="2_3x286"]
-[ext_resource type="Texture2D" uid="uid://dn82v6ycjrroi" path="res://entities/player/graphics/HaloRings.png" id="3_qjqht"]
+[ext_resource type="Texture2D" uid="uid://blb74yj1jt0or" path="res://entities/player/graphics/HaloRings.png" id="3_qjqht"]
 [ext_resource type="PackedScene" uid="uid://d0fobv6xejsab" path="res://components/hurtbox_component.tscn" id="3_wxa5a"]
 [ext_resource type="Script" path="res://components/player_health_component.gd" id="3_ycx7p"]
 [ext_resource type="Script" path="res://entities/player/halo_health_sprite.gd" id="4_521dn"]
@@ -304,6 +304,18 @@ shape = SubResource("CircleShape2D_u187l")
 
 [node name="Weapon" parent="." instance=ExtResource("5_0jjoe")]
 
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.615285, 0.615285)
+texture = ExtResource("2_3x286")
+vframes = 3
+
+[node name="HaloSprite" type="Sprite2D" parent="."]
+position = Vector2(30, -60)
+scale = Vector2(0.627392, 0.627392)
+texture = ExtResource("3_qjqht")
+hframes = 6
+script = ExtResource("4_521dn")
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_let22")
 initial_state = NodePath("PlayerMoveState")
@@ -357,21 +369,6 @@ weapon = NodePath("../../Weapon")
 [node name="PlayerNodeReferences" type="Node" parent="StateMachine" node_paths=PackedStringArray("char_anim_player")]
 script = ExtResource("6_58vn7")
 char_anim_player = NodePath("../../CharAnimationPlayer")
-
-[node name="PlayerSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.615285, 0.615285)
-texture = ExtResource("2_3x286")
-vframes = 3
-
-[node name="IgnoreParentRelativePos" type="Node" parent="."]
-
-[node name="HaloSprite" type="Sprite2D" parent="IgnoreParentRelativePos" node_paths=PackedStringArray("player")]
-position = Vector2(60, -60)
-scale = Vector2(0.627392, 0.627392)
-texture = ExtResource("3_qjqht")
-hframes = 6
-script = ExtResource("4_521dn")
-player = NodePath("../..")
 
 [connection signal="timeout" from="StateMachine/PlayerMoveState/Timers/JumpHoldTimer" to="StateMachine/PlayerMoveState" method="_on_jump_hold_timer_timeout"]
 [connection signal="timeout" from="StateMachine/PlayerMoveState/Timers/CoyoteTimer" to="StateMachine/PlayerMoveState" method="_on_coyote_timer_timeout"]
