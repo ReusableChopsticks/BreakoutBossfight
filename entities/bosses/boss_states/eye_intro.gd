@@ -1,7 +1,7 @@
 extends State
 class_name EyeIntroState
 
-@export var anim: AnimationMixer
+@export var anim: AnimationPlayer
 
 func enter():
 	anim.play("intro")
