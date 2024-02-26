@@ -1,8 +1,7 @@
-[gd_scene load_steps=51 format=3 uid="uid://b14mjug8xedxd"]
+[gd_scene load_steps=55 format=3 uid="uid://b14mjug8xedxd"]
 
 [ext_resource type="Script" path="res://entities/bosses/eye_boss.gd" id="1_8i05s"]
 [ext_resource type="Texture2D" uid="uid://cdf2va2u35ula" path="res://entities/bosses/graphics/BossBody.png" id="2_ajdr8"]
-[ext_resource type="Texture2D" uid="uid://dewnt3164lp7m" path="res://entities/bosses/eyeball.png" id="3_5bn0c"]
 [ext_resource type="Texture2D" uid="uid://b3l4cask3k03e" path="res://entities/bosses/graphics/Eyeballs.png" id="4_ulhnm"]
 [ext_resource type="Texture2D" uid="uid://d1lkts8prwbqr" path="res://entities/bosses/graphics/IrisesSheet.png" id="5_aqi12"]
 [ext_resource type="Script" path="res://components/StateMachine.gd" id="6_hmgcb"]
@@ -36,6 +35,26 @@ func _physics_process(delta):
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nr4r4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhisu"]
+atlas = ExtResource("4_ulhnm")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1c082"]
+atlas = ExtResource("4_ulhnm")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5maqn"]
+atlas = ExtResource("4_ulhnm")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vs27e"]
+atlas = ExtResource("4_ulhnm")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60ro7"]
+atlas = ExtResource("4_ulhnm")
+region = Rect2(800, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ha6sd"]
 atlas = ExtResource("4_ulhnm")
@@ -73,24 +92,28 @@ region = Rect2(600, 0, 200, 200)
 atlas = ExtResource("4_ulhnm")
 region = Rect2(800, 0, 200, 200)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4e0mo"]
-atlas = ExtResource("3_5bn0c")
-region = Rect2(390, 0, 130, 70)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g2mmo"]
-atlas = ExtResource("3_5bn0c")
-region = Rect2(260, 0, 130, 70)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_381db"]
-atlas = ExtResource("3_5bn0c")
-region = Rect2(130, 0, 130, 70)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5auqa"]
-atlas = ExtResource("3_5bn0c")
-region = Rect2(0, 0, 130, 70)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_ut0j0"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhisu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1c082")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5maqn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vs27e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60ro7")
+}],
+"loop": true,
+"name": &"all",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ha6sd")
@@ -109,7 +132,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"blink",
-"speed": 20.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -130,27 +153,11 @@ animations = [{
 "loop": false,
 "name": &"close_eye",
 "speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4e0mo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g2mmo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_381db")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5auqa")
-}],
-"loop": false,
-"name": &"open_eye",
-"speed": 10.0
 }]
 
 [sub_resource type="GDScript" id="GDScript_1ht1u"]
 script/source = "extends Sprite2D
+class_name Iris
 
 var start_pos
 
@@ -163,63 +170,21 @@ func _physics_process(_delta):
 	position = lerp(Vector2.ZERO, PlayerStats.player_pos - global_position, 0.03)
 "
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_q1fjc"]
+radius = 98.4886
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_acrlf"]
+radius = 147.085
+
 [sub_resource type="Animation" id="Animation_161n8"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Eyeball:animation")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"close_eye"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Eyeball:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Eyeball:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Eyeball/Iris:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -233,46 +198,10 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Eyeball:animation")
-tracks/0/interp = 1
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"close_eye"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Eyeball:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 2, 1, 0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Eyeball:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:position")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -292,72 +221,180 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1.6, 2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0, -82), Vector2(0, 5), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_0r4jm"]
-resource_name = "look_up"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Eyeball/Iris:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -200)]
-}
-
-[sub_resource type="Animation" id="Animation_qto7q"]
-resource_name = "look_back_down"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Eyeball/Iris:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, -200), Vector2(0, 10), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_03vs0"]
-resource_name = "blink"
-length = 0.200005
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Eyeball:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 2, 4, 3, 0]
+"values": [Vector2(0, -110), Vector2(0, 5), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vesn3"]
 _data = {
 "RESET": SubResource("Animation_161n8"),
-"blink": SubResource("Animation_03vs0"),
 "idle": SubResource("Animation_jde8p"),
-"intro": SubResource("Animation_48y5o"),
-"look_back_down": SubResource("Animation_qto7q"),
-"look_up": SubResource("Animation_0r4jm")
+"intro": SubResource("Animation_48y5o")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_q1fjc"]
-radius = 98.4886
+[sub_resource type="Animation" id="Animation_bgdva"]
+resource_name = "blink"
+length = 0.40001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Eyeball:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Eyeball:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"blink"]
+}
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_acrlf"]
-radius = 147.085
+[sub_resource type="Animation" id="Animation_3no7s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Eyeball:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"blink"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Eyeball:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Eyeball/Iris:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_t3uqh"]
+resource_name = "look_up"
+length = 0.50001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Eyeball/Iris:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(4.59479, 25.9921),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -200)]
+}
+
+[sub_resource type="Animation" id="Animation_jg0eq"]
+resource_name = "look_back_down"
+length = 1.00001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Eyeball/Iris:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.8),
+"transitions": PackedFloat32Array(0.258817, 1.8025, 1),
+"update": 0,
+"values": [Vector2(0, -200), Vector2(0, 10), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4aj6y"]
+resource_name = "close_eye"
+length = 0.40001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Eyeball:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Eyeball:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"all"]
+}
+
+[sub_resource type="Animation" id="Animation_ioa11"]
+resource_name = "open_eye"
+length = 0.40001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Eyeball:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 3, 2, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Eyeball:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"all"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wuqg0"]
+_data = {
+"RESET": SubResource("Animation_3no7s"),
+"blink": SubResource("Animation_bgdva"),
+"close_eye": SubResource("Animation_4aj6y"),
+"look_back_down": SubResource("Animation_jg0eq"),
+"look_up": SubResource("Animation_t3uqh"),
+"open_eye": SubResource("Animation_ioa11")
+}
 
 [node name="EyeBoss" type="Node2D"]
 script = ExtResource("1_8i05s")
@@ -377,18 +414,13 @@ disabled = true
 clip_children = 2
 scale = Vector2(0.82, 0.82)
 sprite_frames = SubResource("SpriteFrames_ut0j0")
-animation = &"close_eye"
+animation = &"blink"
 
 [node name="Iris" type="Sprite2D" parent="Eye/Eyeball"]
 scale = Vector2(0.466799, 0.466799)
 texture = ExtResource("5_aqi12")
 hframes = 7
 script = SubResource("GDScript_1ht1u")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Eye"]
-libraries = {
-"": SubResource("AnimationLibrary_vesn3")
-}
 
 [node name="HealthComponent" type="Node" parent="Eye"]
 script = ExtResource("10_5nu60")
@@ -438,22 +470,37 @@ degrees_offset_per_burst = 100
 fire_interval = 0.7
 fire_amount = 2
 
+[node name="Animations" type="Node" parent="Eye"]
+
+[node name="BodyAnimationPlayer" type="AnimationPlayer" parent="Eye/Animations"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_vesn3")
+}
+
+[node name="EyeAnimationPlayer" type="AnimationPlayer" parent="Eye/Animations"]
+libraries = {
+"": SubResource("AnimationLibrary_wuqg0")
+}
+speed_scale = 2.0
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_hmgcb")
 initial_state = NodePath("EyeIntroState")
 
 [node name="EyeIdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim")]
 script = ExtResource("10_4sswx")
-idle_time = 1.0
-anim = NodePath("../../Eye/AnimationPlayer")
+idle_time = 0.5
+anim = NodePath("../../Eye/Animations/BodyAnimationPlayer")
 
 [node name="EyeIntroState" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim")]
 script = ExtResource("11_xxj5g")
-anim = NodePath("../../Eye/AnimationPlayer")
+anim = NodePath("../../Eye/Animations/BodyAnimationPlayer")
 
-[node name="EyeChooseAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim")]
+[node name="EyeChooseAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("iris", "anim")]
 script = ExtResource("12_ghtuw")
-anim = NodePath("../../Eye/AnimationPlayer")
+iris = NodePath("../../Eye/Eyeball/Iris")
+anim = NodePath("../../Eye/Animations/EyeAnimationPlayer")
 
 [node name="CryRainAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_node")]
 script = ExtResource("20_o843j")
