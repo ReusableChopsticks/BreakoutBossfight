@@ -8,4 +8,4 @@
 texture = ExtResource("1_dhejm")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-122, -319, 122, -317, 119, -190, 60, -190, 61, 316, -60, 319, -59, -191, -121, -192)
+polygon = PackedVector2Array(-124, -317, 123, -318, 122, -284, 64, -282, 61, 316, -60, 319, -59, -283, -123, -284)

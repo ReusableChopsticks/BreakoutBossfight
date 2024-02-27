@@ -1,16 +1,19 @@
-[gd_scene load_steps=38 format=3 uid="uid://b87gbpvxlbfcy"]
+[gd_scene load_steps=43 format=3 uid="uid://b87gbpvxlbfcy"]
 
 [ext_resource type="Script" path="res://entities/weapon/weapon.gd" id="1_pl645"]
 [ext_resource type="Texture2D" uid="uid://2wrj4s618ni1" path="res://graphics/scribbly_circle.png" id="2_53cjm"]
 [ext_resource type="Texture2D" uid="uid://cdgh8ksom2u3l" path="res://entities/weapon/sword_slash_placeholder.png" id="2_rma3v"]
 [ext_resource type="Texture2D" uid="uid://dnv4pguhvb133" path="res://graphics/1x1.png" id="3_xv5gd"]
+[ext_resource type="Texture2D" uid="uid://53icimkirfd5" path="res://entities/weapon/RangeGlow.png" id="5_x7ag5"]
+[ext_resource type="Texture2D" uid="uid://cs7bdhm8fosvq" path="res://entities/weapon/RangeInnerGlow.png" id="6_it6ry"]
+[ext_resource type="Texture2D" uid="uid://ijdcgi45h1fw" path="res://entities/weapon/RangeGlowWheel.png" id="7_8ucui"]
 
 [sub_resource type="Animation" id="Animation_dctiw"]
 resource_name = "RESET"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/path = NodePath("AttackSwish:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -22,7 +25,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/path = NodePath("AttackSwish:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -34,7 +37,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:animation")
+tracks/2/path = NodePath("AttackSwish:animation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -46,7 +49,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AnimatedSprite2D:flip_h")
+tracks/3/path = NodePath("AttackSwish:flip_h")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -58,7 +61,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AnimatedSprite2D:offset")
+tracks/4/path = NodePath("AttackSwish:offset")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -95,7 +98,7 @@ length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/path = NodePath("AttackSwish:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -107,7 +110,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/path = NodePath("AttackSwish:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -133,7 +136,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AnimatedSprite2D:flip_h")
+tracks/3/path = NodePath("AttackSwish:flip_h")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -145,7 +148,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AnimatedSprite2D:offset")
+tracks/4/path = NodePath("AttackSwish:offset")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -157,7 +160,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AnimatedSprite2D:position")
+tracks/5/path = NodePath("AttackSwish:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -173,7 +176,7 @@ length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/path = NodePath("AttackSwish:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -185,7 +188,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:position")
+tracks/1/path = NodePath("AttackSwish:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -211,7 +214,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AnimatedSprite2D:animation")
+tracks/3/path = NodePath("AttackSwish:animation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -223,7 +226,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AnimatedSprite2D:flip_h")
+tracks/4/path = NodePath("AttackSwish:flip_h")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -238,7 +241,7 @@ resource_name = "up_attack"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/path = NodePath("AttackSwish:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -250,7 +253,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/path = NodePath("AttackSwish:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -276,7 +279,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AnimatedSprite2D:position")
+tracks/3/path = NodePath("AttackSwish:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -309,7 +312,7 @@ size = Vector2(270, 182)
 size = Vector2(121, 89.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sbv2j"]
-radius = 246.008
+radius = 100.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d5xea"]
 atlas = ExtResource("2_53cjm")
@@ -477,8 +480,15 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qlm0q"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ogmul"]
+blend_mode = 1
+
 [node name="Weapon" type="Node2D"]
 script = ExtResource("1_pl645")
+max_charge = 15
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -525,7 +535,26 @@ collision_mask = 26
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeflectArea"]
 shape = SubResource("CircleShape2D_sbv2j")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AttackSwish" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2.47778, 2.47778)
 sprite_frames = SubResource("SpriteFrames_iy24q")
 animation = &"idle"
+
+[node name="DeflectAttackRange" type="Node2D" parent="."]
+scale = Vector2(0.225, 0.225)
+
+[node name="RangeOuterGlow" type="Sprite2D" parent="DeflectAttackRange"]
+modulate = Color(0, 0.780392, 1, 0.392157)
+material = SubResource("CanvasItemMaterial_qlm0q")
+texture = ExtResource("5_x7ag5")
+
+[node name="RangeInnerGlow" type="Sprite2D" parent="DeflectAttackRange"]
+modulate = Color(0, 0.780392, 1, 0.392157)
+material = SubResource("CanvasItemMaterial_qlm0q")
+texture = ExtResource("6_it6ry")
+
+[node name="RangeChargeWheel" type="Sprite2D" parent="."]
+modulate = Color(0, 0.905882, 1, 0.266667)
+material = SubResource("CanvasItemMaterial_ogmul")
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("7_8ucui")

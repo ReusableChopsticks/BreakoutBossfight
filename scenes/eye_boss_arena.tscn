@@ -1,16 +1,30 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0qqi7unmcfk2"]
+[gd_scene load_steps=9 format=3 uid="uid://b0qqi7unmcfk2"]
 
 [ext_resource type="Texture2D" uid="uid://cp0coe7a5802k" path="res://entities/environment/BackgroundSky.png" id="1_0ltd2"]
+[ext_resource type="Shader" path="res://scenes/test_levels/cloud_shader.gdshader" id="2_qd05c"]
 [ext_resource type="PackedScene" uid="uid://bmrdkjqxvde8w" path="res://entities/player/player.tscn" id="2_uyukp"]
 [ext_resource type="PackedScene" uid="uid://b14mjug8xedxd" path="res://entities/bosses/eye_boss.tscn" id="3_60h7x"]
 [ext_resource type="PackedScene" uid="uid://c71a1vvrb5tyf" path="res://entities/environment/floating_platform.tscn" id="4_77t0w"]
 [ext_resource type="PackedScene" uid="uid://cwyfjvosui8rq" path="res://entities/environment/pillar.tscn" id="5_7j8pb"]
 [ext_resource type="PackedScene" uid="uid://b43p78lb3hnqn" path="res://entities/environment/main_platform.tscn" id="5_a1j7u"]
-[ext_resource type="Texture2D" uid="uid://3nesp7yxl8sb" path="res://entities/environment/Pillar.png" id="5_sdwjj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ic18q"]
+shader = ExtResource("2_qd05c")
+shader_parameter/cloudscale = 1.1
+shader_parameter/speed = 0.01
+shader_parameter/clouddark = 0.5
+shader_parameter/cloudlight = 0.3
+shader_parameter/cloudcover = 0.2
+shader_parameter/cloudalpha = 8.0
+shader_parameter/skytint = 0.5
+shader_parameter/skycolour1 = Vector3(1, 0.8, 0.9)
+shader_parameter/skycolour2 = Vector3(1, 0.8, 0.5)
+shader_parameter/m = Transform2D(1.6, -1.2, 1.2, 1.6, 0, 0)
 
 [node name="EyeBossArena" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
 
@@ -19,27 +33,13 @@ position = Vector2(0, -673.5)
 scale = Vector2(3, 0.899)
 texture = ExtResource("1_0ltd2")
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.2, 0.2)
-motion_offset = Vector2(1000, 800)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-modulate = Color(1, 1, 1, 0.364706)
-position = Vector2(18.7504, -72.25)
-scale = Vector2(2.25, 2.25)
-texture = ExtResource("5_sdwjj")
-
-[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-modulate = Color(1, 1, 1, 0.364706)
-position = Vector2(778, 190)
-scale = Vector2(1.39139, 1.39139)
-texture = ExtResource("5_sdwjj")
-
-[node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-modulate = Color(1, 1, 1, 0.364706)
-position = Vector2(-813, 105)
-scale = Vector2(1.81045, 1.81045)
-texture = ExtResource("5_sdwjj")
+[node name="Clouds" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+modulate = Color(1, 1, 1, 0.584314)
+material = SubResource("ShaderMaterial_ic18q")
+position = Vector2(0, -855)
+scale = Vector2(2.91667, 1.36667)
+texture = ExtResource("1_0ltd2")
+offset = Vector2(0, 600)
 
 [node name="Environment" type="Node" parent="."]
 
@@ -52,32 +52,18 @@ position = Vector2(-829, -220)
 [node name="FloatingPlatform2" parent="Environment" instance=ExtResource("4_77t0w")]
 position = Vector2(843, -220)
 
+[node name="Pillar" parent="Environment" instance=ExtResource("5_7j8pb")]
+position = Vector2(-828, 123)
+scale = Vector2(0.858232, 0.858232)
+
+[node name="Pillar2" parent="Environment" instance=ExtResource("5_7j8pb")]
+position = Vector2(841, 123)
+scale = Vector2(0.858232, 0.858232)
+
 [node name="EyeBoss" parent="." instance=ExtResource("3_60h7x")]
 position = Vector2(3, -721)
 scale = Vector2(1.43734, 1.43734)
 
 [node name="Player" parent="." instance=ExtResource("2_uyukp")]
-position = Vector2(8, -79)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, -6.43903)
-offset = Vector2(0, -100)
-zoom = Vector2(0.8, 0.8)
-limit_top = -1600
-limit_bottom = 250
-position_smoothing_speed = 100.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.05
-drag_top_margin = 0.05
-drag_right_margin = 0.05
-drag_bottom_margin = 0.05
-editor_draw_limits = true
-
-[node name="Pillar" parent="." instance=ExtResource("5_7j8pb")]
-position = Vector2(-828, 123)
-scale = Vector2(0.858232, 0.858232)
-
-[node name="Pillar2" parent="." instance=ExtResource("5_7j8pb")]
-position = Vector2(841, 123)
-scale = Vector2(0.858232, 0.858232)
+position = Vector2(-9, -71)
+metadata/_edit_group_ = true

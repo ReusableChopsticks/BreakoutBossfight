@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bmrdkjqxvde8w"]
+[gd_scene load_steps=25 format=3 uid="uid://bmrdkjqxvde8w"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_pe5m7"]
 [ext_resource type="Texture2D" uid="uid://bnbqup2pffxsr" path="res://entities/player/graphics/PlayerSprites.png" id="2_3x286"]
@@ -11,22 +11,7 @@
 [ext_resource type="Script" path="res://components/StateMachine.gd" id="6_let22"]
 [ext_resource type="Script" path="res://entities/player/player_move_state.gd" id="7_3l48t"]
 [ext_resource type="Script" path="res://entities/player/player_attack_state.gd" id="8_vw6pg"]
-
-[sub_resource type="Animation" id="Animation_8vj0u"]
-resource_name = "jump"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(0.482968, 0.329877),
-"update": 0,
-"values": [Vector2(0.5, 0.795), Vector2(0.615285, 0.615285)]
-}
+[ext_resource type="PackedScene" uid="uid://bwqtm8s4461tm" path="res://entities/player/player_cam.tscn" id="12_8dqoo"]
 
 [sub_resource type="Animation" id="Animation_atuay"]
 length = 0.001
@@ -69,6 +54,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(0.517632, 1),
 "update": 0,
 "values": [Vector2(1, 0.3), Vector2(0.615285, 0.615285)]
+}
+
+[sub_resource type="Animation" id="Animation_8vj0u"]
+resource_name = "jump"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.482968, 0.329877),
+"update": 0,
+"values": [Vector2(0.5, 0.795), Vector2(0.615285, 0.615285)]
 }
 
 [sub_resource type="Animation" id="Animation_kfa8n"]
@@ -195,7 +196,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Color(1, 1, 1, 0.164706), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0.482353), Color(1, 1, 1, 1)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -372,6 +373,8 @@ texture = ExtResource("3_qjqht")
 hframes = 6
 script = ExtResource("4_521dn")
 player = NodePath("../..")
+
+[node name="PlayerCam" parent="." instance=ExtResource("12_8dqoo")]
 
 [connection signal="timeout" from="StateMachine/PlayerMoveState/Timers/JumpHoldTimer" to="StateMachine/PlayerMoveState" method="_on_jump_hold_timer_timeout"]
 [connection signal="timeout" from="StateMachine/PlayerMoveState/Timers/CoyoteTimer" to="StateMachine/PlayerMoveState" method="_on_coyote_timer_timeout"]

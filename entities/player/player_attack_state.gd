@@ -10,36 +10,39 @@ class_name PlayerAttackState
 @onready var move_settings: PlayerMoveState = $"../PlayerMoveState"
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-var _hold_time = 0
+var _curr_hold_time = 0
 var attack_dir: String
 	
 func enter():
-	_hold_time = 0
+	_curr_hold_time = 0
 	if Input.is_action_pressed("face up"):
 		attack_dir = "up"
 	elif Input.is_action_pressed("move_down"):
 		attack_dir = "down"
 	else:
 		attack_dir = PlayerStats.get_facing_dir()
+	weapon.play_charge_anim(deflect_hold_time)
 
 func update(delta: float):
 	if Input.is_action_pressed("attack"):
-		_hold_time += delta
+		_curr_hold_time += delta
 
 var is_attacking = false
 func physics_update(delta):
 	# regular attack
-	if Input.is_action_just_released("attack") and _hold_time < deflect_hold_time:
+	if Input.is_action_just_released("attack") and _curr_hold_time < deflect_hold_time:
+		weapon.exit_charge_anim()
 		weapon.use_weapon(attack_dir)
 		#await weapon.attack_finished
 		transitioned.emit(self, "PlayerMoveState")
-	elif !is_attacking and _hold_time >= deflect_hold_time:
+	# charged deflect attack
+	elif !is_attacking and _curr_hold_time >= deflect_hold_time:
 		is_attacking = true
 		weapon.use_deflect_attack()
 		await weapon.attack_finished
 		transitioned.emit(self, "PlayerMoveState")
 	
-	if _hold_time < 0.3:
+	if _curr_hold_time < 0.3:
 		handle_physics(delta)
 	
 func handle_physics(delta):
