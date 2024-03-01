@@ -11,6 +11,7 @@ var health: int = 0:
 		player_health_updated.emit(val)
 
 signal player_health_updated(val: int)
+signal player_damaged()
 
 #region Movement
 # always either left (-1) or right (1)

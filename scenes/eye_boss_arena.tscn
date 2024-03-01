@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0qqi7unmcfk2"]
+[gd_scene load_steps=11 format=3 uid="uid://b0qqi7unmcfk2"]
 
 [ext_resource type="Texture2D" uid="uid://cp0coe7a5802k" path="res://entities/environment/BackgroundSky.png" id="1_0ltd2"]
 [ext_resource type="Shader" path="res://scenes/test_levels/cloud_shader.gdshader" id="2_qd05c"]
 [ext_resource type="PackedScene" uid="uid://bmrdkjqxvde8w" path="res://entities/player/player.tscn" id="2_uyukp"]
+[ext_resource type="Script" path="res://scenes/PlayerKillbox.gd" id="3_1l5ch"]
 [ext_resource type="PackedScene" uid="uid://b14mjug8xedxd" path="res://entities/bosses/eye_boss.tscn" id="3_60h7x"]
 [ext_resource type="PackedScene" uid="uid://c71a1vvrb5tyf" path="res://entities/environment/floating_platform.tscn" id="4_77t0w"]
 [ext_resource type="PackedScene" uid="uid://cwyfjvosui8rq" path="res://entities/environment/pillar.tscn" id="5_7j8pb"]
@@ -20,6 +21,10 @@ shader_parameter/skytint = 0.5
 shader_parameter/skycolour1 = Vector3(1, 0.8, 0.9)
 shader_parameter/skycolour2 = Vector3(1, 0.8, 0.5)
 shader_parameter/m = Transform2D(1.6, -1.2, 1.2, 1.6, 0, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qi6yu"]
+a = Vector2(4078, -95)
+b = Vector2(-4385, -109)
 
 [node name="EyeBossArena" type="Node2D"]
 
@@ -43,6 +48,17 @@ offset = Vector2(0, 600)
 
 [node name="Environment" type="Node" parent="."]
 
+[node name="PlayerKillbox" type="Area2D" parent="Environment"]
+position = Vector2(0, 360)
+script = ExtResource("3_1l5ch")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/PlayerKillbox"]
+position = Vector2(3, 23)
+shape = SubResource("SegmentShape2D_qi6yu")
+
+[node name="RespawnPos" type="Marker2D" parent="Environment/PlayerKillbox"]
+position = Vector2(0, -546)
+
 [node name="MainPlatform" parent="Environment" instance=ExtResource("5_a1j7u")]
 position = Vector2(0, 300)
 
@@ -65,5 +81,5 @@ position = Vector2(3, -721)
 scale = Vector2(1.43734, 1.43734)
 
 [node name="Player" parent="." instance=ExtResource("2_uyukp")]
-position = Vector2(-9, -71)
-metadata/_edit_group_ = true
+
+[connection signal="body_entered" from="Environment/PlayerKillbox" to="Environment/PlayerKillbox" method="_on_body_entered"]

@@ -346,8 +346,8 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="DashCooldownTimer" type="Timer" parent="StateMachine/PlayerMoveState/Timers"]
-wait_time = 0.2
+[node name="IFramesTimer" type="Timer" parent="StateMachine/PlayerMoveState/Timers"]
+wait_time = 1.5
 one_shot = true
 
 [node name="PlayerAttackState" type="Node" parent="StateMachine" node_paths=PackedStringArray("weapon")]
@@ -376,6 +376,8 @@ player = NodePath("../..")
 
 [node name="PlayerCam" parent="." instance=ExtResource("12_8dqoo")]
 
+[connection signal="player_fallen" from="." to="PlayerHealthComponent" method="_on_player_player_fallen"]
+[connection signal="player_fallen" from="." to="StateMachine/PlayerMoveState" method="_on_player_player_fallen"]
 [connection signal="timeout" from="StateMachine/PlayerMoveState/Timers/JumpHoldTimer" to="StateMachine/PlayerMoveState" method="_on_jump_hold_timer_timeout"]
 [connection signal="timeout" from="StateMachine/PlayerMoveState/Timers/CoyoteTimer" to="StateMachine/PlayerMoveState" method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="StateMachine/PlayerMoveState/Timers/BufferTimer" to="StateMachine/PlayerMoveState" method="_on_buffer_timer_timeout"]
@@ -383,4 +385,4 @@ player = NodePath("../..")
 [connection signal="timeout" from="StateMachine/PlayerMoveState/Timers/MoveBufferTimer" to="StateMachine/PlayerMoveState" method="_on_move_buffer_timer_timeout"]
 [connection signal="timeout" from="StateMachine/PlayerMoveState/Timers/WallCoyoteTimer" to="StateMachine/PlayerMoveState" method="_on_wall_coyote_timer_timeout"]
 [connection signal="timeout" from="StateMachine/PlayerMoveState/Timers/WallJumpXBoostTimer" to="StateMachine/PlayerMoveState" method="_on_wall_jump_x_boost_timer_timeout"]
-[connection signal="timeout" from="StateMachine/PlayerMoveState/Timers/DashCooldownTimer" to="StateMachine/PlayerMoveState" method="_on_dash_cooldown_timer_timeout"]
+[connection signal="timeout" from="StateMachine/PlayerMoveState/Timers/IFramesTimer" to="StateMachine/PlayerMoveState" method="_on_i_frames_timer_timeout"]

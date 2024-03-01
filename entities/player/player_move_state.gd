@@ -54,6 +54,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var buffer_timer: Timer = $Timers/BufferTimer
 @onready var wall_jump_buffer_timer: Timer = $Timers/WallJumpBufferTimer
 @onready var move_buffer_timer: Timer = $Timers/MoveBufferTimer
+@onready var i_frames_timer: Timer = $Timers/IFramesTimer
 # this is not for character animation, but controls dash timings precisely
 @onready var dash_anim: AnimationPlayer = $"../../DashAnimationPlayer"
 
@@ -79,8 +80,14 @@ var wall_normal = 0
 const LEFT = -1
 const RIGHT = 1
 
-var is_invincible = false
-
+# makes sure that nothing can set make you not invincible until your i frames are done
+var is_invincible = false:
+	set(val):
+		if i_frames_timer.is_stopped():
+			is_invincible = val
+			
+func _ready():
+	PlayerStats.player_damaged.connect(_on_player_damaged)
 
 func check_collisions():
 	if (p.is_on_floor() or p.is_on_wall_only()) and !can_dash and !is_dashing:
@@ -247,6 +254,15 @@ func set_invincible(value: bool):
 	hurtbox.monitorable = !value
 #endregion
 
+# teleport back to safety
+func _on_player_player_fallen(pos: Vector2):
+	p.position = pos
+
+# set Iframes
+func _on_player_damaged():
+	set_invincible(true)
+	p.self_modulate.a = 0.5
+
 func enter():
 	pass
 
@@ -313,6 +329,8 @@ func _on_wall_coyote_timer_timeout():
 func _on_move_buffer_timer_timeout():
 	has_move_buffer = false
 
-func _on_dash_cooldown_timer_timeout():
-	pass # Replace with function body.
-#endregion
+func _on_i_frames_timer_timeout():
+	set_invincible(false)
+	p.self_modulate.a = 1
+
+
