@@ -20,7 +20,7 @@ func _set_deflected_sprite():
 	sprite.play("spinning_bullet_deflected")
 
 func _physics_process(delta):
-	var col_info = move_and_collide(velocity * delta)
+	var _col_info = move_and_collide(velocity * delta)
 	if !is_deflected:
 		velocity += (PlayerStats.player_pos - global_position).normalized() * track_speed
 		if velocity.length() > max_speed:

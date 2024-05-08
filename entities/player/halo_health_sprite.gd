@@ -14,7 +14,7 @@ func on_health_update(health: int):
 	if health >= 0:
 		frame = 5 - health
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	_offset = offset_right if PlayerStats.facing_dir == PlayerStats.LEFT else offset_left
 	global_position = lerp(global_position, player.global_position + _offset, lerp_weight)
 	look_at(player.global_position)

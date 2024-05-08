@@ -251,7 +251,7 @@ func finish_dash():
 # used while dashing in dash animation
 func set_invincible(value: bool):
 	is_invincible = value
-	hurtbox.monitorable = !value
+	hurtbox.set_hurtbox_monitorable(!value)
 #endregion
 
 # teleport back to safety
@@ -261,7 +261,8 @@ func _on_player_player_fallen(pos: Vector2):
 # set Iframes
 func _on_player_damaged():
 	set_invincible(true)
-	p.self_modulate.a = 0.5
+	i_frames_timer.start()
+	p.modulate.a = 0.3
 
 func enter():
 	pass
@@ -331,6 +332,6 @@ func _on_move_buffer_timer_timeout():
 
 func _on_i_frames_timer_timeout():
 	set_invincible(false)
-	p.self_modulate.a = 1
+	p.modulate.a = 1
 
 

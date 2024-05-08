@@ -6,3 +6,6 @@ class_name HurtboxComponent
 func damage(attack: Attack):
 	if health_component:
 		health_component.damage(attack)
+
+func set_hurtbox_monitorable(val):
+	set_deferred("monitorable", val)

@@ -16,7 +16,7 @@ func damage(attack: Attack):
 		print(get_parent().name + " IS DEAD")
 
 
-func _on_player_player_fallen():
+func _on_player_player_fallen(_pos: Vector2):
 	var attack = Attack.new()
 	attack.attack_damage = 1
 	damage(attack)
